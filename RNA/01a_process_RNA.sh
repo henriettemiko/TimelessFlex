@@ -8,7 +8,6 @@
 ##########
 
 
-source ../set_guix_profile.sh
 source ../set_variables_hg19.sh
 
 
