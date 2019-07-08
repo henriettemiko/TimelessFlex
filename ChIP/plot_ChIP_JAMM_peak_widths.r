@@ -1,3 +1,11 @@
+##########
+#name:		plot_ChIP_JAMM_peak_widths.r
+#description:   plot widths of JAMM peaks
+#author:        Henriette Miko (henriette.miko@mdc-berlin.de)
+#date:          July 8, 2019
+##########
+
+
 library(reshape2)
 library(ggplot2)
 library(RColorBrewer)
