@@ -72,8 +72,8 @@ samtools view -@ 8 -Sh ${MAPPING_DIR}/${NAME}_trimmed.sam | \
     grep -v "XS:i:" > ${MAPPING_DIR}/${NAME}_trimmed_filtered.sam
 
 ##convert to bam
-samtools view -@ 8 -S -b ${MAPPING_DIR}/${NAME}_trimmed_filtered.sam \
-    > ${MAPPING_DIR}/${NAME}_trimmed_filtered.bam
+samtools view -@ 8 -S -b ${MAPPING_DIR}/${NAME}_trimmed_filtered.sam > \
+    ${MAPPING_DIR}/${NAME}_trimmed_filtered.bam
 
 ##sort
 samtools sort -@ 8 -o ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted.bam \
@@ -87,8 +87,9 @@ samtools rmdup -s ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted.bam \
 samtools index ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted_nodup.bam
 
 ##convert to bed
-bedtools bamtobed -i ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted_nodup.bam \
-    > ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted_nodup.bed
+bedtools bamtobed \
+    -i ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted_nodup.bam > \
+    ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted_nodup.bed
 
 ##make bedgraph and bigwig
 bamCoverage -b ${MAPPING_DIR}/${NAME}_trimmed_filtered_sorted_nodup.bam \
