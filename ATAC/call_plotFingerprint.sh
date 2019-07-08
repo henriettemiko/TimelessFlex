@@ -25,5 +25,6 @@ plotFingerprint -b "${FILES[@]}" --labels "D0 rep1" "D0 rep2" "D10 rep1" \
     "D10 rep2" "D2 rep1" "D2 rep2" "D5 rep1" "D5 rep2" "D7 rep1" "D7 rep2" \
     -T "ATAC-seq bam files" --plotFile $QUALITY_DIR/fingerprint_ATAC.pdf
 
+
 exit
 
