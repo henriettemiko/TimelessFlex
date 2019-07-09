@@ -20,7 +20,7 @@ do
     echo $MARK
 
     qsub -hold_jid "call_JAMM" -N plot_peaks_${MARK}
-    -V -j y \
+        -V -j y \
         -o $QUALITY_DIR/plot_peaks_${MARK}.txt -cwd -pe smp 1 \
         -l mem_free=2G,h_vmem=2G -l h_rt=24:00:00 \
         $SCRIPT_DIR/ChIP/call_plot_JAMM_peak_widths.sh $OUTPUT_DIR \
