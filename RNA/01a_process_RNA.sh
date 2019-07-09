@@ -26,7 +26,8 @@ do
     RNA_DIR=$OUTPUT_DIR/RNA/$TIME/
     mkdir -p $RNA_DIR
 
-    qsub -V -j y -o $RNA_DIR/process_RNA_fastq_${NAME}.txt -cwd -l os=centos7 \
+    qsub -N process_RNA_fastq_${NAME} \
+        -V -j y -o $RNA_DIR/process_RNA_fastq_${NAME}.txt -cwd -l os=centos7 \
         -l mem_free=100G,h_vmem=100G $SCRIPT_DIR/RNA/process_RNA_fastq.sh $f \
         $NAME $RNA_DIR $RSEM_REF
 
