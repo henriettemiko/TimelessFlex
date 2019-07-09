@@ -10,6 +10,7 @@
 
 source ../set_variables_hg19.sh
 
+
 cd $HIC_DIR
 mkdir -p D0 D2 D5 D10
 
@@ -22,11 +23,9 @@ for file in $START_DIR/input/HiC/D0/D0.chr*; do
 
     t=$(basename $file ".BP.10000.txt.removed" | cut -d. -f1)
     c=$(basename $file ".BP.10000.txt.removed" | cut -d. -f2)
-    echo $t
-    echo $c
 
-    awk -v c="$c" -v t="$t" 'OFS="\t" {
-    print c,$1,($1+10000),"D0."c"."$1"."$2".left",".","D0\n"
+    awk -v c="$c" -v t="$t" 'OFS="\t" { \
+    print c,$1,($1+10000),"D0."c"."$1"."$2".left",".","D0\n"\
     c,$2,($2+10000),"D0."c"."$1"."$2".right",".","D0"}' \
         <(tail -n +2 $file) | sort -k1,1 -k2,2n > D0/D0_$c.bed
 
@@ -39,11 +38,9 @@ for file in $START_DIR/input/HiC/D2/D2.chr*; do
 
     t=$(basename $file ".BP.10000.txt.removed" | cut -d. -f1)
     c=$(basename $file ".BP.10000.txt.removed" | cut -d. -f2)
-    echo $t
-    echo $c
 
-    awk -v c="$c" -v t="$t" 'OFS="\t" {
-    print c,$1,($1+10000),"D2."c"."$1"."$2".left",".","D2\n"
+    awk -v c="$c" -v t="$t" 'OFS="\t" { \
+    print c,$1,($1+10000),"D2."c"."$1"."$2".left",".","D2\n"\
     c,$2,($2+10000),"D2."c"."$1"."$2".right",".","D2"}' \
         <(tail -n +2 $file) | sort -k1,1 -k2,2n > D2/D2_$c.bed
 
@@ -56,10 +53,9 @@ for file in $START_DIR/input/HiC/D5/D5.chr*; do
 
     t=$(basename $file ".BP.10000.txt.removed" | cut -d. -f1)
     c=$(basename $file ".BP.10000.txt.removed" | cut -d. -f2)
-    echo $t
-    echo $c
-    awk -v c="$c" -v t="$t" 'OFS="\t" {
-    print c,$1,($1+10000),"D5."c"."$1"."$2".left",".","D5\n"
+
+    awk -v c="$c" -v t="$t" 'OFS="\t" { \
+    print c,$1,($1+10000),"D5."c"."$1"."$2".left",".","D5\n"\
     c,$2,($2+10000),"D5."c"."$1"."$2".right",".","D5"}' \
         <(tail -n +2 $file) | sort -k1,1 -k2,2n > D5/D5_$c.bed
 done
@@ -71,11 +67,9 @@ for file in $START_DIR/input/HiC/D10/D10.chr*; do
 
     t=$(basename $file ".BP.10000.txt.removed" | cut -d. -f1)
     c=$(basename $file ".BP.10000.txt.removed" | cut -d. -f2)
-    echo $t
-    echo $c
 
-    awk -v c="$c" -v t="$t" 'OFS="\t" {
-    print c,$1,($1+10000),"D10."c"."$1"."$2".left",".","D10\n"
+    awk -v c="$c" -v t="$t" 'OFS="\t" { \
+    print c,$1,($1+10000),"D10."c"."$1"."$2".left",".","D10\n"\
     c,$2,($2+10000),"D10."c"."$1"."$2".right",".","D10"}' \
         <(tail -n +2 $file) | sort -k1,1 -k2,2n > D10/D10_$c.bed
 
