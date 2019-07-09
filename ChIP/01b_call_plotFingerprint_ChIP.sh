@@ -16,23 +16,28 @@ mkdir -p $QUALITY_DIR
 
 cd $QUALITY_DIR
 
-qsub -V -j y -o $QUALITY_DIR/call_plotFingerprint_H3K27ac.txt -cwd -pe smp 1 \
+qsub -hold_jid "process_ChIP_fastq" -V -j y \
+    -o $QUALITY_DIR/call_plotFingerprint_H3K27ac.txt -cwd -pe smp 1 \
     -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ChIP/call_plotFingerprint_mark.sh \
     H3K27ac $OUTPUT_DIR $QUALITY_DIR
 
-qsub -V -j y -o $QUALITY_DIR/call_plotFingerprint_H3K27me3.txt -cwd -pe smp 1 \
+qsub -hold_jid "process_ChIP_fastq" -V -j y \
+    -o $QUALITY_DIR/call_plotFingerprint_H3K27me3.txt -cwd -pe smp 1 \
     -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ChIP/call_plotFingerprint_mark.sh \
     H3K27me3 $OUTPUT_DIR $QUALITY_DIR
 
-qsub -V -j y -o $QUALITY_DIR/call_plotFingerprint_H3K4me1.txt -cwd -pe smp 1 \
+qsub -hold_jid "process_ChIP_fastq" -V -j y \
+    -o $QUALITY_DIR/call_plotFingerprint_H3K4me1.txt -cwd -pe smp 1 \
     -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ChIP/call_plotFingerprint_mark.sh \
     H3K4me1 $OUTPUT_DIR $QUALITY_DIR
 
-qsub -V -j y -o $QUALITY_DIR/call_plotFingerprint_H3K4me3.txt -cwd -pe smp 1 \
+qsub -hold_jid "process_ChIP_fastq" -V -j y \
+    -o $QUALITY_DIR/call_plotFingerprint_H3K4me3.txt -cwd -pe smp 1 \
     -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ChIP/call_plotFingerprint_mark.sh \
     H3K4me3 $OUTPUT_DIR $QUALITY_DIR
 
-qsub -V -j y -o $QUALITY_DIR/call_plotFingerprint_Input.txt -cwd -pe smp 1 \
+qsub -hold_jid "process_ChIP_fastq" -V -j y \
+    -o $QUALITY_DIR/call_plotFingerprint_Input.txt -cwd -pe smp 1 \
     -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ChIP/call_plotFingerprint_mark.sh \
     Input $OUTPUT_DIR $QUALITY_DIR
 
