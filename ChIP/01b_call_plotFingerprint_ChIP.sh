@@ -21,7 +21,7 @@ do
     echo $MARK
 
 
-qsub -hold_jid "process_ChIP_fastq" -N call_plotFingerprint_${MARK} \
+qsub -hold_jid "process_ChIP_fastq_*" -N call_plotFingerprint_${MARK} \
     -V -j y \
     -o $QUALITY_DIR/call_plotFingerprint_${MARK}.txt -cwd -pe smp 1 \
     -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ChIP/call_plotFingerprint_mark.sh \
