@@ -27,7 +27,8 @@ do
     CHIP_DIR=$OUTPUT_DIR/ChIP/$MARK/$TIME/
     mkdir -p $CHIP_DIR
 
-    qsub -V -j y -o $CHIP_DIR/process_ChIP_fastq_${NAME}.txt -cwd -pe smp 1 \
+    qsub -N process_ChIP_fastq_${NAME} -V -j y \
+        -o $CHIP_DIR/process_ChIP_fastq_${NAME}.txt -cwd -pe smp 1 \
         -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ChIP/process_ChIP_fastq_SE.sh \
         $f $NAME $CHIP_DIR $BOWTIE2_INDEX
 
