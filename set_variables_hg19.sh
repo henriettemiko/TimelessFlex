@@ -13,8 +13,8 @@ echo $0 started on `hostname` at `date` with parameters $*
 
 #set variables for directories
 
-INPUT_DIR=/your/path/to/directory/input
-START_DIR=/your/path/to/directory/
+INPUT_DIR=/fast/AG_Ohler/henriette/PANCREAS_March19/input
+START_DIR=/fast/AG_Ohler/henriette/PANCREAS_March19/
 
 SCRIPT_DIR=$START_DIR/scripts
 
