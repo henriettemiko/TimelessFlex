@@ -94,8 +94,8 @@ bedtools merge -c 4,5,6 -o distinct -d -10000 -i all_bins_notunique.bed > \
     all_bins_unique.bed
 #6 cols: chr start end name(chr*.*.*.left) strand(".") timepoint 
 
-#number of unique bins:
-#cut -f 1-3 all_bins_unique.bed | sort | uniq | wc -l
+echo "number of unique Hi-C bins:"
+cut -f 1-3 all_bins_unique.bed | sort | uniq | wc -l
 
 
 exit
