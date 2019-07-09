@@ -10,7 +10,6 @@
 
 echo $0 started on `hostname` at `date` with parameters $*
 
-source $SCRIPT_DIR/set_guix_profile.sh
 
 #set variables for directories
 
@@ -18,6 +17,9 @@ INPUT_DIR=/your/path/to/directory/input
 START_DIR=/your/path/to/directory/
 
 SCRIPT_DIR=$START_DIR/scripts
+
+source $SCRIPT_DIR/set_guix_profile.sh
+
 
 OUTPUT_DIR=$START_DIR/output_hg19
 mkdir -p $OUTPUT_DIR
