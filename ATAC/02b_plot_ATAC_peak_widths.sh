@@ -16,7 +16,12 @@ mkdir -p $QUALITY_DIR
 cd $QUALITY_DIR
 
 
-Rscript $SCRIPT_DIR/ATAC/plot_ATAC_MACS2_peak_widths.r $OUTPUT_DIR
+qsub -hold_jid "call_MACS2_ATAC_*" -N plot_peaks \
+    -V -j y \
+    -o $QUALITY_DIR/call_plot_peaks.txt -cwd -pe smp 1 \
+    -l mem_free=10G,h_vmem=10G -l h_rt=24:00:00 \
+    $SCRIPT_DIR/ATAC/call_plot_ATAC_MACS2_peak_widths.sh \
+    $OUTPUT_DIR $SCRIPT_DIR $QUALITY_DIR
 
 
 exit

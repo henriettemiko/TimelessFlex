@@ -13,7 +13,9 @@ source ../set_variables_hg19.sh
 QUALITY_DIR=$OUTPUT_DIR/quality_ATAC
 mkdir -p $QUALITY_DIR
 
-qsub -V -j y -o $QUALITY_DIR/call_plotFingerprint.txt -cwd -pe smp 1 \
+qsub -hold_jid "process_ATAC_PE_fastq_*" -N call_plotFingerprint \
+    -V -j y \
+    -o $QUALITY_DIR/call_plotFingerprint.txt -cwd -pe smp 1 \
     -l mem_free=50G,h_vmem=50G $SCRIPT_DIR/ATAC/call_plotFingerprint.sh \
     $OUTPUT_DIR $QUALITY_DIR
 

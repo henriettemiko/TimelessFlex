@@ -1,5 +1,5 @@
 ##########
-#name:		plot_ATAC_MACS2_peak_widths.r
+#name:  		plot_ATAC_MACS2_peak_widths.r
 #description:   plot widths of MACS2 peaks
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 8, 2019
@@ -11,6 +11,7 @@ library(ggplot2)
 
 args = commandArgs(trailingOnly=TRUE)
 out.dir <- args[1]
+quality.dir <- args[2]
 
 setwd(getwd())
 
@@ -70,7 +71,7 @@ medians=aggregate(value ~ L1, allwidths.melted, median)
 lengths=aggregate(value ~ L1, allwidths.melted, length)
 
 
-pdf("ATAC_MACS2_peaks_widths.pdf", height=6, width=8)
+pdf(paste0(quality.dir, "/ATAC_MACS2_peaks_widths.pdf"), height=6, width=8)
 
 ggplot(allwidths.melted, aes(x=L1, y=value, fill=L1)) + \
 geom_violin(trim=TRUE, scale="count") + \

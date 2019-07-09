@@ -21,7 +21,8 @@ do
     MACS2_DIR=$OUTPUT_DIR/ATAC/$TIME/MACS2_peaks
     mkdir -p $MACS2_DIR
 
-    qsub -V -j y -o $MACS2_DIR/call_MACS2_ATAC.txt -cwd -pe smp 1 \
+    qsub -hold_jid "process_ATAC_PE_fastq_*" -N call_MACS2_ATAC_${TIME} \
+        -V -j y -o $MACS2_DIR/call_MACS2_ATAC_${TIME}.txt -cwd -pe smp 1 \
         -l mem_free=20G,h_vmem=20G $SCRIPT_DIR/ATAC/call_MACS2_ATAC.sh \
         $MACS2_DIR $TIME $OUTPUT_DIR $MACS2_ORGANISM $CHR_SIZES
 
