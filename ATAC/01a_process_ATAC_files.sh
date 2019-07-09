@@ -36,7 +36,8 @@ do
         ATAC_DIR=$OUTPUT_DIR/ATAC/$TIME/
         mkdir -p $ATAC_DIR
 
-        qsub -V -j y -o $ATAC_DIR/process_ATAC_PE_fastq_${NAME1}.txt -cwd \
+        qsub -N process_ATAC_PE_fastq_${NAME1} \
+            -V -j y -o $ATAC_DIR/process_ATAC_PE_fastq_${NAME1}.txt -cwd \
             -pe smp 1 -l h_rt=24:00:00 -l mem_free=30G,h_vmem=30G \
             $SCRIPT_DIR/ATAC/process_ATAC_PE_fastq.sh $f1 $f2 $NAME1 $NAME2 \
             $TIME $OUTPUT_DIR $BOWTIE2_INDEX $CHR_SIZES $SCRIPT_DIR $ATAC_DIR
