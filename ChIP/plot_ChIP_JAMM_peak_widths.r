@@ -13,6 +13,7 @@ library(RColorBrewer)
 args = commandArgs(trailingOnly=TRUE)
 out.dir <- args[1]
 hist <- args[2]
+quality.dir <- args[3]
 
 print(hist)
 
@@ -67,7 +68,7 @@ allwidths.melted$L1 = factor(allwidths.melted$L1, \
 medians=aggregate(value ~ L1, allwidths.melted, median)
 lengths=aggregate(value ~ L1, allwidths.melted, length)
 
-pdf(paste0(hist,"_JAMM_peaks_widths.pdf"), width=8, height=6)
+pdf(paste0(quality.dir, "/", hist,"_JAMM_peaks_widths.pdf"), width=8, height=6)
 
 ggplot(allwidths.melted, aes(x=L1, y=value, fill=L1)) + \
 geom_violin(trim=TRUE, scale="count") + \
