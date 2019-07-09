@@ -25,6 +25,8 @@ do
         $SCRIPT_DIR/ChIP/call_plot_JAMM_peak_widths.sh $OUTPUT_DIR \
         $MARK $SCRIPT_DIR $QUALITY_DIR
 
+done
+
 
 exit
 
