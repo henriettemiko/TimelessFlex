@@ -24,7 +24,9 @@ do
     JAMM_DIR=$OUTPUT_DIR/ChIP/$MARK/$TIME/JAMM_peaks
     mkdir -p $JAMM_DIR
 
-    qsub -V -j y -o $JAMM_DIR/call_JAMM.txt -cwd -pe smp 1 \
+    qsub -N call_JAMM_${MARK}_${TIME} \
+        -hold_jid "process_ChIP_fastq" -V -j y \
+        -o $JAMM_DIR/call_JAMM.txt -cwd -pe smp 1 \
         -l mem_free=30G,h_vmem=30G -l h_rt=24:00:00 \
         $SCRIPT_DIR/ChIP/call_JAMM.sh $JAMM_DIR $MARK $TIME $OUTPUT_DIR \
         $CHR_SIZES 
