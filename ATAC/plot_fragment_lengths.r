@@ -11,40 +11,50 @@ library(reshape2)
 
 args = commandArgs(trailingOnly=TRUE)
 
-curdir <- getwd()
-setwd(curdir)
+#curdir <- getwd()
+#setwd(curdir)
 
-name=args[1]
-time=args[2]
-num.lines=as.numeric(args[3])
-quality.dir=args[4]
+counts1 = read.table(args[1], header=F)
+counts2 = read.table(args[2], header=F)
+time=args[3]
+num.lines1=as.numeric(args[4])
+num.lines2=as.numeric(args[5])
+quality.dir=args[6]
 
-print(quality.dir)
-print(name)
-print(num.lines)
-
-counts = read.table(paste0(quality.dir, "/ATAC_",time, "_", name, 
-                           "_fragment_lengths_counts.txt"), header=F)
 
 #divide counts by number of reads in bedpe file
-norm.counts <- counts[,1]/num.lines*10^3
+norm.counts1 <- counts1[,1]/num.lines1*10^3
+norm.counts2 <- counts2[,1]/num.lines2*10^3
 
-pdf(paste0(quality.dir,"/ATAC_",time,"_" ,name,"_fragment_length.pdf"), 
+pdf(paste0(quality.dir,"/ATAC_",time,"_rep1_fragment_length.pdf"), 
     width=8, height=6)
-plot(counts[,2], norm.counts, 
-     main=paste0("Fragment lengths ATAC ", time, " ", name), 
+plot(counts1[,2], norm.counts1, 
+     main=paste0("Fragment lengths ATAC ", time, " rep1",), 
+     xlab="fragment length", type="l", ylab="normalized counts")
+dev.off()
+
+pdf(paste0(quality.dir,"/ATAC_",time,"_rep2_fragment_length.pdf"), 
+    width=8, height=6)
+plot(counts2[,2], norm.counts2, 
+     main=paste0("Fragment lengths ATAC ", time, " rep2",), 
      xlab="fragment length", type="l", ylab="normalized counts")
 dev.off()
 
 
 #log scale
-pdf(paste0(quality.dir,"/ATAC_",time, "_",name,"_fragment_length_log.pdf"), 
+pdf(paste0(quality.dir,"/ATAC_",time, "_rep1_fragment_length_log.pdf"), 
     width=8, height=6)
-plot(counts[,2], log(norm.counts+1), main=paste0("Fragment lengths ATAC ", 
-                                                 time, " ", name), 
+plot(counts1[,2], log(norm.counts1+1), main=paste0("Fragment lengths ATAC ", 
+                                                 time, " rep1"), 
      xlab="fragment length", type="l", ylab="log(normalized counts+1)")
 dev.off()
 
+pdf(paste0(quality.dir,"/ATAC_",time, "_rep2_fragment_length_log.pdf"), 
+    width=8, height=6)
+plot(counts2[,2], log(norm.counts2+1), main=paste0("Fragment lengths ATAC ", 
+                                                 time, " rep2"), 
+     xlab="fragment length", type="l", ylab="log(normalized counts+1)")
+dev.off()
 
 q()
 

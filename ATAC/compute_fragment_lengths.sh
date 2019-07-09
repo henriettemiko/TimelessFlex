@@ -7,27 +7,31 @@
 #date:          July 9, 2019
 ##########
 
-f=$1
-NAME=$2
-TIME=$3
-QUALITY_DIR=$4
-SCRIPT_DIR=$5
+TIME=$1
+QUALITY_DIR=$2
+SCRIPT_DIR=$3
 
 
 echo "#####################"
 echo $0 started on `hostname` at `date` with parameters $*
 echo "Started processing:"
-echo "current file name: $NAME"
 echo "#####################"
 
 
+f1=$OUTPUT_DIR/ATAC/$TIME/mapping/*_R1_*filtered_final_1bp.bedpe
+f2=$OUTPUT_DIR/ATAC/$TIME/mapping/*_R2_*filtered_final_1bp.bedpe
+
+echo $f1
+echo $f2
 
 #plot done on bedpe file because we need paired end information 
 #about fragment size
 #count lines in bedpe  files for later normalization
 
-NUM_LINES=$(wc -l $f | cut -d ' ' -f 1)
-echo $NUM_LINES
+NUM_LINES1=$(wc -l $f1 | cut -d ' ' -f 1)
+echo $NUM_LINES1
+NUM_LINES2=$(wc -l $f2 | cut -d ' ' -f 1)
+echo $NUM_LINES2
 
 
 #SHORT_NAME=${NAME:17}
@@ -38,15 +42,22 @@ echo $NUM_LINES
 #get fragment lengths
 #count how often they occur
 
-awk 'BEGIN {OFS="\t"} {print ($6-$2)}' $f > \
-    $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths.txt
+awk 'BEGIN {OFS="\t"} {print ($6-$2)}' $f1 > \
+    $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_rep1.txt
 
-sort $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths.txt | uniq -c | \
+sort $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_rep1.txt | uniq -c | \
     sort -k2n,2n > \
-    $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_counts.txt
+    $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_counts_rep1.txt
 
-Rscript ${SCRIPT_DIR}/ATAC/plot_fragment_lengths.r $NAME ${TIME} $NUM_LINES \
-    $QUALITY_DIR
+
+awk 'BEGIN {OFS="\t"} {print ($6-$2)}' $f2 > \
+    $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_rep2.txt
+
+sort $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_rep2.txt | uniq -c | \
+    sort -k2n,2n > \
+    $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_counts_rep2.txt
+
+Rscript ${SCRIPT_DIR}/ATAC/plot_fragment_lengths.r $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_counts_rep1.txt $QUALITY_DIR/ATAC_${TIME}_${NAME}_fragment_lengths_counts_rep2.txt $NAME ${TIME} $NUM_LINES1 $NUM_LINES2 $QUALITY_DIR
 
 
 exit
