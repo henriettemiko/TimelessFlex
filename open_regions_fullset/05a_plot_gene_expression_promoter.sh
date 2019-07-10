@@ -131,7 +131,7 @@ NUM_TIME_POINTS=5
 NUM_REPLICATES=3
 #note: number of replicates must be the same for each time point
 
-Rscript $SCRIPT_DIR/open_regions_fullset/plot_RSEM_cluster.r \
+Rscript $SCRIPT_DIR/open_regions_fullset/plot_gene_expression_cluster.r \
     join_${NUM_CLUSTER}assignments.txt ${NUM_TIME_POINTS} ${NUM_REPLICATES} \
     $NUM_CLUSTER $MODEL_DIR_PROM $NUM_CLUSTER_DIR_PROM
 
