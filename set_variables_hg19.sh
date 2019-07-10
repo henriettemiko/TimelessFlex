@@ -24,8 +24,11 @@ source $SCRIPT_DIR/set_guix_profile.sh
 OUTPUT_DIR=$START_DIR/output_hg19
 mkdir -p $OUTPUT_DIR
 
-OPEN_REGIONS_DIR=$OUTPUT_DIR/open_regions
-mkdir -p $OPEN_REGIONS_DIR
+OPEN_REGIONS_DIR_FULL=$OUTPUT_DIR/open_regions_fullset
+mkdir -p $OPEN_REGIONS_DIR_FULL
+
+OPEN_REGIONS_DIR_SUB=$OUTPUT_DIR/open_regions_subset
+mkdir -p $OPEN_REGIONS_DIR_SUB
 
 OPEN_REGIONS_HIC_DIR=$OUTPUT_DIR/open_regions_HiC
 mkdir -p $OPEN_REGIONS_HIC_DIR
