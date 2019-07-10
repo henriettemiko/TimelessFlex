@@ -10,7 +10,7 @@
 TIME=$1
 QUALITY_DIR=$2
 SCRIPT_DIR=$3
-
+OUTPUT_DIR=$4
 
 echo "#####################"
 echo $0 started on `hostname` at `date` with parameters $*
@@ -18,9 +18,16 @@ echo "Started processing:"
 echo "#####################"
 
 
-f1=$OUTPUT_DIR/ATAC/$TIME/mapping/*_R1_*filtered_final_1bp.bedpe
-f2=$OUTPUT_DIR/ATAC/$TIME/mapping/*_R2_*filtered_final_1bp.bedpe
 
+
+if [[ $TIME == "D2" ]]
+then
+f1=($OUTPUT_DIR/ATAC/$TIME/mapping/*F_S17*filtered_final_1bp.bedpe)
+else
+f1=($OUTPUT_DIR/ATAC/$TIME/mapping/*_025Digitonin_*filtered_final_1bp.bedpe)
+fi
+
+f2=($OUTPUT_DIR/ATAC/$TIME/mapping/*1Digitonin_*filtered_final_1bp.bedpe)
 echo $f1
 echo $f2
 

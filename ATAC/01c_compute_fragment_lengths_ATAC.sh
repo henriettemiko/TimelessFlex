@@ -25,7 +25,7 @@ do
 	     -V -j y -o $QUALITY_DIR/compute_fragment_lengths_ATAC_${TIME}.txt \
 	     -cwd -pe smp 1 \
 	     -l mem_free=1G,h_vmem=1G $SCRIPT_DIR/ATAC/compute_fragment_lengths.sh \
-	     $TIME $QUALITY_DIR $SCRIPT_DIR
+	     $TIME $QUALITY_DIR $SCRIPT_DIR $OUTPUT_DIR
 
 done
 
