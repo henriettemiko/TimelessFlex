@@ -5,6 +5,7 @@
 #date:          July 10, 2019
 ##########
 
+
 library(reshape2)
 library(ggplot2)
 library(RColorBrewer)
@@ -126,28 +127,6 @@ text(y = boxplot.stats(peaks.all.widths)$stats[c(2,4)],
 
 dev.off()
 
-
-#distribution of distance between regions
-
-neighbors <- read.delim("peaks_allclassified_neighbors.bed", 
-                        header=F, sep="\t")
-neighbors$dist = neighbors$V13 - neighbors$V3
-
-
-pdf("peak_neighbors_distance_boxplot.pdf", width=4.5)
-
-#same chromosome! V1 is chromosome of first peak and V12 is chromosome 
-#of second peak
-distances <- neighbors$dist[neighbors$V1==neighbors$V12]
-
-boxplot(distances, outline=F, horizontal=F,axes=T, staplewex=1, 
-        main="Distances between open regions", ylab = "length in bp")
-text(y = boxplot.stats(distances)$stats[c(1,3,5)], 
-     labels = boxplot.stats(distances)$stats[c(1,3,5)], x = 1.26)
-text(y = boxplot.stats(distances)$stats[c(2,4)], 
-     labels = boxplot.stats(distances)$stats[c(2,4)], x = 0.74)
-
-dev.off()
 
 q()
 

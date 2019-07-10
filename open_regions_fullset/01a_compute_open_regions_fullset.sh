@@ -24,8 +24,8 @@ CLASSIFY_OPEN_REGIONS_DIR=$OPEN_REGIONS_DIR_FULL/classify_open_regions
 mkdir -p $CLASSIFY_OPEN_REGIONS_DIR
 
 
-PEAK_FILES=("$OUTPUT_DIR/ATAC/*/MACS2_peaks/"\
-    "*_pooled_p005_peaks_IDR_summitpos_final.narrowPeak")
+PEAK_FILES=($OUTPUT_DIR/ATAC/*/MACS2_peaks/\
+*_pooled_p005_peaks_IDR_summitpos_final.narrowPeak)
 echo "${PEAK_FILES[@]}"
 cp "${PEAK_FILES[@]}" $COMBINE_PEAKS_DIR
 
@@ -99,13 +99,13 @@ bedtools closest -s -D "a" -t "all" -a peaks_minus.bed \
 
 #take minimum of TSSs col8 and maximum of TES col9
 bedtools merge -c 4,5,6,7,8,9,10,11,12,13 \
-    -o distinct,distinct,distinct,distinct,min,max,distinct,distinct,\
-    distinct,absmin -i peaks_plus_closestTSS_all.bed > \
+    -o "distinct,distinct,distinct,distinct,min,max,distinct,distinct,\
+distinct,absmin" -i peaks_plus_closestTSS_all.bed > \
     peaks_plus_closestTSS_merged.bed
 
 bedtools merge -c 4,5,6,7,8,9,10,11,12,13 \
-    -o distinct,distinct,distinct,distinct,min,max,distinct,distinct,\
-    distinct,absmin -i peaks_minus_closestTSS_all.bed > \
+    -o "distinct,distinct,distinct,distinct,min,max,distinct,distinct,\
+distinct,absmin" -i peaks_minus_closestTSS_all.bed > \
     peaks_minus_closestTSS_merged.bed
 
 #comma in col4: multiple peaks
@@ -140,8 +140,8 @@ awk 'OFS="\t" {if($10!~"," && $4!~","){print $0}}' \
 #all peaks have plus strand here but strand of closest TSSs is correct, always 
 #one plus and one minus, first one plus, second one minus
 join -t $'\t' -j 4 \
-    -o 1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,1.11,1.12,1.13,2.1,2.2,2.3,\
-    2.4,2.5,2.6,2.7,2.8,2.9,2.10,2.11,2.12,2.13 \
+    -o "1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9,1.10,1.11,1.12,1.13,2.1,2.2,2.3,\
+2.4,2.5,2.6,2.7,2.8,2.9,2.10,2.11,2.12,2.13" \
     <( sort -k4,4 peaks_plus_closestTSS_filtered.bed) \
     <(sort -k4,4 peaks_minus_closestTSS_filtered.bed) | \
     sort -k1,1 -k2,2n > peaks_closestTSS.bed
@@ -265,7 +265,7 @@ cat peaks_enhancers_intragenic.bed peaks_enhancers_intergenic.bed | \
     sort -k1,1 -k2,2n > peaks_allclassified_enhancers.bed
 #FINAL SET OF OPEN CHROMATIN REGIONS
 
-Rscript $SCRIPT_DIR/open_regions/plot_classified_open_regions_widths.r 
+Rscript $SCRIPT_DIR/open_regions_fullset/plot_classified_open_regions_widths.r 
 
 
 #for decision about distance from open region and closest TSS
@@ -274,7 +274,7 @@ Rscript $SCRIPT_DIR/open_regions/plot_classified_open_regions_widths.r
 cut -f13 peaks_closestTSS.bed > peaks_closestTSS_plus_dist.txt
 cut -f26 peaks_closestTSS.bed > peaks_closestTSS_minus_dist.txt
 
-Rscript $SCRIPT_DIR/open_regions/plot_closestTSS_dist.r 
+Rscript $SCRIPT_DIR/open_regions_fullset/plot_closestTSS_dist.r 
 
 
 #check distances to neighbor regions
@@ -283,7 +283,7 @@ Rscript $SCRIPT_DIR/open_regions/plot_closestTSS_dist.r
 paste <(head -n -1 peaks_allclassified.bed) \
     <(tail -n +2 peaks_allclassified.bed) > peaks_allclassified_neighbors.bed
 
-Rscript $SCRIPT_DIR/open_regions/plot_neighbor_dist.r 
+Rscript $SCRIPT_DIR/open_regions_fullset/plot_neighbor_dist.r 
 
 
 exit
