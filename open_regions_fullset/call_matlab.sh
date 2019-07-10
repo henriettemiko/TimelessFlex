@@ -19,9 +19,9 @@ END_NUM=$6
 CUR_DIR=$7
 
 matlab -nodisplay -nosplash -nodesktop -r "numTracks=$NUM_MARKS;\
-    numTimePts=$NUM_FC;endNum=$END_NUM;startNum=$START_NUM;\
-    signalGeneratorDir='$SIGNAL_GENERATOR_DIR';curDir='$CUR_DIR';" < \
-    $SCRIPT_DIR/open_regions/learn_cluster.m
+numTimePts=$NUM_FC;endNum=$END_NUM;startNum=$START_NUM;\
+signalGeneratorDir='$SIGNAL_GENERATOR_DIR';curDir='$CUR_DIR';" < \
+    $SCRIPT_DIR/open_regions_fullset/learn_cluster.m
 
 
 exit

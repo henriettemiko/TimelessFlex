@@ -15,7 +15,7 @@ disp(curDir);
 
 
 %define paths
-cd '/data/ohler/henriette/programs/bnt-master';
+cd '/fast/AG_Ohler/henriette/PANCREAS_final/bnt-master';
 addpath(genpathKPM(pwd));
 cd(curDir);
 
