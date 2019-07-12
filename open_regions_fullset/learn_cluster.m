@@ -24,8 +24,9 @@ for (numClusters = startNum:endNum)
     disp(numClusters);
 
     % Prepare DAG structure
-    % 20+1=21 nodes in network
-    % 21 x 21 matrix (0: no edge, 1: directed edge)
+    % 4 fold changes and 4 histone marks
+    % 16+1=17 nodes in network
+    % 17 x 17 matrix (0: no edge, 1: directed edge)
 
     numNodes = (numTimePts*numTracks) + 1;
     dag = zeros(numNodes);

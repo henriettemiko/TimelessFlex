@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########
-#name:          03a_compute_histone_mark_signals.sh
+#name:          03b_combine_histone_mark_signals.sh
 #description:   compute histone mark signals at feature regions
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 10, 2019
