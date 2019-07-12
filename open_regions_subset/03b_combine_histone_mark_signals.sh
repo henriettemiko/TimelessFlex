@@ -47,7 +47,7 @@ echo "${MAX_FILES_PROM[@]}"
 paste <(sort-bed-typical $PROM_REGIONS) "${MAX_FILES_PROM[@]}" > \
     all_max_counts_prom.txt
 
-Rscript $SCRIPT_DIR/open_regions_subset/get_normalized_FC.r \
+Rscript $SCRIPT_DIR/open_regions_subset/get_normalized_FC_nofilter.r \
     all_max_counts_prom.txt "_prom" "promoters"
 
 #the files allCountsNorm and allFold are ordered in D0, D2, D5, D7, D10 and 
@@ -63,7 +63,7 @@ echo "${MAX_FILES_ENH[@]}"
 paste <(sort-bed-typical $ENH_REGIONS) "${MAX_FILES_ENH[@]}" > \
     all_max_counts_enh.txt
 
-Rscript $SCRIPT_DIR/open_regions_subset/get_normalized_FC.r \
+Rscript $SCRIPT_DIR/open_regions_subset/get_normalized_FC_nofilter.r \
     all_max_counts_enh.txt "_enh" "enhancers"
 
 
