@@ -17,8 +17,8 @@ mkdir -p $FEATURE_REGIONS_DIR
 
 
 #feature regions should be windows 
-#for all D0, D2, D5, D10 IDR peaks: extend  window 500 bp from downstream and
-#upstream edge
+#for all D0, D2, D5, D7, D10 IDR peaks: extend  window 500 bp from downstream
+#and upstream edge
 
 cd $FEATURE_REGIONS_DIR
 
