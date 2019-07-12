@@ -63,19 +63,54 @@ bedtools intersect -v -wa -a peaks_beforeblacklist.bed -b $BLACKLIST > \
     peaks.bed
 
 
-
+#############
 
 #now Hi-C comes into play
 #compute fully overlaps of Hi-C bins and open chromatin regions/peaks
+#full peak must be overlapped by bin (if not then difficult to decide which 
+#Hi-C information is used for this peak
 bedtools intersect -wo -F 1 -a $HIC_DIR/all_bins_unique.bed -b peaks.bed > \
 all_bins_unique_overlapping_peaks.bed
+#col1-6 Hi-C bin, col 7- peak information, last col overlap
+#all overlaps of unique bins with peaks
+#for each overlap with a peak the bin occurs once in file
 
-#peaks_overlapped.bed is then divided into promoters and enhancers
+#number of occurences of bin is number of overlaps
+#count occurences and plot
+cut -f 1-3 all_bins_unique_overlapping_peaks.bed | sort | uniq -c > \
+all_bins_unique_overlapping_peaks_counts.txt
+#NUMBER OF UNIQUE BINS THAT OVERLAP AT LEAST ONE PEAK FULLY (OPEN CHROMATIN REGION)
+
+awk '{print $1}' all_bins_unique_overlapping_peaks_counts.txt | sort | uniq -c > overlap_counts.txt
+
+#plot how many peaks Hi-C bins are overlapping fully
+Rscript $SCRIPT_DIR/open_regions_subset/plot_bins_overlaps.r \
+all_bins_unique_overlapping_peaks_counts.txt
+
+
+#get unique peaks
 cut -f 7-11 all_bins_unique_overlapping_peaks.bed | sort | uniq | \
 sort -k1,1 -k2,2n > peaks_overlapped.bed
+
+#get unique bins
 cut -f 1-6 all_bins_unique_overlapping_peaks.bed | sort | uniq | \
 sort -k1,1 -k2,2n > bins_overlapping.bed
+#peaks_overlapped.bed is then divided into promoters and enhancers
 
+
+##########
+
+#for later: notunique bins
+bedtools intersect -wo -F 1 -a $HIC_DIR/all_bins_notunique.bed -b peaks.bed > all_bins_notunique_overlapping_peaks.bed
+
+#out of curiosity: how many bins are not overlapping
+bedtools intersect -v -a $HIC_DIR/all_bins_unique.bed -b peaks.bed > \
+all_bins_unique_nonoverlapping_peaks.bed
+
+#########
+
+
+exit
 
 
 cd $ANNOTATION_DIR
