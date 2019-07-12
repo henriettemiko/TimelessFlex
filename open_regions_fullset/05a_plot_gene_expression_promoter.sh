@@ -17,8 +17,6 @@ NUM_CLUSTER=18
 SIGNAL_GENERATOR_DIR_PROM=$OPEN_REGIONS_DIR_FULL/Signal_Generator_promoters
 TIMELESS_DIR_PROM=$OPEN_REGIONS_DIR_FULL/timeless_promoters
 
-RNA_DIR=$OUTPUT_DIR/RNA
-
 NUM_MARKS=4
 NUM_TIME_POINTS=5
 
@@ -33,10 +31,9 @@ for TIME in "${TIMES[@]}"
 do
     echo $TIME
 
-    RSEM_DIR=$RNA_DIR/$TIME/RSEM
+    RSEM_DIR=$OUTPUT_DIR/RNA/$TIME/RSEM
 
-
-    RSEM_FILES=($RNA_DIR/${TIME}/RSEM/*trimmed.genes.results)
+    RSEM_FILES=($RSEM_DIR/*trimmed.genes.results)
     echo "${RSEM_FILES[@]}"
 
     for f in "${RSEM_FILES[@]}"
@@ -47,21 +44,28 @@ do
 
         #remove first line with column headers
         #1st column: gene id, 7th column: expected FPKM
-        tail -n +2 $f | cut -f1 > $RSEM_DIR/gene_ids.txt
-        tail -n +2 $f | cut -f7 > $RSEM_DIR/${NAME}_FPKM.txt
+        tail -n +2 $f | cut -f1 > gene_ids.txt
+        tail -n +2 $f | cut -f7 > ${NAME}_${TIME}_FPKM.txt
 
     done
 
-    #until here same for every cluster number
-
-
-    FPKM_FILES=($RSEM_DIR/*_FPKM.txt)
+    FPKM_FILES=(*_${TIME}_FPKM.txt)
     echo "${FPKM_FILES[@]}"
 
-    #order of gene ids should be the same
-    paste "${FPKM_FILES[@]}" > $RSEM_DIR/${TIME}_allFPKM.txt
+    #order of gene ids is the same
+    paste "${FPKM_FILES[@]}" > ${TIME}_allFPKM.txt
 
 done
+
+JOIN_FILES=(D*_allFPKM.txt)
+echo "${JOIN_FILES[@]}"
+#order is D0 D10 D2 D5 D7
+
+#genes ids same for each time point 
+paste gene_ids.txt "${JOIN_FILES[@]}" > all_join.txt
+#col1 gene id, then for each time point for each replicate FPKM
+
+#until here same for every cluster number
 
 
 cut -f1,2,3,4,5,6,8,10,32 allCountsNorm_${NUM_CLUSTER}classes.txt > \
@@ -114,16 +118,6 @@ if (c[i] == 1) for (j = 1; j <= c[i]; j++) print l[i,j] } }' \
 #this is all genes that are unambigously assigned to one clusters, 
 #col1 gene id, col2 assignment
 
-
-#now time point is D10 in RSEM_DIR
-JOIN_FILES=($RNA_DIR/D*/RSEM/D*_allFPKM.txt)
-echo "${JOIN_FILES[@]}"
-#order is D0 D10 D2 D5 D7
-
-#now time point is D10
-#genes ids same for each time point 
-paste $RSEM_DIR/gene_ids.txt "${JOIN_FILES[@]}" > all_join.txt
-#col1 gene id, then for each time point for each replicate FPKM
 
 join -t $'\t' all_join.txt \
     regions_${NUM_CLUSTER}classes_allprom2_nodup_sameassignment.txt > \

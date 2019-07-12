@@ -15,7 +15,6 @@ source ../set_variables_hg19.sh
 NUM_CLUSTER_PROM=14
 
 NUM_MARKS=4
-NUM_FC=6
 NUM_TIME_POINTS=5
 
 SIGNAL_GENERATOR_DIR_PROM=$OPEN_REGIONS_DIR_FULL/Signal_Generator_promoters
@@ -42,7 +41,8 @@ do
 
     #note: more memory needed: 30G
     #all regions with cluster assignments
-    #stores sum of all overlaps of time points, later divide by number of replicates (here 2) to get mean
+    #stores sum of all overlaps of time points, later divide by number of 
+    #replicates (here 2) to get mean
     bedtools intersect -c \
         -a $NUM_CLUSTER_DIR_PROM/regions_${NUM_CLUSTER_PROM}classes.bed \
         -b ${BEDGRAPH_FILES[@]} > \

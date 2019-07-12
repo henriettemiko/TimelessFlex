@@ -12,7 +12,7 @@ source ../set_variables_hg19.sh
 
 
 #choose cluster number for promoters here
-NUM_CLUSTER=14
+NUM_CLUSTER=18
 
 NUM_MARKS=4
 NUM_TIME_POINTS=5
@@ -36,8 +36,8 @@ SIGNATURE_GENES_DIR=$INPUT_DIR/signature_genes
 #copy columns from excel sheet into txt file manually
 
 #  685 DE_signature_genes.txt
-#  566 FG_signature_genes.txt
 #  155 GT_signature_genes.txt
+#  566 FG_signature_genes.txt
 #  236 PE_signature_genes.txt
 ##########
 
