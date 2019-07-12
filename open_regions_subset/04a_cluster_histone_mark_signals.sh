@@ -12,7 +12,7 @@ source ../set_variables_hg19.sh
 
 
 NUM_MARKS=4
-NUM_FC=4
+NUM_FC=3
 
 SIGNAL_GENERATOR_DIR_PROM=$OPEN_REGIONS_DIR_SUB/Signal_Generator_promoters
 SIGNAL_GENERATOR_DIR_ENH=$OPEN_REGIONS_DIR_SUB/Signal_Generator_enhancers

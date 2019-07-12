@@ -177,44 +177,44 @@ write.table(nfc.reordered, sep = "\t", file = paste0("allFold_noise.txt"),
 
 pdf(paste0("logFC_H3K27ac", name, ".pdf"), width=8, height=6)
 par(mfrow=c(2,2),oma=c(0,0,2,0))
-hist(rbind(fc1[,1],nfc1[,1]), breaks = 100, main=paste0("D2/D0"), 
+hist(c(fc1[,1],nfc1[,1]), breaks = 100, main=paste0("D2/D0"), 
      xlab=("log2FC"))
-hist(rbind(fc1[,2],nfc1[,2]), breaks = 100, main=paste0("D5/D2"), 
+hist(c(fc1[,2],nfc1[,2]), breaks = 100, main=paste0("D5/D2"), 
      xlab=("log2FC"))
-hist(rbind(fc1[,3],nfc1[,3]), breaks = 100, main=paste0("D10/D5"), 
+hist(c(fc1[,3],nfc1[,3]), breaks = 100, main=paste0("D10/D5"), 
      xlab=("log2FC"))
 mtext("H3K27ac", outer=TRUE, cex=1.5)
 dev.off()
 
 pdf(paste0("logFC_H3K27me3", name, ".pdf"), width=8, height=6)
 par(mfrow=c(2,2),oma=c(0,0,2,0))
-hist(rbind(fc2[,1],nfc2[,1]), breaks = 100, main=paste0("D2/D0"), 
+hist(c(fc2[,1],nfc2[,1]), breaks = 100, main=paste0("D2/D0"), 
      xlab=("log2FC"))
-hist(rbind(fc2[,2],nfc2[,2]), breaks = 100, main=paste0("D5/D2"), 
+hist(c(fc2[,2],nfc2[,2]), breaks = 100, main=paste0("D5/D2"), 
      xlab=("log2FC"))
-hist(rbind(fc2[,3],nfc2[,3]), breaks = 100, main=paste0("D10/D5"), 
+hist(c(fc2[,3],nfc2[,3]), breaks = 100, main=paste0("D10/D5"), 
      xlab=("log2FC"))
 mtext("H3K27me3", outer=TRUE, cex=1.5)
 dev.off()
 
 pdf(paste0("logFC_H3K4me1", name, ".pdf"), width=8, height=6)
 par(mfrow=c(2,2),oma=c(0,0,2,0))
-hist(rbind(fc3[,1],nfc3[,1]), breaks = 100, main=paste0("D2/D0"), 
+hist(c(fc3[,1],nfc3[,1]), breaks = 100, main=paste0("D2/D0"), 
      xlab=("log2FC"))
-hist(rbind(fc3[,2],nfc3[,2]), breaks = 100, main=paste0("D5/D2"), 
+hist(c(fc3[,2],nfc3[,2]), breaks = 100, main=paste0("D5/D2"), 
      xlab=("log2FC"))
-hist(rbind(fc3[,3],nfc3[,3]), breaks = 100, main=paste0("D10/D5"), 
+hist(c(fc3[,3],nfc3[,3]), breaks = 100, main=paste0("D10/D5"), 
      xlab=("log2FC"))
 mtext("H3K4me1", outer=TRUE, cex=1.5)
 dev.off()
 
 pdf(paste0("logFC_H3K4me3", name, ".pdf"), width=8, height=6)
 par(mfrow=c(2,2),oma=c(0,0,2,0))
-hist(rbind(fc4[,1],nfc4[,1]), breaks = 100, main=paste0("D2/D0"), 
+hist(c(fc4[,1],nfc4[,1]), breaks = 100, main=paste0("D2/D0"), 
      xlab=("log2FC"))
-hist(rbind(fc4[,2],nfc4[,2]), breaks = 100, main=paste0("D5/D2"), 
+hist(c(fc4[,2],nfc4[,2]), breaks = 100, main=paste0("D5/D2"), 
      xlab=("log2FC"))
-hist(rbind(fc4[,3],nfc4[,3]), breaks = 100, main=paste0("D10/D5"), 
+hist(c(fc4[,3],nfc4[,3]), breaks = 100, main=paste0("D10/D5"), 
      xlab=("log2FC"))
 mtext("H3K4me3", outer=TRUE, cex=1.5)
 dev.off()
