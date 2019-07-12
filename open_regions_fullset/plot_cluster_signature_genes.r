@@ -48,8 +48,8 @@ print(colMeans(k4me3))
 
 #read in information about signature genes in clusters
 DE = read.table(paste0(numcluster.dir,"/DE_genes_clusters.txt"))
-FG = read.table(paste0(numcluster.dir,"/FG_genes_clusters.txt"))
 GT = read.table(paste0(numcluster.dir,"/GT_genes_clusters.txt"))
+FG = read.table(paste0(numcluster.dir,"/FG_genes_clusters.txt"))
 PE = read.table(paste0(numcluster.dir,"/PE_genes_clusters.txt"))
 
 
@@ -57,11 +57,11 @@ PE = read.table(paste0(numcluster.dir,"/PE_genes_clusters.txt"))
 #DE.all = read.table(paste0(in.dir,"/DE_signature_genes.txt"))
 #print(nrow(DE.all))
 #
-#FG.all = read.table(paste0(in.dir,"/FG_signature_genes.txt"))
-#print(nrow(FG.all))
-#
 #GT.all = read.table(paste0(in.dir,"/GT_signature_genes.txt"))
 #print(nrow(GT.all))
+#
+#FG.all = read.table(paste0(in.dir,"/FG_signature_genes.txt"))
+#print(nrow(FG.all))
 #
 #PE.all = read.table(paste0(in.dir,"/PE_signature_genes.txt"))
 #print(nrow(PE.all))
@@ -71,11 +71,11 @@ PE = read.table(paste0(numcluster.dir,"/PE_genes_clusters.txt"))
 DE.all = read.table(paste0(numcluster.dir,"/DE_genes.txt"))
 print(nrow(DE.all))
 
-FG.all = read.table(paste0(numcluster.dir,"/FG_genes.txt"))
-print(nrow(FG.all))
-
 GT.all = read.table(paste0(numcluster.dir,"/GT_genes.txt"))
 print(nrow(GT.all))
+
+FG.all = read.table(paste0(numcluster.dir,"/FG_genes.txt"))
+print(nrow(FG.all))
 
 PE.all = read.table(paste0(numcluster.dir,"/PE_genes.txt"))
 print(nrow(PE.all))
@@ -123,9 +123,9 @@ for (i in 1:numClusters) {
            legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
            col=c("#009E73", "#D50F25", "black", "gray"), pch=15) 
     mtext(side=1, text=paste0("signature genes:\nD2: ", DE[DE$V2==i,]$V1, 
-                              " / ", nrow(DE.all), ", D5: ", FG[FG$V2==i,]$V1, 
-                              " / ", nrow(FG.all), 
-                              ", D7: ", GT[GT$V2==i,]$V1, " / ", nrow(GT.all), 
+                              " / ", nrow(DE.all), ", D5: ", GT[GT$V2==i,]$V1, 
+                              " / ", nrow(GT.all), 
+                              ", D7: ", FG[FG$V2==i,]$V1, " / ", nrow(FG.all), 
                               ", D10: ", PE[PE$V2==i,]$V1, 
                               " / ", nrow(PE.all)), line=6)
 
