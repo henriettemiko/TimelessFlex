@@ -14,7 +14,7 @@ source ../set_variables_hg19.sh
 
 
 #choose cluster number for promoters here
-NUM_CLUSTER_PROM=7
+NUM_CLUSTER_PROM=18
 
 
 NUM_MARKS=4
@@ -34,11 +34,11 @@ paste $SIGNAL_GENERATOR_DIR_PROM/allCountsNorm.txt \
     allCountsNorm_${NUM_CLUSTER_PROM}classes.txt
 
 Rscript $SCRIPT_DIR/open_regions_fullset/plot_clusters_fullset.r \
-    $NUM_CLUSTER $NUM_MARKS $NUM_TIME_POINTS $MODEL_DIR_PROM \
+    $NUM_CLUSTER_PROM $NUM_MARKS $NUM_TIME_POINTS $MODEL_DIR_PROM \
     $TIMELESS_DIR_PROM $SIGNAL_GENERATOR_DIR_PROM "promoter"
 
 
-
+exit
 #enhancers
 
 #choose cluster number for enhancers here
