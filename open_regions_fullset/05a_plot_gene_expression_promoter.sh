@@ -11,7 +11,7 @@
 source ../set_variables_hg19.sh
 
 #choose cluster number for promoter clusters here
-NUM_CLUSTER=7
+NUM_CLUSTER=18
 
 
 SIGNAL_GENERATOR_DIR_PROM=$OPEN_REGIONS_DIR_FULL/Signal_Generator_promoters
@@ -42,6 +42,8 @@ do
     for f in "${RSEM_FILES[@]}"
     do
         echo $f
+
+        NAME=$(basename $f .genes.results)
 
         #remove first line with column headers
         #1st column: gene id, 7th column: expected FPKM

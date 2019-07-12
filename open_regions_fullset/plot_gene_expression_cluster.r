@@ -28,6 +28,7 @@ lastcol = dim(fpkms)[2]
 mean.fpkm = data.frame(matrix(nrow=numDataPoints, ncol=numTimePoints+1))
 geomav.fpkm = data.frame(matrix(nrow=numDataPoints, ncol=numTimePoints+1))
 
+print(dim(fpkms))
 #store cluster assignment in first column
 mean.fpkm[,1]=fpkms[,lastcol]
 geomav.fpkm[,1]=fpkms[,lastcol]
@@ -38,7 +39,7 @@ for (m in 1:numTimePoints) {
     start=((m-1)*numReplicates)+1+1
     end=(m*numReplicates)+1
     range=seq(start, end)
-
+    print(range)
     cur.mean <- apply(fpkms[,range], 1, function(d) (d[1]+d[2]+d[3])/3)
     cur.geomav <- apply(fpkms[,range], 1, function(d) (d[1]*d[2]*d[3])^(1/3))
 
