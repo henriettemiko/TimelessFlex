@@ -81,7 +81,8 @@ cat D10/D10_chr*.bed | sort -k1,1 -k2,2n > D10/D10.bed
 #combine Hi-C bins over time points
 cat D0/D0.bed D2/D2.bed D5/D5.bed D10/D10.bed | sort -k1,1 -k2,2n > \
     all_bins_notunique.bed
-#here a lot of bins can occur multiple times, multiple times in same timepoint and multiple times at different timepoints
+#here a lot of bins can occur multiple times, multiple times in same timepoint
+#and multiple times at different timepoints
 
 #get unique bins
 bedtools merge -c 4,5,6 -o distinct -d -10000 -i all_bins_notunique.bed > \
