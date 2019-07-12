@@ -63,6 +63,21 @@ bedtools intersect -v -wa -a peaks_beforeblacklist.bed -b $BLACKLIST > \
     peaks.bed
 
 
+
+
+#now Hi-C comes into play
+#compute fully overlaps of Hi-C bins and open chromatin regions/peaks
+bedtools intersect -wo -F 1 -a $HIC_DIR/all_bins_unique.bed -b peaks.bed > \
+all_bins_unique_overlapping_peaks.bed
+
+#peaks_overlapped.bed is then divided into promoters and enhancers
+cut -f 7-11 all_bins_unique_overlapping_peaks.bed | sort | uniq | \
+sort -k1,1 -k2,2n > peaks_overlapped.bed
+cut -f 1-6 all_bins_unique_overlapping_peaks.bed | sort | uniq | \
+sort -k1,1 -k2,2n > bins_overlapping.bed
+
+
+
 cd $ANNOTATION_DIR
 
 #get annotation files
@@ -91,9 +106,9 @@ cd $CLASSIFY_OPEN_REGIONS_DIR
 
 #look at peaks once as if on plus strand and once as if on minus strand
 awk 'OFS="\t" {print $1,$2,$3,$1"."$2,"0","+";}' \
-    $COMBINE_PEAKS_DIR/peaks.bed > peaks_plus.bed
+    $COMBINE_PEAKS_DIR/peaks_overlapped.bed > peaks_plus.bed
 awk 'OFS="\t" {print $1,$2,$3,$1"."$2,"0","-";}' \
-    $COMBINE_PEAKS_DIR/peaks.bed > peaks_minus.bed
+    $COMBINE_PEAKS_DIR/peaks_overlapped.bed > peaks_minus.bed
 
 #find closest TSS for each peak on plus strand and on minus strand
 #keep all ties
@@ -160,7 +175,7 @@ join -t $'\t' -j 4 \
 #1.5,1.6,2.5,2.6 should be ignored: col5,6,18,19
 
 #needed for join
-awk 'OFS="\t" {print $1"."$2,$0}' $COMBINE_PEAKS_DIR/peaks.bed > \
+awk 'OFS="\t" {print $1"."$2,$0}' $COMBINE_PEAKS_DIR/peaks_overlapped.bed > \
     peaks_identifier.bed
 
 
