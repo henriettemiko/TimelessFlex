@@ -14,7 +14,7 @@ source ../set_variables_hg19.sh
 
 
 #choose cluster number for promoters here
-NUM_CLUSTER_PROM=18
+NUM_CLUSTER_PROM=15
 
 
 NUM_MARKS=4
@@ -38,11 +38,10 @@ Rscript $SCRIPT_DIR/open_regions_subset/plot_clusters_subset.r \
     $TIMELESS_DIR_PROM $SIGNAL_GENERATOR_DIR_PROM "promoter"
 
 
-exit
 #enhancers
 
 #choose cluster number for enhancers here
-NUM_CLUSTER_ENH=21
+NUM_CLUSTER_ENH=16
 
 SIGNAL_GENERATOR_DIR_ENH=$OPEN_REGIONS_DIR_SUB/Signal_Generator_enhancers
 TIMELESS_DIR_ENH=$OPEN_REGIONS_DIR_SUB/timeless_enhancers

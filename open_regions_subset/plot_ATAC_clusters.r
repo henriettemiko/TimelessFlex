@@ -35,7 +35,7 @@ pdf(paste0(numcluster.dir,"/ATAC_cutsites_", numClusters, "_normalized.pdf"),
 
 #quantile normalization over time (rows are regions, cols are time points)
 #this replaces normalization for number of cut sites
-overlaps.prom.normalized = normalizeQuantiles(overlaps.prom[,2:6])
+overlaps.prom.normalized = normalizeQuantiles(overlaps.prom[,2:5])
 
 for (i in 1:numClusters) {
 
@@ -74,7 +74,7 @@ for (i in 1:numClusters) {
     print(prom.peaks.numbers)
 
     normvalues <- read.table(paste0("normalization_values_", numClusters, 
-                                    "_prom.txt"))
+                                    ".txt"))
 
     normD0 <- normvalues[1,1]
     normD10 <- normvalues[2,1]

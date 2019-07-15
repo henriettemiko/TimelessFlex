@@ -27,7 +27,6 @@ cat 2_30/numPar_*.mat |sort -k1,1n | cut -f2 > numPar.txt
 Rscript $SCRIPT_DIR/open_regions_subset/plot_AIC_BIC.r AIC.txt BIC.txt \
     $TIMELESS_DIR_PROM likelihood.txt numPar.txt
 
-exit
 
 cd $TIMELESS_DIR_ENH
 

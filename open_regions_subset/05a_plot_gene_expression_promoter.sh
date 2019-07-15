@@ -11,7 +11,7 @@
 source ../set_variables_hg19.sh
 
 #choose cluster number for promoter clusters here
-NUM_CLUSTER=18
+NUM_CLUSTER=7
 
 
 SIGNAL_GENERATOR_DIR_PROM=$OPEN_REGIONS_DIR_SUB/Signal_Generator_promoters
@@ -68,7 +68,7 @@ paste gene_ids.txt "${JOIN_FILES[@]}" > all_join.txt
 #until here same for every cluster number
 
 
-cut -f1,2,3,4,5,6,8,10,32 allCountsNorm_${NUM_CLUSTER}classes.txt > \
+cut -f1,2,3,4,5,6,8,10,28 allCountsNorm_${NUM_CLUSTER}classes.txt > \
     regions_${NUM_CLUSTER}classes.bed 
 
 #for the plot only look at genes that are in exactly one cluster

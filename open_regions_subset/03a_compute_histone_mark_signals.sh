@@ -35,18 +35,18 @@ do
         echo $MARK
         echo $TIME
     
-        SIGNAL_GENERATOR_DIR_PROM=$OPEN_REGIONS_DIR_SUB/\
-Signal_Generator_promoters
-        mkdir -p $SIGNAL_GENERATOR_DIR_PROM
-
-        qsub -l os=centos7 -V -j y \
-            -o "$SIGNAL_GENERATOR_DIR_PROM/$MARK/$TIME/\
-call_Signal_Generator_prom.txt" -cwd -pe smp 1 \
-            -l mem_free=50G,h_vmem=50G \
-            $SCRIPT_DIR/open_regions_subset/call_Signal_Generator.sh \
-            $MARK $TIME $SIGNAL_GENERATOR_DIR_PROM $OUTPUT_DIR $PROM_REGIONS \
-            $CHR_SIZES
-
+#        SIGNAL_GENERATOR_DIR_PROM=$OPEN_REGIONS_DIR_SUB/\
+#Signal_Generator_promoters
+#        mkdir -p $SIGNAL_GENERATOR_DIR_PROM
+#
+#        qsub -l os=centos7 -V -j y \
+#            -o "$SIGNAL_GENERATOR_DIR_PROM/$MARK/$TIME/\
+#call_Signal_Generator_prom.txt" -cwd -pe smp 1 \
+#            -l mem_free=50G,h_vmem=50G \
+#            $SCRIPT_DIR/open_regions_subset/call_Signal_Generator.sh \
+#            $MARK $TIME $SIGNAL_GENERATOR_DIR_PROM $OUTPUT_DIR $PROM_REGIONS \
+#            $CHR_SIZES
+#
 
         SIGNAL_GENERATOR_DIR_ENH=$OPEN_REGIONS_DIR_SUB/\
 Signal_Generator_enhancers
