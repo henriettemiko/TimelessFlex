@@ -12,7 +12,7 @@ source ../set_variables_hg19.sh
 
 
 #choose cluster number for promoter clusters
-NUM_CLUSTER_PROM=9
+NUM_CLUSTER_PROM=18
 
 NUM_MARKS=4
 NUM_TIME_POINTS=5
@@ -98,7 +98,7 @@ for ((i=1; i<=$NUM_CLUSTER_PROM; i++)); do echo $i; \
 #how to get normalization values
 cut -f 7 $NUM_CLUSTER_DIR_PROM/allCountsNorm_${NUM_CLUSTER_PROM}classes.txt | \
     tr , '\n' | cut -d"_" -f 1 | sort | uniq -c > \
-    normalization_values_${NUM_CLUSTER_PROM}_prom.txt
+    normalization_values_${NUM_CLUSTER_PROM}.txt
 
 
 ##################

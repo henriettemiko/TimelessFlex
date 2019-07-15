@@ -12,7 +12,7 @@ source ../set_variables_hg19.sh
 
 
 #choose cluster number for enhancers clusters
-NUM_CLUSTER_ENH=12
+NUM_CLUSTER_ENH=18
 
 NUM_MARKS=4
 NUM_TIME_POINTS=5
@@ -102,7 +102,7 @@ for ((i=1; i<=$NUM_CLUSTER_ENH; i++)); do echo $i; \
 #how to get normalization values
 cut -f 7 $NUM_CLUSTER_DIR_ENH/allCountsNorm_${NUM_CLUSTER_ENH}classes.txt | \
     tr , '\n' | cut -d"_" -f 1 | sort | uniq -c > \
-    normalization_values_${NUM_CLUSTER_ENH}_ENH.txt
+    normalization_values_${NUM_CLUSTER_ENH}.txt
 
 
 ##################

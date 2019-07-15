@@ -74,7 +74,7 @@ for (i in 1:numClusters) {
     print(prom.peaks.numbers)
 
     normvalues <- read.table(paste0("normalization_values_", numClusters, 
-                                    "_prom.txt"))
+                                    ".txt"))
 
     normD0 <- normvalues[1,1]
     normD10 <- normvalues[2,1]
