@@ -43,15 +43,15 @@ else
 fi
 
 computeMatrix reference-point --referencePoint center -a 2000 -b 2000 \
-    -R "peaks_uni_2000.bed peaks_bi_2000.bed peaks_inter_2000.bed \
-peaks_intra_2000.bed" -S "${FILES[@]}" -o matrix_${MARK}.gz -p 16 > \
+    -R peaks_uni_2000.bed peaks_bi_2000.bed peaks_inter_2000.bed \
+    peaks_intra_2000.bed -S "${FILES[@]}" -o matrix_${MARK}.gz -p 16 > \
     out.txt 2>&1
 
 plotHeatmap -m matrix_${MARK}.gz -out heatmap_${MARK}.pdf --perGroup \
     --plotTitle "${MARK}" --startLabel "-2000" --endLabel "+2000" \
     --refPointLabel "summit" \
-    --samplesLabel '"D0 rep1" "D0 rep2" "D10 rep1" "D10 rep2" "D2 rep1" \
-"D2 rep2" "D5 rep1" "D5 rep2" "D7 rep1" "D7 rep2"' \
+    --samplesLabel "D0 rep1" "D0 rep2" "D10 rep1" "D10 rep2" "D2 rep1" \
+    "D2 rep2" "D5 rep1" "D5 rep2" "D7 rep1" "D7 rep2" \
     --regionsLabel "unidirectional" "bidirectional" "intergenic" "intragenic" \
     --legendLocation center-left
 
@@ -66,16 +66,16 @@ computeMatrix reference-point --referencePoint center -a 2000 -b 2000 \
 plotHeatmap -m matrix_${MARK}_prom.gz -out heatmap_${MARK}_prom.pdf \
     --perGroup --plotTitle "${MARK}" --startLabel "-2000" --endLabel "+2000" \
     --refPointLabel "summit" \
-    --samplesLabel '"D0 rep1" "D0 rep2" "D10 rep1" "D10 rep2" "D2 rep1" \
-"D2 rep2" "D5 rep1" "D5 rep2" "D7 rep1" "D7 rep2"' \
+    --samplesLabel "D0 rep1" "D0 rep2" "D10 rep1" "D10 rep2" "D2 rep1" \
+    "D2 rep2" "D5 rep1" "D5 rep2" "D7 rep1" "D7 rep2" \
     --regionsLabel "unidirectional" "bidirectional" \
     --legendLocation center-left
 
 plotHeatmap -m matrix_${MARK}_enh.gz -out heatmap_${MARK}_enh.pdf --perGroup \
     --plotTitle "${MARK}" --startLabel "-2000" --endLabel "+2000" \
     --refPointLabel "summit" \
-    --samplesLabel '"D0 rep1" "D0 rep2" "D10 rep1" "D10 rep2" "D2 rep1" \
-"D2 rep2" "D5 rep1" "D5 rep2" "D7 rep1" "D7 rep2"' \
+    --samplesLabel "D0 rep1" "D0 rep2" "D10 rep1" "D10 rep2" "D2 rep1" \
+    "D2 rep2" "D5 rep1" "D5 rep2" "D7 rep1" "D7 rep2" \
     --regionsLabel "intergenic" "intragenic" --legendLocation center-left
 
 

@@ -119,14 +119,35 @@ for (i in 1:numClusters) {
                           k4me1[cur.items,5]))), col = cbbPalette[4], 
           ylim = c(0,65), lwd = 8, type="o", pch=16)
 
+
+    DE.num=DE[DE$V2==i,]$V2
+    if (length(DE.num)==0) {
+        DE.num = 0
+    }
+
+    GT.num=GT[GT$V2==i,]$V2
+    if (length(GT.num)==0) {
+        GT.num = 0
+    }
+
+    FG.num=FG[FG$V2==i,]$V2
+    if (length(FG.num)==0) {
+        FG.num = 0
+    }
+
+    PE.num=PE[PE$V2==i,]$V2
+        if (length(PE.num)==0) {
+        PE.num = 0
+    }
+
     legend("topright", inset=c(-0.49,0), 
            legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
            col=c("#009E73", "#D50F25", "black", "gray"), pch=15) 
-    mtext(side=1, text=paste0("signature genes:\nD2: ", DE[DE$V2==i,]$V1, 
-                              " / ", nrow(DE.all), ", D5: ", GT[GT$V2==i,]$V1, 
+    mtext(side=1, text=paste0("signature genes:\nD2: ", DE.num, 
+                              " / ", nrow(DE.all), ", D5: ", GT.num, 
                               " / ", nrow(GT.all), 
-                              ", D7: ", FG[FG$V2==i,]$V1, " / ", nrow(FG.all), 
-                              ", D10: ", PE[PE$V2==i,]$V1, 
+                              ", D7: ", FG.num, " / ", nrow(FG.all), 
+                              ", D10: ", PE.num, 
                               " / ", nrow(PE.all)), line=6)
 
     error.bars(stuff.k4me3, eyes = FALSE, sd = FALSE, bars = FALSE, 
