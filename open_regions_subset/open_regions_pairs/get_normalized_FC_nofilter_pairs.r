@@ -2,7 +2,7 @@
 #name:          get_normalized_FC_nofilter_pairs.r
 #description:   compute normalized fold changes for pairs without filtering
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          July 16, 2019
+#date:          July 17, 2019
 ##########
 
 library(limma)
@@ -30,16 +30,6 @@ m1enh = normalizeQuantiles(cbind(l[[40]], l[[41]], l[[42]],l[[43]]))
 m2enh = normalizeQuantiles(cbind(l[[44]], l[[45]], l[[46]],l[[47]])) 
 m3enh = normalizeQuantiles(cbind(l[[48]], l[[49]], l[[50]],l[[51]])) 
 m4enh = normalizeQuantiles(cbind(l[[52]], l[[53]], l[[54]],l[[55]])) 
-
-print(head(m1prom))
-print(head(m2prom))
-print(head(m3prom))
-print(head(m4prom))
-
-print(head(m1enh))
-print(head(m2enh))
-print(head(m3enh))
-print(head(m4enh))
 
 mean1prom=mean(m1prom)
 mean2prom=mean(m2prom)
@@ -270,15 +260,7 @@ write.table(fc.reordered.noise, sep = "\t",
             quote = F, row.names = F, col.names = F)
 
 
-
-
-
-
-
 #q()
-
-
-
 
 #histogram of fold changes
 #around 0: stays the same
@@ -346,13 +328,13 @@ dev.off()
 
 #plot distribution of counts
 
-if (name=="init_prom-enh"){
+if (name=="init_prom-enh" || name=="multi_prom-enh"){
     left="promoter"
     right="enhancer"
-} else if (name=="init_prom-prom"){
+} else if (name=="init_prom-prom" || name=="multi_prom-prom"){
     left="promoter"
     right="promoter"
-} else if (name=="init_enh-enh"){
+} else if (name=="init_enh-enh" || name=="multi_enh-enh"){
     left="enhancer"
     right="enhancer"
 }
@@ -372,7 +354,7 @@ pdf(paste0("Hist_H3K27me3_", name, ".pdf"), width=8, height=6)
 par(mfrow=c(1,2),oma=c(0,0,2,0))
 hist(m2prom, breaks = 100, main=paste0(left), xlab=("normalized counts"))
 lines(rep(mean2prom, 100), seq(0,200000,length.out=100), col = "red", 
-       lty = 1, lwd=2)
+      lty = 1, lwd=2)
 hist(m2enh, breaks = 100, main=paste0(right), xlab=("normalized counts"))
 lines(rep(mean2enh, 100), seq(0,200000,length.out=100), col = "red", 
       lty = 1, lwd=2)
