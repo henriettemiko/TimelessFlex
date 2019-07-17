@@ -119,7 +119,7 @@ for (i in 1:numClusters) {
     }
 
     PE.num=PE[PE$V2==i,]$V2
-        if (length(PE.num)==0) {
+    if (length(PE.num)==0) {
         PE.num = 0
     }
 
@@ -137,7 +137,7 @@ for (i in 1:numClusters) {
                col = cbbPalette[1], add = TRUE)
     lines(colMeans((cbind(k4me3[cur.items,1], k4me3[cur.items,2], 
                           k4me3[cur.items,3], k4me3[cur.items,4]))),
-           col = cbbPalette[1], ylim = c(0,65), lwd = 8, type="o", pch=16)
+          col = cbbPalette[1], ylim = c(0,65), lwd = 8, type="o", pch=16)
 
     error.bars(stuff.k27ac, eyes = FALSE, sd = FALSE, bars = FALSE, 
                arrow.col = cbbPalette[2], ylim = c(0,65), 
@@ -151,7 +151,7 @@ for (i in 1:numClusters) {
                col = cbbPalette[3], add = TRUE)
     lines(colMeans((cbind(k27me3[cur.items,1], k27me3[cur.items,2], 
                           k27me3[cur.items,3], k27me3[cur.items,4]))),
-           col = cbbPalette[3], ylim = c(0,65), lwd = 8, type="o", pch=16)
+          col = cbbPalette[3], ylim = c(0,65), lwd = 8, type="o", pch=16)
 
 }
 

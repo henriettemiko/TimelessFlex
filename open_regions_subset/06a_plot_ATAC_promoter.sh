@@ -56,8 +56,8 @@ done
 #col 11 is normalized overlaps
 for t in "${TIMES[@]}"; do echo $t; \
     awk -v t="$t" -v numcluster="${NUM_CLUSTER_PROM}" 'OFS="\t" {len=$3-$2; 
-        print $0,$10/len > "regions_"numcluster"_"t"_cutsites.bed"}' \
-        regions_${NUM_CLUSTER_PROM}_${t}_cutsites_unnormalized.bed; done
+print $0,$10/len > "regions_"numcluster"_"t"_cutsites.bed"}' \
+    regions_${NUM_CLUSTER_PROM}_${t}_cutsites_unnormalized.bed; done
 
 
 NUM_REPLICATES=2
@@ -80,8 +80,8 @@ paste regions_${NUM_CLUSTER_PROM}_D0_cutsites.bed \
 
 for ((i=1; i<=$NUM_CLUSTER_PROM; i++)); do echo $i; \
     awk -v i="$i" -v numcluster="${NUM_CLUSTER_PROM}" 'OFS="\t" {if ($28==i) 
-        print $7 > "merged_peaks_regions_"numcluster"_cluster"i".txt"}' \
-        $NUM_CLUSTER_DIR_PROM/allCountsNorm_${NUM_CLUSTER_PROM}classes.txt; done
+print $7 > "merged_peaks_regions_"numcluster"_cluster"i".txt"}' \
+    $NUM_CLUSTER_DIR_PROM/allCountsNorm_${NUM_CLUSTER_PROM}classes.txt; done
 
 #for all regions together: count how often peaks from D0, D2 etc occur
 for ((i=1; i<=$NUM_CLUSTER_PROM; i++)); do echo $i; \
