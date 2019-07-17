@@ -232,7 +232,7 @@ mkdir -p $SIGNAL_GENERATOR_DIR_INIT_PROM_PROM
 cd $SIGNAL_GENERATOR_DIR_INIT_PROM_PROM
 
 Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
-    get_normalized_FC_nofilter_pairs.r \
+get_normalized_FC_nofilter_pairs.r \
     $OPEN_REGIONS_DIR_PAIRS/max_counts_init_pairs_unique_prom-prom.txt \
     "init_prom-prom"
 
@@ -242,8 +242,8 @@ Signal_Generator_init_enh-enh
 mkdir -p $SIGNAL_GENERATOR_DIR_INIT_ENH_ENH
 cd $SIGNAL_GENERATOR_DIR_INIT_ENH_ENH
 
-Rscript $SCRIPT_DIR/open_regions_subset/\
-open_regions_pairs/get_normalized_FC_nofilter_pairs.r \
+Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+get_normalized_FC_nofilter_pairs.r \
     $OPEN_REGIONS_DIR_PAIRS/max_counts_init_pairs_unique_enh-enh.txt \
     "init_enh-enh"
 
