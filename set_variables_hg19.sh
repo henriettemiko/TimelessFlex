@@ -13,8 +13,8 @@ echo $0 started on `hostname` at `date` with parameters $*
 
 #set variables for directories
 
-INPUT_DIR=/fast/AG_Ohler/henriette/PANCREAS_March19/input
-START_DIR=/fast/AG_Ohler/henriette/PANCREAS_March19/
+INPUT_DIR=/fast/AG_Ohler/henriette/PANCREAS_final/input
+START_DIR=/fast/AG_Ohler/henriette/PANCREAS_final/
 
 SCRIPT_DIR=$START_DIR/scripts
 
@@ -30,8 +30,8 @@ mkdir -p $OPEN_REGIONS_DIR_FULL
 OPEN_REGIONS_DIR_SUB=$OUTPUT_DIR/open_regions_subset
 mkdir -p $OPEN_REGIONS_DIR_SUB
 
-OPEN_REGIONS_HIC_DIR=$OUTPUT_DIR/open_regions_HiC
-mkdir -p $OPEN_REGIONS_HIC_DIR
+OPEN_REGIONS_DIR_PAIRS=$OPEN_REGIONS_DIR_SUB/open_regions_pairs
+mkdir -p $OPEN_REGIONS_DIR_PAIRS
 
 HIC_DIR=$OUTPUT_DIR/HiC
 mkdir -p $HIC_DIR
@@ -48,10 +48,10 @@ if [ ! -f $ANNOTATION_DIR/gencode.v29lift37.annotation.gtf ]
 then
     #Gencode annotation https://www.gencodegenes.org
     wget -P $ANNOTATION_DIR \
-        "ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_29/
-    GRCh37_mapping/gencode.v29lift37.annotation.gtf.gz"
+        "ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_29/"\
+"GRCh37_mapping/gencode.v29lift37.annotation.gtf.gz"
     gunzip $ANNOTATION_DIR/gencode.v29lift37.annotation.gtf.gz
-else
+#else
     #echo "annotation is already there"
 fi
 ANNOTATION=$ANNOTATION_DIR/gencode.v29lift37.annotation.gtf 
@@ -66,10 +66,10 @@ then
     #https://sites.google.com/site/anshulkundaje/projects/blacklists
     #https://www.encodeproject.org/annotations/ENCSR636HFF/
     wget -P $BLACKLIST_DIR \
-        "https://www.encodeproject.org/files/ENCFF001TDO/@@download/
-    ENCFF001TDO.bed.gz"
+        "https://www.encodeproject.org/files/ENCFF001TDO/@@download/"\
+"ENCFF001TDO.bed.gz"
     gunzip $BLACKLIST_DIR/ENCFF001TDO.bed.gz
-else
+#else
     #echo "blacklist is already there"
 fi
 BLACKLIST=$BLACKLIST_DIR/ENCFF001TDO.bed
@@ -83,12 +83,12 @@ mkdir -p $CHR_SIZES_DIR
 if [ ! -f $CHR_SIZES_DIR/hg19_chr_sizes.txt ]
 then
     wget -O $CHR_SIZES_DIR/hg19_chromInfo.txt.gz \
-        "http://hgdownload.cse.ucsc.edu/goldenpath/hg19/database/
-    chromInfo.txt.gz"
+        "http://hgdownload.cse.ucsc.edu/goldenpath/hg19/database/"\
+"chromInfo.txt.gz"
     gunzip $CHR_SIZES_DIR/hg19_chromInfo.txt.gz
     grep -v hap $CHR_SIZES_DIR/hg19_chromInfo.txt | grep -v Un | \
         grep -v random | cut -f1-2 > $CHR_SIZES_DIR/hg19_chr_sizes.txt
-else
+#else
     #echo "chr sizes file is already there"
 fi
 CHR_SIZES=$CHR_SIZES_DIR/hg19_chr_sizes.txt
@@ -107,7 +107,7 @@ then
         ftp://ftp.ccb.jhu.edu/pub/data/bowtie2_indexes/hg19.zip
     unzip -d $BOWTIE2_INDEX_DIR $BOWTIE2_INDEX_DIR/hg19.zip
 
-else
+#else
     #echo "Bowtie2 index is already there"
 fi
 
@@ -123,10 +123,10 @@ mkdir -p $PRIMARY_ASSEMBLY_DIR
 if [ ! -f $PRIMARY_ASSEMBLY_DIR/GRCh37.primary_assembly.genome.fa ]
 then
     wget -P $PRIMARY_ASSEMBLY_DIR \
-        "ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_29/
-    GRCh37_mapping/GRCh37.primary_assembly.genome.fa.gz"
+        "ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_29/"\
+"GRCh37_mapping/GRCh37.primary_assembly.genome.fa.gz"
     gunzip $PRIMARY_ASSEMBLY_DIR/GRCh37.primary_assembly.genome.fa.gz
-else
+#else
     #echo "primary assembly is already there"
 fi
 
@@ -138,7 +138,7 @@ then
     rsem-prepare-reference --gtf $ANNOTATION \
         --bowtie $PRIMARY_ASSEMBLY_DIR/GRCh37.primary_assembly.genome.fa \
         $RSEM_REF_DIR/RSEM_ref
-else
+#else
     #echo "RSEM reference is already there"
 fi
 
