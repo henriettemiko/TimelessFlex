@@ -70,140 +70,140 @@ for (numClusters = startNum:endNum)
     [2:numNodes]);
     tan.CPD{1} = tabular_CPD(tan, 1, 'CPT', 'unif', 'dirichlet_weight', 1, ...
     'dirichlet_type', 'unif');
-    for(t = 2:numNodes)
+    for (t = 2:numNodes)
         tan.CPD{t} = gaussian_CPD(tan, t);
 
-end
+    end
 
-%disp(struct(tan.CPD{1}).CPT);
+    %disp(struct(tan.CPD{1}).CPT);
 
-% head node c is discrete node
-% each node is a Gaussian node (except head node), has parameters my and sigma
-% for each cluster: for each node my and sigma, alpha and beta for each edge 
-%(linear regression)
+    % head node c is discrete node
+    % each node is a Gaussian node (except head node), has parameters my and sigma
+    % for each cluster: for each node my and sigma, alpha and beta for each edge 
+    %(linear regression)
 
-%%%Import Data%%%
-dataOrig = importdata(inFile, '\t');
-numDataPts = length(dataOrig(:,1));
-disp(dataOrig(1,1));
-disp(['There are ' num2str(numDataPts) ' data points.']);
-disp(dataOrig(1:3,:));
-rem = num2cell(dataOrig,1);
-rem = cell2num(rem);
-data = cell(numDataPts, numNodes);
-for (i = 1:numDataPts)
-    data(i,2:numNodes) = num2cell(rem(i,:));
-end
-data = data';
-
-
-%%%Initialize with k-means%%%
-% initial clustering: assign promoter regions to clusters 1,..., 11
-% get initial parameters for EM algorithm
-
-disp(['Initializing with K-means']);
-k = kmeans(dataOrig, numClusters, 'Distance', 'cityblock', 'Replicates', ...
-15, 'MaxIter', 300, 'display', 'final');
-
-koutFile = [curDir '/k-means_initalization_' num2str(numClusters) '.txt'];
-dlmwrite(koutFile, k, '\t');
-
-date = data;
-date(1,:) = num2cell(k);
-
-%date is fully observed with values for hidden nodes initialized with k-means
-%data is not fully observed, values for hidden nodes are []
-
-tan = learn_params(tan, date);
-tanFull = tan;
-
-outFileFull = [curDir '/model-' num2str(numClusters) '_fullbeforeEM.mat'];
-%save(outFileFull, 'tan');
-disp(['learn_params done']);
+    %%%Import Data%%%
+    dataOrig = importdata(inFile, '\t');
+    numDataPts = length(dataOrig(:,1));
+    disp(dataOrig(1,1));
+    disp(['There are ' num2str(numDataPts) ' data points.']);
+    disp(dataOrig(1:3,:));
+    rem = num2cell(dataOrig,1);
+    rem = cell2num(rem);
+    data = cell(numDataPts, numNodes);
+    for (i = 1:numDataPts)
+        data(i,2:numNodes) = num2cell(rem(i,:));
+    end
+    data = data';
 
 
-%%%EM%%%%
+    %%%Initialize with k-means%%%
+    % initial clustering: assign promoter regions to clusters 1,..., 11
+    % get initial parameters for EM algorithm
 
-% keep refining parameters: my and sigma for each node, probabilities of c, 
-%edges are linear regression (alpha, beta)
+    disp(['Initializing with K-means']);
+    k = kmeans(dataOrig, numClusters, 'Distance', 'cityblock', 'Replicates', ...
+    15, 'MaxIter', 300, 'display', 'final');
 
-engine = jtree_inf_engine(tan);
-disp(['Started EM algorithm']);
+    koutFile = [curDir '/k-means_initalization_' num2str(numClusters) '.txt'];
+    dlmwrite(koutFile, k, '\t');
 
-[tan, LLtrace, engine] = learn_params_em(engine, data, 200, 0.0002);
-outFile = [curDir '/model-' num2str(numClusters) '.mat'];
-%save(outFile, 'tan');
+    date = data;
+    date(1,:) = num2cell(k);
 
-numPar = 0;
-for (i = 1:numNodes)
-    temp = struct(tan.CPD{i});
-    numPar = numPar + temp.nparams;
-end
+    %date is fully observed with values for hidden nodes initialized with k-means
+    %data is not fully observed, values for hidden nodes are []
 
-disp('Model is trained');
+    tan = learn_params(tan, date);
+    tanFull = tan;
 
-
-%store likelihood and number of parameters for likelihood ratio test later
-likelihood = LLtrace(length(LLtrace));
-fname3 = [curDir '/likelihood_' num2str(numClusters) '.mat'];
-f3 = fopen(fname3, 'at');
-cold3 = [num2str(numClusters) '\t' num2str(likelihood, '%.6f')];
-fprintf(f3, cold3);
-fprintf(f3, '\n');
-fclose(f3)
-
-fname4 = [curDir '/numPar_' num2str(numClusters) '.mat'];
-f4 = fopen(fname4, 'at');
-cold4 = [num2str(numClusters) '\t' num2str(numPar, '%.6f')];
-fprintf(f4, cold4);
-fprintf(f4, '\n');
-fclose(f4)
-
-AIC = (-2 * LLtrace(length(LLtrace))) + (numPar * 2);
-fname = [curDir '/AIC_' num2str(numClusters) '.mat'];
-f = fopen(fname, 'at');
-cold = [num2str(numClusters) '\t' num2str(AIC, '%.6f')];
-fprintf(f, cold);
-fprintf(f, '\n');
-fclose(f)
-
-BIC = (-2 * LLtrace(length(LLtrace))) + (numPar * log(numDataPts));
-fname2 = [curDir '/BIC_' num2str(numClusters) '.mat'];
-f2 = fopen(fname2, 'at');
-cold2 = [num2str(numClusters) '\t' num2str(BIC, '%.6f')];
-fprintf(f2, cold2);
-fprintf(f2, '\n');
-fclose(f2)
+    outFileFull = [curDir '/model-' num2str(numClusters) '_fullbeforeEM.mat'];
+    %save(outFileFull, 'tan');
+    disp(['learn_params done']);
 
 
-%%%%%%%%%%%%%%clustering script
+    %%%EM%%%%
 
-%%%start inference%%%
-disp(['Starting Inference...']);
-logl=0;
-marginal = zeros(numClusters, numDataPts);
-for (nd = 1:numDataPts)
-    evidence = cell(numNodes, 1);
-    evidence(2:numNodes,1) = data(2:numNodes,nd);
+    % keep refining parameters: my and sigma for each node, probabilities of c, 
+    %edges are linear regression (alpha, beta)
+
     engine = jtree_inf_engine(tan);
-    [engine, ll] = enter_evidence(engine, evidence');
-    logl = logl+ll;
-    marg = marginal_nodes(engine, 1);
-    [none, index] = max(marg.T);
-    marginal(:,nd) = marg.T;
-    data(1,nd) = num2cell(index); 
-end
+    disp(['Started EM algorithm']);
+
+    [tan, LLtrace, engine] = learn_params_em(engine, data, 200, 0.0002);
+    outFile = [curDir '/model-' num2str(numClusters) '.mat'];
+    %save(outFile, 'tan');
+
+    numPar = 0;
+    for (i = 1:numNodes)
+        temp = struct(tan.CPD{i});
+        numPar = numPar + temp.nparams;
+    end
+
+    disp('Model is trained');
 
 
-%%%cluster information%%%
-disp(['Writing Results...']);
-data = data';
-classes = cell2num(data(:,1));
-marginal = marginal';
-outFile = [curDir '/classes-' num2str(numClusters) '.txt'];
-classe = [classes, marginal];
-display(size(classe));
-dlmwrite(outFile, classe, '\t');
+    %store likelihood and number of parameters for likelihood ratio test later
+    likelihood = LLtrace(length(LLtrace));
+    fname3 = [curDir '/likelihood_' num2str(numClusters) '.mat'];
+    f3 = fopen(fname3, 'at');
+    cold3 = [num2str(numClusters) '\t' num2str(likelihood, '%.6f')];
+    fprintf(f3, cold3);
+    fprintf(f3, '\n');
+    fclose(f3)
+
+    fname4 = [curDir '/numPar_' num2str(numClusters) '.mat'];
+    f4 = fopen(fname4, 'at');
+    cold4 = [num2str(numClusters) '\t' num2str(numPar, '%.6f')];
+    fprintf(f4, cold4);
+    fprintf(f4, '\n');
+    fclose(f4)
+
+    AIC = (-2 * LLtrace(length(LLtrace))) + (numPar * 2);
+    fname = [curDir '/AIC_' num2str(numClusters) '.mat'];
+    f = fopen(fname, 'at');
+    cold = [num2str(numClusters) '\t' num2str(AIC, '%.6f')];
+    fprintf(f, cold);
+    fprintf(f, '\n');
+    fclose(f)
+
+    BIC = (-2 * LLtrace(length(LLtrace))) + (numPar * log(numDataPts));
+    fname2 = [curDir '/BIC_' num2str(numClusters) '.mat'];
+    f2 = fopen(fname2, 'at');
+    cold2 = [num2str(numClusters) '\t' num2str(BIC, '%.6f')];
+    fprintf(f2, cold2);
+    fprintf(f2, '\n');
+    fclose(f2)
+
+
+    %%%%%%%%%%%%%%clustering script
+
+    %%%start inference%%%
+    disp(['Starting Inference...']);
+    logl=0;
+    marginal = zeros(numClusters, numDataPts);
+    for (nd = 1:numDataPts)
+        evidence = cell(numNodes, 1);
+        evidence(2:numNodes,1) = data(2:numNodes,nd);
+        engine = jtree_inf_engine(tan);
+        [engine, ll] = enter_evidence(engine, evidence');
+        logl = logl+ll;
+        marg = marginal_nodes(engine, 1);
+        [none, index] = max(marg.T);
+        marginal(:,nd) = marg.T;
+        data(1,nd) = num2cell(index); 
+    end
+
+
+    %%%cluster information%%%
+    disp(['Writing Results...']);
+    data = data';
+    classes = cell2num(data(:,1));
+    marginal = marginal';
+    outFile = [curDir '/classes-' num2str(numClusters) '.txt'];
+    classe = [classes, marginal];
+    display(size(classe));
+    dlmwrite(outFile, classe, '\t');
 
 end
 
