@@ -102,13 +102,13 @@ for (i in 1:numClusters) {
     colnames(stuff.k4me1.enh) <- c("D0", "D2", "D5", "D10")
 
 
-    if (name=="init_prom-enh" || name=="multi_prom-enh"){
+    if (type=="init_prom-enh" || type=="multi_prom-enh"){
         left="PROMOTER"
         right="ENHANCER"
-    } else if (name=="init_prom-prom" || name=="multi_prom-prom"){
+    } else if (type=="init_prom-prom" || type=="multi_prom-prom"){
         left="PROMOTER"
         right="PROMOTER"
-    } else if (name=="init_enh-enh" || name=="multi_enh-enh"){
+    } else if (type=="init_enh-enh" || type=="multi_enh-enh"){
         left="ENHANCER"
         right="ENHANCER"
     }
