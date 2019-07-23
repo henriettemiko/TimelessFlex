@@ -27,7 +27,15 @@ score <- function(x){
     return(x)
 }
 
-l = read.table(paste0(numcluster.dir, "/classes-", numClusters, ".txt"))
+
+filename=""
+if (type=="multi_prom-enh" || type=="multi_prom-prom" || type=="multi_enh-enh"){
+    filename="_afterEM"
+} 
+
+
+
+l = read.table(paste0(numcluster.dir, "/classes-", numClusters, filename, ".txt"))
 k = read.table(paste0(signalgenerator.dir, "/allCountsNorm.txt"))
 
 
