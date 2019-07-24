@@ -15,13 +15,12 @@ SIGNAL_GENERATOR_DIR=$4
 MODEL_DIR=$5
 TYPE=$6
 
+echo $TYPE
 
 FILENAME=""
-if [[ $TYPE=="multi_prom-enh" || $TYPE=="multi_prom-prom" || 
-    $TYPE=="multi_enh-enh" ]]
+if [[ $TYPE =~ "multi" ]]
 then
     FILENAME="_afterEM"
-
 fi
 
 echo $FILENAME
