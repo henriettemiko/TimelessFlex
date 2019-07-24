@@ -70,13 +70,13 @@ for (i in 1:numClusters) {
 
     #divide by 2 because 2 replicates were summed up
     boxplot(1000*(cur.overlaps.prom/2), 
-            main=paste0("Cluster ", i, " ", left, " (" , length(cur.items.prom), " regions)"), 
+            main=paste0("Cluster ", i, " ", left), 
             ylab="normalized mean ATAC-seq cut sites",xlab="time", 
             ylim=c(0,25), col=rep("orange",5), 
             names = c("D0","D2","D5","D10"),  outline = F)
 
     boxplot(1000*(cur.overlaps.enh/2), 
-            main=paste0(right, " (" , length(cur.items.enh), " regions)"), 
+            main=paste0(right, " (" , length(cur.items.enh), " pairs)"), 
             ylab="normalized mean ATAC-seq cut sites",xlab="time", 
             ylim=c(0,25), col=rep("orange",5), 
             names = c("D0","D2","D5","D10"),  outline = F)
