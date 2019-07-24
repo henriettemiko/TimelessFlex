@@ -29,13 +29,15 @@ score <- function(x){
 
 
 filename=""
-if (type=="multi_prom-enh" || type=="multi_prom-prom" || type=="multi_enh-enh"){
+if (type=="multi_prom-enh" || type=="multi_prom-prom" || 
+    type=="multi_enh-enh"){
     filename="_afterEM"
 } 
 
 
 
-l = read.table(paste0(numcluster.dir, "/classes-", numClusters, filename, ".txt"))
+l = read.table(paste0(numcluster.dir, "/classes-", numClusters, filename, 
+                      ".txt"))
 k = read.table(paste0(signalgenerator.dir, "/allCountsNorm.txt"))
 
 
@@ -167,7 +169,7 @@ for (i in 1:numClusters) {
                ylim = c(0,65), 
                ylab = "normalized average histone mark signal", 
                xlab="time", col = cbbPalette[4], 
-               main = paste0(right, ", n=", length(cur.items)))
+               main = paste0(right, " (", length(cur.items), " pairs)"))
     lines(colMeans((cbind(k4me1[cur.items,5], k4me1[cur.items,6], 
                           k4me1[cur.items,7], k4me1[cur.items,8]))), 
           col = cbbPalette[4], ylim = c(0,65), lwd = 8, type="o", 

@@ -20,7 +20,8 @@ NUM_CLUSTER_MULTI_PROM_PROM=5
 
 SIGNAL_GENERATOR_DIR_MULTI_PROM_ENH=${OPEN_REGIONS_DIR_PAIRS}_noordering/\
 Signal_Generator_multi_prom-enh
-TIMELESS_DIR_MULTI_PROM_ENH=${OPEN_REGIONS_DIR_PAIRS}_noordering/timeless_multi_prom-enh
+TIMELESS_DIR_MULTI_PROM_ENH=${OPEN_REGIONS_DIR_PAIRS}_noordering/\
+timeless_multi_prom-enh
 
 MODEL_DIR_MULTI_PROM_ENH=$TIMELESS_DIR_MULTI_PROM_ENH/\
 $NUM_CLUSTER_MULTI_PROM_ENH
@@ -80,8 +81,6 @@ paste gene_ids.txt "${JOIN_FILES[@]}" > all_join.txt
 
 
 #regions are col2-12
-#cut -f1,2,3,4,5,6,8,10,28 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_ENH}classes.txt > \
-#    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes.bed
 cut -f2-7,9,11,56 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_ENH}classes.txt > \
     regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes.bed 
 
@@ -94,7 +93,8 @@ cut -f2-7,9,11,56 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_ENH}classes.txt > \
 # strand is from TSS
 
 awk 'OFS="\t" {if ($7!="." && $8==".") print $0}' \
-    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes.bed > regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_uni.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes.bed > \
+    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_uni.txt
 
 
 #b) bidirectional promoter regions
@@ -104,10 +104,12 @@ awk 'OFS="\t" {if ($7!="." && $8==".") print $0}' \
 
 awk 'OFS="\t" {if ($7!="." && $8!=".") 
 print $1,$2,$3,$4,$5,"+",$7,".",$9"\n"$1,$2,$3,$4,$5,"-",$8,".",$9}' \
-    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes.bed > regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_bidir.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes.bed > \
+    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_bidir.txt
 
 cat regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_uni.txt \
-    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_bidir.txt | sort -k1,1 -k2,2n > \
+    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_bidir.txt | \
+    sort -k1,1 -k2,2n > \
     regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom.txt
 
 #regions are distinct and non-overlapping
@@ -128,26 +130,28 @@ awk '!seen[$0]++' regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2.txt > \
 awk 'BEGIN { FS="\t" } { c[$1]++; l[$1,c[$1]]=$0 } END { for (i in c) { 
 if (c[i] == 1) for (j = 1; j <= c[i]; j++) print l[i,j] } }' \
     regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup.txt | sort > \
-    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup_sameassignment.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup_sameassign.txt
 #this is all genes that are unambigously assigned to one clusters, 
 #col1 gene id, col2 assignment
 
 
 join -t $'\t' all_join.txt \
-    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup_sameassignment.txt > \
+    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup_sameassign.txt > \
     join_${NUM_CLUSTER_MULTI_PROM_ENH}assignments.txt
 
 NUM_TIME_POINTS=4
 NUM_REPLICATES=3
 #note: number of replicates must be the same for each time point
 
-Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/plot_gene_expression_cluster.r \
-    join_${NUM_CLUSTER_MULTI_PROM_ENH}assignments.txt ${NUM_TIME_POINTS} ${NUM_REPLICATES} \
-    ${NUM_CLUSTER_MULTI_PROM_ENH} $NUM_CLUSTER_DIR_MULTI_PROM_ENH
+Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+plot_gene_expression_cluster.r \
+    join_${NUM_CLUSTER_MULTI_PROM_ENH}assignments.txt ${NUM_TIME_POINTS} \
+    ${NUM_REPLICATES} ${NUM_CLUSTER_MULTI_PROM_ENH} \
+    $NUM_CLUSTER_DIR_MULTI_PROM_ENH
 
 #this is all genes that are unambigously assigned to one clusters, 
 #col1 gene id, col2 assignment
-cp regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup_sameassignment.txt \
+cp regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup_sameassign.txt \
     genes_assignment.txt
 
 
@@ -157,7 +161,8 @@ cp regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes_allprom2_nodup_sameassignment.tx
 
 SIGNAL_GENERATOR_DIR_MULTI_PROM_PROM=${OPEN_REGIONS_DIR_PAIRS}_noordering/\
 Signal_Generator_multi_prom-prom
-TIMELESS_DIR_MULTI_PROM_PROM=${OPEN_REGIONS_DIR_PAIRS}_noordering/timeless_multi_prom-prom
+TIMELESS_DIR_MULTI_PROM_PROM=${OPEN_REGIONS_DIR_PAIRS}_noordering/\
+timeless_multi_prom-prom
 
 MODEL_DIR_MULTI_PROM_PROM=$TIMELESS_DIR_MULTI_PROM_PROM/\
 $NUM_CLUSTER_MULTI_PROM_PROM
@@ -220,13 +225,11 @@ paste gene_ids.txt "${JOIN_FILES[@]}" > all_join.txt
 
 
 #regions are col2-12
-#cut -f1,2,3,4,5,6,8,10,28 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_ENH}classes.txt > \
-#    regions_${NUM_CLUSTER_MULTI_PROM_ENH}classes.bed
 cut -f2-7,9,11,56 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_PROM}classes.txt > \
     regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes1.bed
 
-cut -f29-34,36,38,56 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_PROM}classes.txt > \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes2.bed 
+cut -f29-34,36,38,56 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_PROM}classes.txt \
+    > regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes2.bed 
 
 #for the plot only look at genes that are in exactly one cluster
 #it could be that one gene belongs to two or more clusters because it has two 
@@ -237,9 +240,12 @@ cut -f29-34,36,38,56 allCountsNorm_${NUM_CLUSTER_MULTI_PROM_PROM}classes.txt > \
 # strand is from TSS
 
 awk 'OFS="\t" {if ($7!="." && $8==".") print $0}' \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes1.bed > regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_uni1.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes1.bed > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_uni1.txt
+
 awk 'OFS="\t" {if ($7!="." && $8==".") print $0}' \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes2.bed > regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_uni2.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes2.bed > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_uni2.txt
 
 #b) bidirectional promoter regions
 #two genes assigned, left from + strand, right from - strand
@@ -248,18 +254,22 @@ awk 'OFS="\t" {if ($7!="." && $8==".") print $0}' \
 
 awk 'OFS="\t" {if ($7!="." && $8!=".") 
 print $1,$2,$3,$4,$5,"+",$7,".",$9"\n"$1,$2,$3,$4,$5,"-",$8,".",$9}' \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes1.bed > regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir1.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes1.bed > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir1.txt
 
 awk 'OFS="\t" {if ($7!="." && $8!=".") 
 print $1,$2,$3,$4,$5,"+",$7,".",$9"\n"$1,$2,$3,$4,$5,"-",$8,".",$9}' \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes2.bed > regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir2.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes2.bed > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir2.txt
 
 cat regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_uni1.txt \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir1.txt | sort -k1,1 -k2,2n > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir1.txt | \
+    sort -k1,1 -k2,2n > \
     regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom1.txt
 
 cat regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_uni2.txt \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir2.txt | sort -k1,1 -k2,2n > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_bidir2.txt | \
+    sort -k1,1 -k2,2n > \
     regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2.txt
 
 #regions are distinct and non-overlapping
@@ -284,23 +294,25 @@ awk '!seen[$0]++' regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_2.txt >
 #check if gene is in there and assigned to different clusters
 awk 'BEGIN { FS="\t" } { c[$1]++; l[$1,c[$1]]=$0 } END { for (i in c) { 
 if (c[i] == 1) for (j = 1; j <= c[i]; j++) print l[i,j] } }' \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup1.txt | sort > \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassignment1.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup1.txt | \
+    sort > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassign1.txt
 
 awk 'BEGIN { FS="\t" } { c[$1]++; l[$1,c[$1]]=$0 } END { for (i in c) { 
 if (c[i] == 1) for (j = 1; j <= c[i]; j++) print l[i,j] } }' \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup2.txt | sort > \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassignment2.txt
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup2.txt | \
+    sort > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassign2.txt
 #this is all genes that are unambigously assigned to one clusters, 
 #col1 gene id, col2 assignment
 
 
 join -t $'\t' all_join.txt \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassignment1.txt > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassign1.txt > \
     join_${NUM_CLUSTER_MULTI_PROM_PROM}assignments1.txt
 
 join -t $'\t' all_join.txt \
-    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassignment2.txt > \
+    regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassign2.txt > \
     join_${NUM_CLUSTER_MULTI_PROM_PROM}assignments2.txt
 
 NUM_TIME_POINTS=4
@@ -315,9 +327,9 @@ Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/plot_gene_expression_
 
 #this is all genes that are unambigously assigned to one clusters, 
 #col1 gene id, col2 assignment
-cp regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassignment1.txt \
+cp regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassign1.txt \
     genes_assignment1.txt
-cp regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassignment2.txt \
+cp regions_${NUM_CLUSTER_MULTI_PROM_PROM}classes_allprom2_nodup_sameassign2.txt \
     genes_assignment2.txt
 
 

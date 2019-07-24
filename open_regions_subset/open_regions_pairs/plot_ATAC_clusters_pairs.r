@@ -26,11 +26,8 @@ numClusters=as.numeric(args[5])
 type=args[6]
 
 
-print(numReplicates)
-print(numTimePoints)
-print(numClusters)
 print(head(overlaps.prom))
-
+print(head(overlaps.enh))
 
     if (type=="init_prom-enh" || type=="multi_prom-enh"){
         left="PROMOTER"

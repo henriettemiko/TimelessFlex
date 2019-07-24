@@ -49,7 +49,8 @@ mkdir -p $CUR_DIR_MULTI_PROM_ENH
 qsub -l os=centos7 -l h_vmem=20G -pe smp 1 -cwd -V -m ea \
     -M henriette.miko@mdc-berlin.de -j y \
     -o $CUR_DIR_MULTI_PROM_ENH/call_matlab_multi_pairs_out.txt \
-    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/call_matlab_multi_pairs.sh \
+    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+call_matlab_multi_pairs.sh \
     $NUM_MARKS $NUM_FC $SCRIPT_DIR $SIGNAL_GENERATOR_DIR_MULTI_PROM_ENH \
     $TIMELESS_DIR_INIT_PROM_ENH $NUM_CLUSTERS_PROM_ENH $CUR_DIR_MULTI_PROM_ENH
 
@@ -60,9 +61,11 @@ mkdir -p $CUR_DIR_MULTI_PROM_PROM
 qsub -l os=centos7 -l h_vmem=20G -pe smp 1 -cwd -V -m ea \
     -M henriette.miko@mdc-berlin.de -j y \
     -o $CUR_DIR_MULTI_PROM_PROM/call_matlab_multi_pairs_out.txt \
-    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/call_matlab_multi_pairs.sh \
+    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+call_matlab_multi_pairs.sh \
     $NUM_MARKS $NUM_FC $SCRIPT_DIR $SIGNAL_GENERATOR_DIR_MULTI_PROM_PROM \
-    $TIMELESS_DIR_INIT_PROM_PROM $NUM_CLUSTERS_PROM_PROM $CUR_DIR_MULTI_PROM_PROM
+    $TIMELESS_DIR_INIT_PROM_PROM $NUM_CLUSTERS_PROM_PROM \
+    $CUR_DIR_MULTI_PROM_PROM
 
 
 CUR_DIR_MULTI_ENH_ENH=$TIMELESS_DIR_MULTI_ENH_ENH/$NUM_CLUSTERS_ENH_ENH
@@ -71,7 +74,8 @@ mkdir -p $CUR_DIR_MULTI_ENH_ENH
 qsub -l os=centos7 -l h_vmem=20G -pe smp 1 -cwd -V -m ea \
     -M henriette.miko@mdc-berlin.de -j y \
     -o $CUR_DIR_MULTI_ENH_ENH/call_matlab_multi_pairs_out.txt \
-    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/call_matlab_multi_pairs.sh \
+    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+call_matlab_multi_pairs.sh \
     $NUM_MARKS $NUM_FC $SCRIPT_DIR $SIGNAL_GENERATOR_DIR_MULTI_ENH_ENH \
     $TIMELESS_DIR_INIT_ENH_ENH $NUM_CLUSTERS_ENH_ENH $CUR_DIR_MULTI_ENH_ENH
 

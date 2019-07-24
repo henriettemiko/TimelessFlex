@@ -89,7 +89,8 @@ for (i in 1:numClusters) {
     cur.items2 = which(geomav.fpkm.reordered2[[1]] == i)
     cur.scores2 <- geomav.fpkm.reordered2[cur.items2,2:5]
 
-    boxplot(log(cur.scores2+1), main=paste0("PROMOTER (", length(cur.items2), " genes)"), 
+    boxplot(log(cur.scores2+1), main=paste0("PROMOTER (", length(cur.items2), 
+                                            " genes)"), 
             names = c("D0", "D2", "D5", "D10"), outline = F, 
             ylab="log(geomav gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
 
@@ -119,7 +120,8 @@ for (i in 1:numClusters) {
     cur.items2 = which(mean.fpkm.reordered2[[1]] == i)
     cur.scores2 <- mean.fpkm.reordered2[cur.items2,2:5]
 
-    boxplot(log(cur.scores2+1), main=paste0("PROMOTER (" , length(cur.items2), " genes)"), 
+    boxplot(log(cur.scores2+1), main=paste0("PROMOTER (" , length(cur.items2),
+                                            " genes)"), 
             names = c("D0", "D2", "D5", "D10"), outline = F, 
             ylab="log(mean gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
 

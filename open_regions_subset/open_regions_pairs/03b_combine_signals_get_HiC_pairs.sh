@@ -73,7 +73,8 @@ cat all_max_counts_prom.txt all_max_counts_enh.txt | sort -k1,1 -k2,2n > \
 #then get pair infomation
 cut -f 4 "$OPEN_REGIONS_DIR_SUB/combine_peaks/"\
 "all_bins_unique_overlapping_peaks.bed" | sort | uniq | tr , "\n" | \
-    sed s/.right//g | sed s/.left//g | sort | uniq -d > mypairs_all_notunique.txt
+    sed s/.right//g | sed s/.left//g | sort | uniq -d > \
+    mypairs_all_notunique.txt
 #ALL PAIRS FROM UNCOLLAPSED BINS WHERE BIN OVERLAPS AT LEAST ONE OPEN 
 #CHROMATIN REGION FULLY
 #here we still have time information, so not unique
@@ -91,7 +92,8 @@ cut -d"." -f2- mypairs_all_notunique.txt | sort | uniq > mypairs_all_unique.txt
 
 cut -f 4 "$OPEN_REGIONS_DIR_SUB/combine_peaks/"\
 "all_bins_unique_overlapping_peaks.bed" | sort | uniq -u | tr , "\n" | \
-    sed s/.right//g | sed s/.left//g | sort | uniq -d > mypairs_init_notunique.txt
+    sed s/.right//g | sed s/.left//g | sort | uniq -d > \
+    mypairs_init_notunique.txt
 #INIT SET
 
 cut -d"." -f2- mypairs_init_notunique.txt | sort | uniq > \
@@ -181,16 +183,23 @@ awk 'OFS="\t" {if ($9!="." && $36!=".") print $0}' \
 ###
 #reorder prom-prom pairs: right side has higher K27ac value at D10
 
-awk 'OFS="\t" {if ($16<=$43) {print $0}}' max_counts_init_pairs_unique_prom-prom.txt > max_counts_init_pairs_unique_prom-prom_correctorder_pt1.txt
-awk 'OFS="\t" {if ($16>$43) {print $0}}' max_counts_init_pairs_unique_prom-prom.txt > max_counts_init_pairs_unique_prom-prom_wrongorder.txt
+awk 'OFS="\t" {if ($16<=$43) {print $0}}' \
+    max_counts_init_pairs_unique_prom-prom.txt > \
+    max_counts_init_pairs_unique_prom-prom_correctorder_pt1.txt
+awk 'OFS="\t" {if ($16>$43) {print $0}}' \
+    max_counts_init_pairs_unique_prom-prom.txt > \
+    max_counts_init_pairs_unique_prom-prom_wrongorder.txt
 
-cut -f 2-28 max_counts_init_pairs_unique_prom-prom_wrongorder.txt > left_prom-prom.txt
-cut -f 1,29- max_counts_init_pairs_unique_prom-prom_wrongorder.txt > right_prom-prom.txt
+cut -f 2-28 max_counts_init_pairs_unique_prom-prom_wrongorder.txt > \
+    left_prom-prom.txt
+cut -f 1,29- max_counts_init_pairs_unique_prom-prom_wrongorder.txt > \
+    right_prom-prom.txt
 paste right_prom-prom.txt left_prom-prom.txt > \
     max_counts_init_pairs_unique_prom-prom_correctorder_pt2.txt
 
 cat max_counts_init_pairs_unique_prom-prom_correctorder_pt1.txt \
-    max_counts_init_pairs_unique_prom-prom_correctorder_pt2.txt | sort -k1,1 -k2,2n > \
+    max_counts_init_pairs_unique_prom-prom_correctorder_pt2.txt | \
+    sort -k1,1 -k2,2n > \
     max_counts_init_pairs_unique_prom-prom.txt
 
 ###
@@ -206,16 +215,23 @@ awk 'OFS="\t" {if ($9=="."  && $36=="." ) print $0}' \
 ###
 #reorder enh-enh pairs: right side has higher K27ac value at D10
 
-awk 'OFS="\t" {if ($16<=$43) {print $0}}' max_counts_init_pairs_unique_enh-enh.txt > max_counts_init_pairs_unique_enh-enh_correctorder_pt1.txt
-awk 'OFS="\t" {if ($16>$43) {print $0}}' max_counts_init_pairs_unique_enh-enh.txt > max_counts_init_pairs_unique_enh-enh_wrongorder.txt
+awk 'OFS="\t" {if ($16<=$43) {print $0}}' \
+    max_counts_init_pairs_unique_enh-enh.txt > \
+    max_counts_init_pairs_unique_enh-enh_correctorder_pt1.txt
+awk 'OFS="\t" {if ($16>$43) {print $0}}' \
+    max_counts_init_pairs_unique_enh-enh.txt > \
+    max_counts_init_pairs_unique_enh-enh_wrongorder.txt
 
-cut -f 2-28 max_counts_init_pairs_unique_enh-enh_wrongorder.txt > left_enh-enh.txt
-cut -f 1,29- max_counts_init_pairs_unique_enh-enh_wrongorder.txt > right_enh-enh.txt
+cut -f 2-28 max_counts_init_pairs_unique_enh-enh_wrongorder.txt > \
+    left_enh-enh.txt
+cut -f 1,29- max_counts_init_pairs_unique_enh-enh_wrongorder.txt > \
+    right_enh-enh.txt
 paste right_enh-enh.txt left_enh-enh.txt > \
     max_counts_init_pairs_unique_enh-enh_correctorder_pt2.txt
 
 cat max_counts_init_pairs_unique_enh-enh_correctorder_pt1.txt \
-    max_counts_init_pairs_unique_enh-enh_correctorder_pt2.txt | sort -k1,1 -k2,2n > \
+    max_counts_init_pairs_unique_enh-enh_correctorder_pt2.txt | \
+    sort -k1,1 -k2,2n > \
     max_counts_init_pairs_unique_enh-enh.txt
 
 ###

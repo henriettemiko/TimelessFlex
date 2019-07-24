@@ -1,5 +1,5 @@
 %%%%%%%%%%
-%name:          learn_cluster.m
+%name:          learn_cluster_pairs.m
 %description:   learns model and clusters regions for pairs
 %author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 %date:          July 17, 2019
@@ -74,6 +74,8 @@ for (numClusters = startNum:endNum)
     disp(inFileFiltered);
     disp(inFile);
 
+    disp(numNodes);
+
     %%%prepare TAN%%%
     disp([datestr(datetime) ': Initializing TAN...']);
 
@@ -93,9 +95,10 @@ for (numClusters = startNum:endNum)
     %disp(struct(tan.CPD{1}).CPT);
 
     % head node c is discrete node
-    % each node is a Gaussian node (except head node), has parameters my and sigma
-    % for each cluster: for each node my and sigma, alpha and beta for each edge 
-    %(linear regression)
+    % each node is a Gaussian node (except head node), has parameters my and
+    % sigma
+    % for each cluster: for each node my and sigma, alpha and beta for each  
+    % edge (linear regression)
 
     %%%Import Data%%%
     dataOrigFiltered = importdata(inFileFiltered, '\t');
@@ -135,8 +138,8 @@ for (numClusters = startNum:endNum)
     %(k-1)-means for filtered data
 
     disp(['Initializing with K-means']);
-    k = kmeans(dataOrigFiltered, (numClusters-1), 'Distance', 'cityblock', 'Replicates', ...
-    15, 'MaxIter', 300, 'display', 'final');
+    k = kmeans(dataOrigFiltered, (numClusters-1), 'Distance', 'cityblock', ...
+    'Replicates', 15, 'MaxIter', 300, 'display', 'final');
 
     koutFile = [curDir '/k-means_initalization_' num2str(numClusters) '.txt'];
     dlmwrite(koutFile, k, '\t');
@@ -155,7 +158,8 @@ for (numClusters = startNum:endNum)
     date = data;
     date(1,:) = num2cell(kFull);
 
-    %date is fully observed with values for hidden nodes initialized with k-means
+    %date is fully observed with values for hidden nodes initialized with 
+    %k-means
     %data is not fully observed, values for hidden nodes are []
 
     tan = learn_params(tan, date);
@@ -176,7 +180,7 @@ for (numClusters = startNum:endNum)
 
     [tan, LLtrace, engine] = learn_params_em(engine, data, 200, 0.0002);
     outFile = [curDir '/model-' num2str(numClusters) '.mat'];
-    %save(outFile, 'tan');
+    save(outFile, 'tan');
 
     numPar = 0;
     for (i = 1:numNodes)
