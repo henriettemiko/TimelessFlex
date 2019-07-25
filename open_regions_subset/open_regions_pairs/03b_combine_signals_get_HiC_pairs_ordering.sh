@@ -180,6 +180,29 @@ awk 'OFS="\t" {if ($9!="." && $36!=".") print $0}' \
     max_counts_init_pairs_unique.txt > \
     max_counts_init_pairs_unique_prom-prom.txt
 
+###
+#reorder prom-prom pairs: right side has higher K27ac value at D10
+
+awk 'OFS="\t" {if ($16<=$43) {print $0}}' \
+    max_counts_init_pairs_unique_prom-prom.txt > \
+    max_counts_init_pairs_unique_prom-prom_correctorder_pt1.txt
+awk 'OFS="\t" {if ($16>$43) {print $0}}' \
+    max_counts_init_pairs_unique_prom-prom.txt > \
+    max_counts_init_pairs_unique_prom-prom_wrongorder.txt
+
+cut -f 2-28 max_counts_init_pairs_unique_prom-prom_wrongorder.txt > \
+    left_prom-prom.txt
+cut -f 1,29- max_counts_init_pairs_unique_prom-prom_wrongorder.txt > \
+    right_prom-prom.txt
+paste right_prom-prom.txt left_prom-prom.txt > \
+    max_counts_init_pairs_unique_prom-prom_correctorder_pt2.txt
+
+cat max_counts_init_pairs_unique_prom-prom_correctorder_pt1.txt \
+    max_counts_init_pairs_unique_prom-prom_correctorder_pt2.txt | \
+    sort -k1,1 -k2,2n > \
+    max_counts_init_pairs_unique_prom-prom.txt
+
+###
 
 cut -f 13-28,40-55 max_counts_init_pairs_unique_prom-prom.txt > \
     max_counts_init_pairs_unique_prom-prom_counts.txt
@@ -189,6 +212,29 @@ cut -f 13-28,40-55 max_counts_init_pairs_unique_prom-prom.txt > \
 awk 'OFS="\t" {if ($9=="."  && $36=="." ) print $0}' \
     max_counts_init_pairs_unique.txt > max_counts_init_pairs_unique_enh-enh.txt
 
+###
+#reorder enh-enh pairs: right side has higher K27ac value at D10
+
+awk 'OFS="\t" {if ($16<=$43) {print $0}}' \
+    max_counts_init_pairs_unique_enh-enh.txt > \
+    max_counts_init_pairs_unique_enh-enh_correctorder_pt1.txt
+awk 'OFS="\t" {if ($16>$43) {print $0}}' \
+    max_counts_init_pairs_unique_enh-enh.txt > \
+    max_counts_init_pairs_unique_enh-enh_wrongorder.txt
+
+cut -f 2-28 max_counts_init_pairs_unique_enh-enh_wrongorder.txt > \
+    left_enh-enh.txt
+cut -f 1,29- max_counts_init_pairs_unique_enh-enh_wrongorder.txt > \
+    right_enh-enh.txt
+paste right_enh-enh.txt left_enh-enh.txt > \
+    max_counts_init_pairs_unique_enh-enh_correctorder_pt2.txt
+
+cat max_counts_init_pairs_unique_enh-enh_correctorder_pt1.txt \
+    max_counts_init_pairs_unique_enh-enh_correctorder_pt2.txt | \
+    sort -k1,1 -k2,2n > \
+    max_counts_init_pairs_unique_enh-enh.txt
+
+###
 
 cut -f 13-28,40-55 max_counts_init_pairs_unique_enh-enh.txt > \
     max_counts_init_pairs_unique_enh-enh_counts.txt

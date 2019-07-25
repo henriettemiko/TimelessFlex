@@ -61,7 +61,7 @@ for (numClusters = startNum:endNum)
     dag(18,19) = 1;
 
     % third histone modification tree H3K4me1 enhancer
-    dag(19,20) = 1;
+    dag(20,21) = 1;
     dag(21,22) = 1;
 
     % 4th histone modification tree H3K4me3 enhancer

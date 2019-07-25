@@ -12,7 +12,7 @@ source ../../set_variables_hg19.sh
 
 
 NUM_MARKS=4
-NUM_FC=3
+NUM_FC=6 #3 for promoters and 3 for enhancers
 START_NUM=2
 END_NUM=30
 
@@ -38,7 +38,7 @@ mkdir -p $TIMELESS_DIR_INIT_ENH_ENH
 CUR_DIR_INIT_PROM_ENH=$TIMELESS_DIR_INIT_PROM_ENH/${START_NUM}_${END_NUM}
 mkdir -p $CUR_DIR_INIT_PROM_ENH
 
-qsub -l os=centos7 -l h_vmem=150G -pe smp 1 -cwd -V -m ea \
+qsub -l os=centos7 -l h_vmem=20G -cwd -V -m ea \
     -M henriette.miko@mdc-berlin.de -j y \
     -o $CUR_DIR_INIT_PROM_ENH/call_matlab_pairs_out.txt \
     $SCRIPT_DIR/open_regions_subset/open_regions_pairs/call_matlab_pairs.sh \
@@ -46,11 +46,10 @@ qsub -l os=centos7 -l h_vmem=150G -pe smp 1 -cwd -V -m ea \
     $START_NUM $END_NUM $CUR_DIR_INIT_PROM_ENH
 
 
-
 CUR_DIR_INIT_PROM_PROM=$TIMELESS_DIR_INIT_PROM_PROM/${START_NUM}_${END_NUM}
 mkdir -p $CUR_DIR_INIT_PROM_PROM
 
-qsub -l os=centos7 -l h_vmem=150G -pe smp 1 -cwd -V -m ea \
+qsub -l os=centos7 -l h_vmem=20G -cwd -V -m ea \
     -M henriette.miko@mdc-berlin.de -j y \
     -o $CUR_DIR_INIT_PROM_PROM/call_matlab_pairs_out.txt \
     $SCRIPT_DIR/open_regions_subset/open_regions_pairs/call_matlab_pairs.sh \
@@ -61,7 +60,7 @@ qsub -l os=centos7 -l h_vmem=150G -pe smp 1 -cwd -V -m ea \
 CUR_DIR_INIT_ENH_ENH=$TIMELESS_DIR_INIT_ENH_ENH/${START_NUM}_${END_NUM}
 mkdir -p $CUR_DIR_INIT_ENH_ENH
 
-qsub -l os=centos7 -l h_vmem=150G -pe smp 1 -cwd -V -m ea \
+qsub -l os=centos7 -l h_vmem=20G -cwd -V -m ea \
     -M henriette.miko@mdc-berlin.de -j y \
     -o $CUR_DIR_INIT_ENH_ENH/call_matlab_pairs_out.txt \
     $SCRIPT_DIR/open_regions_subset/open_regions_pairs/call_matlab_pairs.sh \

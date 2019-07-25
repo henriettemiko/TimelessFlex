@@ -118,28 +118,28 @@ n.reordered.noise = cbind(l[-g,1:12],m1promnoise[,c(1,3,4,2)],
 
 
 write.table(rbind(n.reordered.filtered, n.reordered.noise), 
-            sep = "\t", file = paste0("allCountsNorm_", name, ".txt"), 
+            sep = "\t", file = paste0("allCountsNorm.txt"), 
             quote = F, row.names = F, col.names = F)
 
 write.table(cbind(rbind(l[g,1:12],l[-g,1:12]),
                   rbind(l[g,29:39],l[-g,29:39])), sep = "\t", 
-            file = paste0("regions_", name, ".bed"), 
+            file = paste0("regions.bed"), 
             quote = F, row.names = F, col.names = F)
 
 write.table(n.reordered.filtered, sep = "\t",
-            file = paste0("allCountsNorm_filtered_", name, ".txt"), 
+            file = paste0("allCountsNorm_filtered.txt"), 
             quote = F, row.names = F, col.names = F)
 
 write.table(cbind(l[g,1:12],l[g,29:39]), 
-            sep = "\t", file = paste0("regions_filtered_", name, ".bed"), 
+            sep = "\t", file = paste0("regions_filtered.bed"), 
             quote = F, row.names = F, col.names = F)
 
 write.table(n.reordered.noise, sep = "\t",
-            file = paste0("allCountsNorm_noise_", name, ".txt"), 
+            file = paste0("allCountsNorm_noise.txt"), 
             quote = F, row.names = F, col.names = F)
 
 write.table(cbind(l[-g,1:12],l[-g,29:39]), sep = "\t", 
-            file = paste0("regions_noise_", name, ".bed"), 
+            file = paste0("regions_noise.bed"), 
             quote = F, row.names = F, col.names = F)
 
 
@@ -243,20 +243,27 @@ print(dim(fc.reordered.noise))
 
 
 write.table(rbind(fc.reordered.filtered, fc.reordered.noise), 
-            sep = "\t", file = paste0("allFold_", name, ".txt"), 
+            sep = "\t", file = paste0("allFold.txt"), 
             quote = F, row.names = F, col.names = F)
 
 write.table(rbind(fc.reordered.filtered.data, fc.reordered.noise.data), 
-            sep = "\t", file = paste0("allFold_data_", name, ".txt"), 
+            sep = "\t", file = paste0("allFold_data.txt"), 
             quote = F, row.names = F, col.names = F)
 
-
 write.table(fc.reordered.filtered, sep = "\t",
-            file = paste0("allFold_filtered_", name, ".txt"), 
+            file = paste0("allFold_filtered.txt"), 
             quote = F, row.names = F, col.names = F)
 
 write.table(fc.reordered.noise, sep = "\t",
-            file = paste0("allFold_noise_", name, ".txt"), 
+            file = paste0("allFold_noise.txt"), 
+            quote = F, row.names = F, col.names = F)
+
+write.table(fc.reordered.filtered.data, sep = "\t",
+            file = paste0("allFold_filtered_data.txt"), 
+            quote = F, row.names = F, col.names = F)
+
+write.table(fc.reordered.noise.data, sep = "\t",
+            file = paste0("allFold_noise_data.txt"), 
             quote = F, row.names = F, col.names = F)
 
 
