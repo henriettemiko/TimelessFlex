@@ -30,7 +30,7 @@ score <- function(x){
 
 filename=""
 if (type=="multi_prom-enh" || type=="multi_prom-prom" || 
-    type=="multi_enh-enh"){
+    type=="multi_enh-enh" || type=="combined_multi" || type=="combined_initmulti"){
     filename="_afterEM"
 } 
 
@@ -111,6 +111,8 @@ for (i in 1:numClusters) {
 
     colnames(stuff.k4me1.enh) <- c("D0", "D2", "D5", "D10")
 
+    left="PROMOTER/ENHANCER"
+    right="PROMOTER/ENHANCER"
 
     if (type=="init_prom-enh" || type=="multi_prom-enh"){
         left="PROMOTER"

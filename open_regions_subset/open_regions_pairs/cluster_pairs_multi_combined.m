@@ -28,7 +28,9 @@ PromEnh =  load([modelDirPromEnh, '/', num2str(numClustersPromEnh), '/model-', n
 PromProm =  load([modelDirPromProm, '/', num2str(numClustersPromProm), '/model-', num2str(numClustersPromProm), '_afterEM.mat']);
 EnhEnh =  load([modelDirEnhEnh, '/', num2str(numClustersEnhEnh), '/model-', num2str(numClustersEnhEnh), '_afterEM.mat']);
 
-
+disp(PromEnh);
+disp(PromProm);
+disp(EnhEnh);
 
 %combine 3 models into one combined model
 
@@ -94,16 +96,16 @@ nopre=[ 2 8 14 20 5 11 17 23]
 for idx=1:numel(nopre)
    t=nopre(idx)
    
-   allmean = [struct(PromEnh.tan.CPD{t}).mean struct(PromProm.tan.CPD{t}).mean struct(EnhEnh.tan.CPD{t}).mean ];
+   allmean = [struct(PromEnh.initModel.tan.CPD{t}).mean struct(PromProm.initModel.tan.CPD{t}).mean struct(EnhEnh.initModel.tan.CPD{t}).mean ];
    
 allcov=zeros(1,1,numClusters);
-allcov(1,1,1:numClustersPromEnh)=struct(PromEnh.tan.CPD{t}).cov;
+allcov(1,1,1:numClustersPromEnh)=struct(PromEnh.initModel.tan.CPD{t}).cov;
 
 
 
-allcov(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.tan.CPD{t}).cov;
+allcov(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.initModel.tan.CPD{t}).cov;
 
-allcov(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.tan.CPD{t}).cov;
+allcov(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.initModel.tan.CPD{t}).cov;
 
 allweights=double.empty(1,0, numClusters);
 
@@ -120,29 +122,34 @@ t=pre(idx)
 
 
 
-allmean = [struct(PromEnh.tan.CPD{t}).mean struct(PromProm.tan.CPD{t}).mean struct(EnhEnh.tan.CPD{t}).mean ];
+allmean = [struct(PromEnh.initModel.tan.CPD{t}).mean struct(PromProm.initModel.tan.CPD{t}).mean struct(EnhEnh.initModel.tan.CPD{t}).mean ];
    
 allcov=zeros(1,1,numClusters);
 allcov=zeros(1,1,numClusters);
-   allcov(1,1,1:numClustersPromEnh)=struct(PromEnh.tan.CPD{t}).cov;
-allcov(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.tan.CPD{t}).cov;
-allcov(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.tan.CPD{t}).cov;
+   allcov(1,1,1:numClustersPromEnh)=struct(PromEnh.initModel.tan.CPD{t}).cov;
+allcov(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.initModel.tan.CPD{t}).cov;
+allcov(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.initModel.tan.CPD{t}).cov;
 
 
 allweights=zeros(1,1, numClusters);
-   allweights(1,1,1:numClustersPromEnh)=struct(PromEnh.tan.CPD{t}).weights;
-allweights(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.tan.CPD{t}).weights;
-allweights(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.tan.CPD{t}).weights;
+   allweights(1,1,1:numClustersPromEnh)=struct(PromEnh.initModel.tan.CPD{t}).weights;
+allweights(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.initModel.tan.CPD{t}).weights;
+allweights(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.initModel.tan.CPD{t}).weights;
 
 allnet.CPD{t} = gaussian_CPD(allnet, t, 'mean', allmean, 'cov', allcov, 'weights', allweights);
 
 end
 
-allnet.CPD{1} = tabular_CPD(allnet, 1, 'CPT', [(3617/9684)*struct(PromEnh.tan.CPD{1}).CPT; (800/9684)*struct(PromProm.tan.CPD{1}).CPT; (5267/9684)*struct(EnhEnh.tan.CPD{1}).CPT]);
+%init regions
+%allnet.CPD{1} = tabular_CPD(allnet, 1, 'CPT', [(3617/9684)*struct(PromEnh.tan.CPD{1}).CPT; (800/9684)*struct(PromProm.tan.CPD{1}).CPT; (5267/9684)*struct(EnhEnh.tan.CPD{1}).CPT]);
+
+
+%multi regions
+allnet.CPD{1} = tabular_CPD(allnet, 1, 'CPT', [(3406/9555)*struct(PromEnh.initModel.tan.CPD{1}).CPT; (687/9555)*struct(PromProm.initModel.tan.CPD{1}).CPT; (5462/9555)*struct(EnhEnh.initModel.tan.CPD{1}).CPT]);
 
 
 %check if probs sum up to 1
-sumprobs=cumsum([(3617/9684)*struct(PromEnh.tan.CPD{1}).CPT; (800/9684)*struct(PromProm.tan.CPD{1}).CPT; (5267/9684)*struct(EnhEnh.tan.CPD{1}).CPT]);
+sumprobs=cumsum([(3406/9555)*struct(PromEnh.initModel.tan.CPD{1}).CPT; (687/9555)*struct(PromProm.initModel.tan.CPD{1}).CPT; (5462/9555)*struct(EnhEnh.initModel.tan.CPD{1}).CPT]);
 disp(sumprobs);
 %%
 
@@ -160,7 +167,7 @@ disp(sumprobs);
 outFile1 = [curDir '/model-' num2str(numClusters) '.mat'];
 save(outFile1, 'allnet');
 
-exit
+
 
 %%%
 %now cluster all multi pairs together with combined model
@@ -182,7 +189,7 @@ dataOrig = [ pem; ppm; eem ];
 
 
 %%%Import Data%%%
-dataOrig = importdata(inFile, '\t');
+%dataOrig = importdata(inFile, '\t');
 numDataPts = length(dataOrig(:,1));
 disp(dataOrig(1,1));
 disp(['There are ' num2str(numDataPts) ' data points.']);
@@ -194,7 +201,7 @@ for (i = 1:numDataPts)
     data(i,2:numNodes) = num2cell(rem(i,:));
 end
 data = data';
-%mydata = data;
+mydata = data;
 
 disp(data(1:25,1:10));
     
@@ -223,7 +230,7 @@ disp(['Writing Results...']);
 data = data';
 classes = cell2num(data(:,1));
 marginal = marginal';
-outFile = [curDir '/classes-' num2str(numClusters) '.txt'];
+outFile = [curDir '/classes-' num2str(numClusters) '_combinedmodel.txt'];
 classe = [classes, marginal];
 display(size(classe));
 dlmwrite(outFile, classe, '\t');
@@ -239,11 +246,10 @@ dlmwrite(outFile, classe, '\t');
 %edges are linear regression (alpha, beta)
 
 
-data=data';
 engine = jtree_inf_engine(allnet);
 disp(['Started EM algorithm']);
 
-[allnet, LLtrace, engine] = learn_params_em(engine, data, 200, 0.0002);
+[allnet, LLtrace, engine] = learn_params_em(engine, mydata, 200, 0.0002);
 outFile2 = [curDir '/model-' num2str(numClusters) '_afterEM.mat'];
 save(outFile2, 'allnet');
 
@@ -267,21 +273,21 @@ logl=0;
 marginal = zeros(numClusters, numDataPts);
 for (nd = 1:numDataPts)
     evidence = cell(numNodes, 1);
-    evidence(2:numNodes,1) = data(2:numNodes,nd);
+    evidence(2:numNodes,1) = mydata(2:numNodes,nd);
     engine = jtree_inf_engine(allnet);
     [engine, ll] = enter_evidence(engine, evidence');
     logl = logl+ll;
     marg = marginal_nodes(engine, 1);
     [none, index] = max(marg.T);
     marginal(:,nd) = marg.T;
-    data(1,nd) = num2cell(index); 
+    mydata(1,nd) = num2cell(index); 
 end
 
 
 %%%cluster information%%%
 disp(['Writing Results...']);
-data = data';
-classes = cell2num(data(:,1));
+mydata = mydata';
+classes = cell2num(mydata(:,1));
 marginal = marginal';
 outFile3 = [curDir '/classes-' num2str(numClusters) '_afterEM.txt'];
 classe = [classes, marginal];

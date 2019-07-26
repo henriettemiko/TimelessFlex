@@ -12,8 +12,8 @@ source ../../set_variables_hg19.sh
 
 #choose numbers here
 NUM_CLUSTERS_PROM_ENH=10
-NUM_CLUSTERS_PROM_PROM=5
-NUM_CLUSTERS_ENH_ENH=12
+NUM_CLUSTERS_PROM_PROM=4
+NUM_CLUSTERS_ENH_ENH=15
 
 
 NUM_MARKS=4
@@ -46,13 +46,13 @@ mkdir -p $TIMELESS_DIR_MULTI_ENH_ENH
 CUR_DIR_MULTI_PROM_ENH=$TIMELESS_DIR_MULTI_PROM_ENH/$NUM_CLUSTERS_PROM_ENH
 mkdir -p $CUR_DIR_MULTI_PROM_ENH
 
-qsub -l os=centos7 -l h_vmem=20G -pe smp 1 -cwd -V -m ea \
-    -M henriette.miko@mdc-berlin.de -j y \
-    -o $CUR_DIR_MULTI_PROM_ENH/call_matlab_multi_pairs_out.txt \
-    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
-call_matlab_multi_pairs.sh \
-    $NUM_MARKS $NUM_FC $SCRIPT_DIR $SIGNAL_GENERATOR_DIR_MULTI_PROM_ENH \
-    $TIMELESS_DIR_INIT_PROM_ENH $NUM_CLUSTERS_PROM_ENH $CUR_DIR_MULTI_PROM_ENH
+#qsub -l os=centos7 -l h_vmem=20G -pe smp 1 -cwd -V -m ea \
+#    -M henriette.miko@mdc-berlin.de -j y \
+#    -o $CUR_DIR_MULTI_PROM_ENH/call_matlab_multi_pairs_out.txt \
+#    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+#call_matlab_multi_pairs.sh \
+#    $NUM_MARKS $NUM_FC $SCRIPT_DIR $SIGNAL_GENERATOR_DIR_MULTI_PROM_ENH \
+#    $TIMELESS_DIR_INIT_PROM_ENH $NUM_CLUSTERS_PROM_ENH $CUR_DIR_MULTI_PROM_ENH
 
 
 CUR_DIR_MULTI_PROM_PROM=$TIMELESS_DIR_MULTI_PROM_PROM/$NUM_CLUSTERS_PROM_PROM

@@ -15,10 +15,10 @@ source ../../set_variables_hg19.sh
 NUM_CLUSTER_MULTI_PROM_ENH=10
 
 #choose cluster number for multi prom-prom pairs here
-NUM_CLUSTER_MULTI_PROM_PROM=5
+NUM_CLUSTER_MULTI_PROM_PROM=4
 
 #choose cluster number for multi enh-enh pairs here
-NUM_CLUSTER_MULTI_ENH_ENH=12
+NUM_CLUSTER_MULTI_ENH_ENH=15
 
 
 NUM_MARKS=4
