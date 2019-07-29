@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########
-#name:          04c_plot_clusters_pairs_multi.sh
+#name:          04g_plot_clusters_pairs_multi.sh
 #description:   calls plotting of clusters for pairs multi
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 26, 2019

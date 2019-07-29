@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########
-#name:          call_matlab_cluster_multi_pairs_combined.sh
+#name:          call_matlab_cluster_pairs_combined_initmulti.sh
 #description:   calls MATLAB for combining models and clustering all pairs
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 25, 2019

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########
-#name:          04f_cluster_multi_with_combined.sh
+#name:          04h_cluster_initmulti_with_combined.sh
 #description:   calls clustering scripts for pairs with combined model
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 25, 2019

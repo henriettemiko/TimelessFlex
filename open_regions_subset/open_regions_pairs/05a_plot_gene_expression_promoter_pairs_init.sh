@@ -15,7 +15,7 @@ source ../../set_variables_hg19.sh
 NUM_CLUSTER_INIT_PROM_ENH=10
 
 #choose cluster number for init prom-prom pairs here
-NUM_CLUSTER_INIT_PROM_PROM=5
+NUM_CLUSTER_INIT_PROM_PROM=4
 
 
 SIGNAL_GENERATOR_DIR_INIT_PROM_ENH=${OPEN_REGIONS_DIR_PAIRS}/\

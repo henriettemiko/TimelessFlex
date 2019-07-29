@@ -1,5 +1,5 @@
 %%%%%%%%%%
-%name:          cluster_pairs_combined.m
+%name:          cluster_pairs_initmulti_combined.m
 %description:   clusters initmulti regions with combined model for pairs
 %author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 %date:          July 26, 2019
