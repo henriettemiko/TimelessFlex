@@ -24,9 +24,12 @@ disp(numClusters);
 
 %load models from clustering of multi pairs
 
-PromEnh =  load([modelDirPromEnh, '/', num2str(numClustersPromEnh), '/model-', num2str(numClustersPromEnh), '_afterEM.mat']);
-PromProm =  load([modelDirPromProm, '/', num2str(numClustersPromProm), '/model-', num2str(numClustersPromProm), '_afterEM.mat']);
-EnhEnh =  load([modelDirEnhEnh, '/', num2str(numClustersEnhEnh), '/model-', num2str(numClustersEnhEnh), '_afterEM.mat']);
+PromEnh =  load([modelDirPromEnh, '/', num2str(numClustersPromEnh), ...
+'/model-', num2str(numClustersPromEnh), '_afterEM.mat']);
+PromProm =  load([modelDirPromProm, '/', num2str(numClustersPromProm), ...
+'/model-', num2str(numClustersPromProm), '_afterEM.mat']);
+EnhEnh =  load([modelDirEnhEnh, '/', num2str(numClustersEnhEnh), ...
+'/model-', num2str(numClustersEnhEnh), '_afterEM.mat']);
 
 
 
@@ -94,14 +97,17 @@ nopre=[ 2 8 14 20 5 11 17 23]
 for idx=1:numel(nopre)
    t=nopre(idx)
    
-   allmean = [struct(PromEnh.initModel.tan.CPD{t}).mean struct(PromProm.initModel.tan.CPD{t}).mean struct(EnhEnh.initModel.tan.CPD{t}).mean ];
+   allmean = [struct(PromEnh.initModel.tan.CPD{t}).mean ...
+   struct(PromProm.initModel.tan.CPD{t}).mean ...
+   struct(EnhEnh.initModel.tan.CPD{t}).mean ];
    
 allcov=zeros(1,1,numClusters);
 allcov(1,1,1:numClustersPromEnh)=struct(PromEnh.initModel.tan.CPD{t}).cov;
 
 
 
-allcov(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.initModel.tan.CPD{t}).cov;
+allcov(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))= ...
+struct(PromProm.initModel.tan.CPD{t}).cov;
 
 allcov(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.initModel.tan.CPD{t}).cov;
 
@@ -130,11 +136,12 @@ allcov(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClu
 
 
 allweights=zeros(1,1, numClusters);
-   allweights(1,1,1:numClustersPromEnh)=struct(PromEnh.initModel.tan.CPD{t}).weights;
+allweights(1,1,1:numClustersPromEnh)=struct(PromEnh.initModel.tan.CPD{t}).weights;
 allweights(1,1,(numClustersPromEnh+1):(numClustersPromEnh+numClustersPromProm))=struct(PromProm.initModel.tan.CPD{t}).weights;
 allweights(1,1,(numClustersPromEnh+numClustersPromProm+1):(numClustersPromEnh+numClustersPromProm+numClustersEnhEnh))=struct(EnhEnh.initModel.tan.CPD{t}).weights;
 
-allnet.CPD{t} = gaussian_CPD(allnet, t, 'mean', allmean, 'cov', allcov, 'weights', allweights);
+allnet.CPD{t} = gaussian_CPD(allnet, t, 'mean', allmean, 'cov', allcov, ...
+'weights', allweights);
 
 end
 
@@ -142,7 +149,9 @@ allnet.CPD{1} = tabular_CPD(allnet, 1, 'CPT', [((3617+3406)/(9684+9555))*struct(
 
 
 %check if probs sum up to 1
-sumprobs=cumsum([((3617+3406)/(9684+9555))*struct(PromEnh.initModel.tan.CPD{1}).CPT; ((800+687)/(9684+9555))*struct(PromProm.initModel.tan.CPD{1}).CPT; ((5267+5462)/(9684+9555))*struct(EnhEnh.initModel.tan.CPD{1}).CPT]);
+sumprobs=cumsum([((3617+3406)/(9684+9555))*struct(PromEnh.initModel.tan.CPD{1}).CPT;...
+((800+687)/(9684+9555))*struct(PromProm.initModel.tan.CPD{1}).CPT;...
+((5267+5462)/(9684+9555))*struct(EnhEnh.initModel.tan.CPD{1}).CPT]);
 disp(sumprobs);
 %%
 
@@ -243,11 +252,10 @@ dlmwrite(outFile, classe, '\t');
 
 
 
-
-%now use EM to improve parameters
 %%%EM%%%%
+%now use EM to improve parameters
 
-% keep refining parameters: my and sigma for each node, probabilities of c, 
+%keep refining parameters: my and sigma for each node, probabilities of c, 
 %edges are linear regression (alpha, beta)
 
 

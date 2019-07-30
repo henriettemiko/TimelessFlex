@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ##########
-#name:          get_HiC_pairs.sh
-#description:   get Hi-C pairs
+#name:          03b_combine_signals_get_HiC_pairs_ordering.sh
+#description:   get Hi-C pairs and order prom-prom and enh-enh pairs
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 23, 2019
 ##########

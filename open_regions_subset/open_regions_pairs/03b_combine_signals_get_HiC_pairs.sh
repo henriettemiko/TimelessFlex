@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########
-#name:          get_HiC_pairs.sh
+#name:          03b_combine_signals_get_HiC_pairs.sh
 #description:   get Hi-C pairs
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 23, 2019

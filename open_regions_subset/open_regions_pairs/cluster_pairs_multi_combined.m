@@ -238,9 +238,8 @@ dlmwrite(outFile, classe, '\t');
 
 
 
-
-%now use EM to improve parameters
 %%%EM%%%%
+%now use EM to improve parameters
 
 % keep refining parameters: my and sigma for each node, probabilities of c, 
 %edges are linear regression (alpha, beta)
@@ -260,9 +259,6 @@ for (i = 1:numNodes)
 end
 
 disp('Model is trained');
-
-
-
 
 
 %%%%%%%%%%%%%%clustering script
@@ -293,12 +289,6 @@ outFile3 = [curDir '/classes-' num2str(numClusters) '_afterEM.txt'];
 classe = [classes, marginal];
 display(size(classe));
 dlmwrite(outFile3, classe, '\t');
-
-
-%multi pairs end
-%%%
-
-
 
 
 exit
