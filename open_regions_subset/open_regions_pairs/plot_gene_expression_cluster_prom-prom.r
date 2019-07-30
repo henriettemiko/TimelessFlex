@@ -1,6 +1,6 @@
 
 ##########
-#name:          plot_gene_expression_cluster.r
+#name:          plot_gene_expression_cluster_prom-prom.r
 #description:   plot gene expression for promoters from pairs prom-prom
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 24, 2019

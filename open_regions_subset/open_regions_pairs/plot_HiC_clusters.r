@@ -75,7 +75,7 @@ for (i in 1:numClusters) {
     print(min(as.matrix(interactions2)))
     print(max(as.matrix(interactions2)))
 
-    #TODO: change ylim depending on max value
+    #NOTE: change ylim depending on max value
   
     #for each region how many peaks from which time point were used for merging
     boxplot(interactions2, names = c("D0","D2","D5","D10"),  outline = T, 
