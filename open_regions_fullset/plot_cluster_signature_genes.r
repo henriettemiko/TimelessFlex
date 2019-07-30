@@ -53,20 +53,6 @@ FG = read.table(paste0(numcluster.dir,"/FG_genes_clusters.txt"))
 PE = read.table(paste0(numcluster.dir,"/PE_genes_clusters.txt"))
 
 
-##all signature genes in supplement list
-#DE.all = read.table(paste0(in.dir,"/DE_signature_genes.txt"))
-#print(nrow(DE.all))
-#
-#GT.all = read.table(paste0(in.dir,"/GT_signature_genes.txt"))
-#print(nrow(GT.all))
-#
-#FG.all = read.table(paste0(in.dir,"/FG_signature_genes.txt"))
-#print(nrow(FG.all))
-#
-#PE.all = read.table(paste0(in.dir,"/PE_signature_genes.txt"))
-#print(nrow(PE.all))
-
-
 ##all signature genes from list that were unambiguously assigned in this clustering
 DE.all = read.table(paste0(numcluster.dir,"/DE_genes.txt"))
 print(nrow(DE.all))
