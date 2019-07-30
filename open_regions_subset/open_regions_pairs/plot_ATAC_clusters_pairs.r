@@ -98,20 +98,20 @@ par(mfrow=c(1,2))
 
 for (i in 1:numClusters) {
 
-    prom.peaks.numbers = read.table(paste0(numcluster.dir,
-                                           "/prom_merged_peaks_numbers_regions_",
-                                           numClusters, "_cluster",i,".txt"), 
-                                    header=F)
+    prom.peaks.numbers=read.table(paste0(numcluster.dir,
+                                         "/prom_merged_peaks_numbers_regions_",
+                                         numClusters, "_cluster",i,".txt"), 
+                                  header=F)
     print(prom.peaks.numbers)
 
-    enh.peaks.numbers = read.table(paste0(numcluster.dir,
-                                           "/enh_merged_peaks_numbers_regions_",
-                                           numClusters, "_cluster",i,".txt"), 
-                                    header=F)
+    enh.peaks.numbers=read.table(paste0(numcluster.dir,
+                                        "/enh_merged_peaks_numbers_regions_",
+                                        numClusters, "_cluster",i,".txt"), 
+                                 header=F)
     print(enh.peaks.numbers)
 
-    prom.normvalues <- read.table(paste0("prom_normalization_values_", numClusters, 
-                                    ".txt"))
+    prom.normvalues <- read.table(paste0("prom_normalization_values_", 
+                                         numClusters, ".txt"))
 
     prom.normD0 <- prom.normvalues[1,1]
     prom.normD10 <- prom.normvalues[2,1]
@@ -126,8 +126,8 @@ for (i in 1:numClusters) {
     print(prom.peaks.numbers.reordered)
 
 
-    enh.normvalues <- read.table(paste0("enh_normalization_values_", numClusters, 
-                                    ".txt"))
+    enh.normvalues <- read.table(paste0("enh_normalization_values_", 
+                                        numClusters, ".txt"))
 
     enh.normD0 <- enh.normvalues[1,1]
     enh.normD10 <- enh.normvalues[2,1]
