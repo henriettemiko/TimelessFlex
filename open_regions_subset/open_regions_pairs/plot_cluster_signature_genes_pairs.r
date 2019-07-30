@@ -86,17 +86,9 @@ DE = read.table(paste0(numcluster.dir,"/DE_genes_clusters.txt"))
 GT = read.table(paste0(numcluster.dir,"/GT_genes_clusters.txt"))
 PE = read.table(paste0(numcluster.dir,"/PE_genes_clusters.txt"))
 
-
-##all signature genes in supplement list
-#DE.all = read.table(paste0(in.dir,"/DE_signature_genes.txt"))
-#print(nrow(DE.all))
-#
-#GT.all = read.table(paste0(in.dir,"/GT_signature_genes.txt"))
-#print(nrow(GT.all))
-#
-#PE.all = read.table(paste0(in.dir,"/PE_signature_genes.txt"))
-#print(nrow(PE.all))
-
+print(DE)
+print(GT)
+print(PE)
 
 #all signature genes from list that were unambiguously assigned in this 
 #clustering
@@ -201,20 +193,24 @@ for (i in 1:numClusters) {
           pch=16)
 
 
-    DE.num=DE[DE$V2==i,]$V2
+    DE.num=DE[DE$V2==i,]$V1
     if (length(DE.num)==0) {
         DE.num = 0
     }
 
-    GT.num=GT[GT$V2==i,]$V2
+    GT.num=GT[GT$V2==i,]$V1
     if (length(GT.num)==0) {
         GT.num = 0
     }
 
-    PE.num=PE[PE$V2==i,]$V2
+    PE.num=PE[PE$V2==i,]$V1
     if (length(PE.num)==0) {
         PE.num = 0
     }
+
+    print(DE.num)
+    print(GT.num)
+    print(PE.num)
 
     legend("topright", inset=c(-0.5,0), 
            legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
