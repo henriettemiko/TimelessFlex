@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ##########
-#name:          06a_plot_ATAC_pairs.sh
-#description:   plots ATAC signal for clusters for pairs
+#name:          06a_plot_ATAC_pairs_init.sh
+#description:   plots ATAC signal for clusters for pairs init
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 24, 2019
 ##########
@@ -82,6 +82,5 @@ $SCRIPT_DIR/open_regions_subset/open_regions_pairs/plot_ATAC_signals_pairs.sh \
     "init_enh-enh"
     
 
-
-
 exit
+

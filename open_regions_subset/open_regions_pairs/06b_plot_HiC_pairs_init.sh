@@ -84,6 +84,5 @@ $SCRIPT_DIR/open_regions_subset/open_regions_pairs/plot_HiC_signals_pairs.sh \
     "init_enh-enh"
     
 
-
-
 exit
+
