@@ -9,10 +9,10 @@ July 30, 2019
 
 
 
-Bayes Net Toolbox for Matlab is required
+Bayes Net Toolbox for Matlab is required: 
 https://github.com/bayesnet/bnt
 
 
-This framework builds on clustering model:
+This framework builds on clustering model: 
 https://github.com/mahmoudibrahim/timeless
 
