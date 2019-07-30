@@ -1,6 +1,6 @@
 ##########
-#name:          plot_feature_region_widths.r
-#description:   plot widths of feature regions
+#name:          plot_feature_region_widths_overlaps.r
+#description:   plot overlaps of feature regions with histone marks
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 10, 2019
 ##########
