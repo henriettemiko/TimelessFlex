@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ##########
-#name:          05b_GO_analysis_pairs.sh
-#description:   calls GO analysis on promoter clusters from pairs
+#name:          05b_GO_analysis_pairs_init.sh
+#description:   calls GO analysis on promoter clusters from pairs init
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 24, 2019
 ##########

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ##########
-#name:          05a_plot_gene_expression_promoter_pairs.sh
-#description:   plots gene expression (FPKM from RSEM) for promoters pairs
+#name:          05a_plot_gene_expression_promoter_pairs_init.sh
+#description:   plots gene expression (FPKM from RSEM) for promoters pairs init
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 24, 2019
 ##########
@@ -135,8 +135,8 @@ if (c[i] == 1) for (j = 1; j <= c[i]; j++) print l[i,j] } }' \
 
 
 join -t $'\t' all_join.txt \
-    regions_${NUM_CLUSTER_INIT_PROM_ENH}classes_allprom2_nodup_sameassign.txt > \
-    join_${NUM_CLUSTER_INIT_PROM_ENH}assignments.txt
+    regions_${NUM_CLUSTER_INIT_PROM_ENH}classes_allprom2_nodup_sameassign.txt \
+    > join_${NUM_CLUSTER_INIT_PROM_ENH}assignments.txt
 
 NUM_TIME_POINTS=4
 NUM_REPLICATES=3
@@ -283,10 +283,10 @@ cut -f 7,9 regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2.txt > \
 #genes could be in there multiple times
 #multiple lines are only taken once
 #gene and class assignment must be same here to be fitting the seen
-awk '!seen[$0]++' regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_1.txt > \
-    regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup1.txt
-awk '!seen[$0]++' regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_2.txt > \
-    regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup2.txt
+awk '!seen[$0]++' regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_1.txt \
+    > regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup1.txt
+awk '!seen[$0]++' regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_2.txt \
+    > regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup2.txt
 
 
 #check if gene is in there and assigned to different clusters
@@ -306,18 +306,19 @@ if (c[i] == 1) for (j = 1; j <= c[i]; j++) print l[i,j] } }' \
 
 
 join -t $'\t' all_join.txt \
-    regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup_sameassign1.txt > \
-    join_${NUM_CLUSTER_INIT_PROM_PROM}assignments1.txt
+    regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup_sameassign1.txt \
+    > join_${NUM_CLUSTER_INIT_PROM_PROM}assignments1.txt
 
 join -t $'\t' all_join.txt \
-    regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup_sameassign2.txt > \
-    join_${NUM_CLUSTER_INIT_PROM_PROM}assignments2.txt
+    regions_${NUM_CLUSTER_INIT_PROM_PROM}classes_allprom2_nodup_sameassign2.txt \
+    > join_${NUM_CLUSTER_INIT_PROM_PROM}assignments2.txt
 
 NUM_TIME_POINTS=4
 NUM_REPLICATES=3
 #note: number of replicates must be the same for each time point
 
-Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/plot_gene_expression_cluster_prom-prom.r \
+Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+plot_gene_expression_cluster_prom-prom.r \
     join_${NUM_CLUSTER_INIT_PROM_PROM}assignments1.txt \
     join_${NUM_CLUSTER_INIT_PROM_PROM}assignments2.txt ${NUM_TIME_POINTS} \
     ${NUM_REPLICATES} ${NUM_CLUSTER_INIT_PROM_PROM} \
