@@ -45,6 +45,8 @@ print(head(overlaps.enh))
 pdf(paste0(numcluster.dir,"/ATAC_cutsites_", numClusters, "_normalized.pdf"), 
     height=6, width=8)
 
+par(oma=c(0,0,2,0), xpd=TRUE)
+
 par(mfrow=c(1,2))
 
 #quantile normalization over time (rows are regions, cols are time points)
@@ -70,16 +72,20 @@ for (i in 1:numClusters) {
 
     #divide by 2 because 2 replicates were summed up
     boxplot(1000*(cur.overlaps.prom/2), 
-            main=paste0("Cluster ", i, " ", left), 
+            main=paste0(left), 
             ylab="normalized mean ATAC-seq cut sites",xlab="time", 
             ylim=c(0,25), col=rep("orange",5), 
             names = c("D0","D2","D5","D10"),  outline = F)
 
     boxplot(1000*(cur.overlaps.enh/2), 
-            main=paste0(right, " (" , length(cur.items.enh), " pairs)"), 
+            main=paste0(right), 
             ylab="normalized mean ATAC-seq cut sites",xlab="time", 
             ylim=c(0,25), col=rep("orange",5), 
             names = c("D0","D2","D5","D10"),  outline = F)
+
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
+
 
 }
 
@@ -93,6 +99,8 @@ warnings()
 
 pdf(paste0(numcluster.dir,"/ATAC_merged_peaks_", numClusters, 
            "_normalized_sep.pdf"), height=6, width=8)
+
+par(oma=c(0,0,2,0), xpd=TRUE)
 
 par(mfrow=c(1,2))
 
@@ -147,7 +155,7 @@ for (i in 1:numClusters) {
     #for 8 cluster 0.4
     barplot(prom.peaks.numbers.reordered, 
             names=c("D0", "D2", "D5", "D10"), 
-            main=paste0("Cluster ",i, " ", left), xlab="time", 
+            main=paste0(left), xlab="time", 
             ylab="percentage of ATAC-seq peaks", ylim=c(0,0.3), col="orange")
 
     barplot(enh.peaks.numbers.reordered, 
@@ -157,6 +165,10 @@ for (i in 1:numClusters) {
 
     #for all regions together how many peaks came from which time point for 
     #merging (number of peaks/all peaks per time point)
+
+
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
 
 }
 dev.off()
@@ -168,6 +180,8 @@ warnings()
 
 pdf(paste0(numcluster.dir,"/ATAC_merged_peaks_", numClusters, 
            "_fromwhichtimepoint.pdf"), height=6, width=8)
+
+par(oma=c(0,0,2,0), xpd=TRUE)
 
 par(mfrow=c(1,2))
 
@@ -200,7 +214,7 @@ for (i in 1:numClusters) {
     boxplot(merged.peaks.prom, names = c("D0", "D2", "D5", "D10"),  
             outline = T, col="orange", ylim=c(0,3), 
             ylab="number of merged peaks per region", yaxt='n', 
-            main=paste0("Cluster ",i, " ", left), xlab="time")
+            main=paste0(left), xlab="time")
     axis(side=2, labels=c(0,1,2,3,4), at=c(0,1,2,3,4))
 
 
@@ -209,6 +223,9 @@ for (i in 1:numClusters) {
             ylab="number of merged peaks per region", yaxt='n', 
             main=paste0(right), xlab="time")
     axis(side=2, labels=c(0,1,2,3,4), at=c(0,1,2,3,4))
+
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
 
 }
 

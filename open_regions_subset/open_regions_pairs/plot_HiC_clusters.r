@@ -19,6 +19,8 @@ numcluster.dir=getwd()
 pdf(paste0(numcluster.dir,"/HiC_interactions_", numClusters, ".pdf"), 
     height=6, width=4)
 
+par(oma=c(0,0,2,0), xpd=TRUE)
+
 for (i in 1:numClusters) {
   
 
@@ -48,9 +50,12 @@ for (i in 1:numClusters) {
 
   #for 8 cluster 0.3 is okay
   barplot(interactions.reordered, names=c("D0","D2","D5","D10"), 
-          main=paste0("Cluster ",i), xlab="time", 
+          main="", xlab="time", 
           ylab="percentage of Hi-C interactions at time point", 
-          ylim=c(0,0.25), col="lightskyblue")
+          ylim=c(0,0.5), col="lightskyblue")
+
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
   
 }
 dev.off()
@@ -62,6 +67,7 @@ warnings()
 pdf(paste0(numcluster.dir,"/HiC_interactions_", numClusters, 
            "_forwhichtimepoint.pdf"), height=6, width=4)
 
+par(oma=c(0,0,2,0), xpd=TRUE)
 
 for (i in 1:numClusters) {
   
@@ -81,9 +87,12 @@ for (i in 1:numClusters) {
     boxplot(interactions2, names = c("D0","D2","D5","D10"),  outline = T, 
             col="lightskyblue", ylim=c(0,1), 
             ylab="number of Hi-C interactions per region", yaxt='n', 
-            main=paste0("Cluster ",i), xlab="time")
+            main="", xlab="time")
     axis(side=2, labels=c(0,1,2,3), at=c(0,1,2,3))
   
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
+
     print(which(is.na(as.matrix(interactions2))))
   
     print(head(as.matrix(interactions2)))

@@ -12,10 +12,10 @@ source ../../set_variables_hg19.sh
 
 
 #choose cluster number for multi prom-enh pairs here
-NUM_CLUSTER_MULTI_PROM_ENH=10
+NUM_CLUSTER_MULTI_PROM_ENH=17
 
 #choose cluster number for multi prom-prom pairs here
-NUM_CLUSTER_MULTI_PROM_PROM=4
+NUM_CLUSTER_MULTI_PROM_PROM=7
 
 
 SIGNAL_GENERATOR_DIR_MULTI_PROM_ENH=${OPEN_REGIONS_DIR_PAIRS}/\

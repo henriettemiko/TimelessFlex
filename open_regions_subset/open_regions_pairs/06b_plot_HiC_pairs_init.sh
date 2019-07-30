@@ -12,13 +12,13 @@ source ../../set_variables_hg19.sh
 
 
 #choose cluster number for init prom-enh pairs here
-NUM_CLUSTER_INIT_PROM_ENH=10
+NUM_CLUSTER_INIT_PROM_ENH=17
 
 #choose cluster number for init prom-prom pairs here
-NUM_CLUSTER_INIT_PROM_PROM=4
+NUM_CLUSTER_INIT_PROM_PROM=7
 
 #choose cluster number for init enh-enh pairs here
-NUM_CLUSTER_INIT_ENH_ENH=15
+NUM_CLUSTER_INIT_ENH_ENH=23
 
 
 
