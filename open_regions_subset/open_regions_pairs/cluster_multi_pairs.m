@@ -6,10 +6,6 @@
 %%%%%%%%%%
 
 
-disp('here')
-
-disp(numClusters);
-
 disp(numTimePts);
 disp(numTracks)
 disp(signalGeneratorDir);
@@ -48,7 +44,7 @@ data = data';
 mydata = data;
 
 disp(data(1:25,1:10));
-    
+
 %%%%%%%%%%%%%%clustering script
 
 %%%start inference%%%
@@ -81,98 +77,9 @@ dlmwrite(outFile, classe, '\t');
 
 
 %%%%%%%%%%
-%now use EM to improve parameters
-
-%% Prepare DAG structure
-%% 3 fold changes and 4 histone marks for promoters and for enhancers
-%% 2*12+1=25 nodes in network
-%% 25 x 25 matrix (0: no edge, 1: directed edge)
-%
-%numNodes = (numTimePts*numTracks) + 1;
-%dag = zeros(numNodes);
-%
-%% head node has edge to all other nodes
-%dag(1, 2:numNodes) = 1;
-%
-%%pancreas trees
-%% first histone modification tree H3K27ac promoter
-%dag(2,3) = 1;
-%dag(3,4) = 1;
-%
-%% second histone modification tree H3K27me3 promoter
-%dag(5,6) = 1;
-%dag(6,7) = 1;
-%
-%% third histone modification tree H3K4me1 promoter
-%dag(8,9) = 1;
-%dag(9,10) = 1;
-%
-%% 4th histone modification tree H3K4me3 promoter
-%dag(11,12) = 1;
-%dag(12,13) = 1;
-%
-%
-%% first histone modification tree H3K27ac enhancer
-%dag(14,15) = 1;
-%dag(15,16) = 1;
-%
-%% second histone modification tree H3K27me3 enhancer
-%dag(17,18) = 1;
-%dag(18,19) = 1;
-%
-%% third histone modification tree H3K4me1 enhancer
-%dag(20,21) = 1;
-%dag(21,22) = 1;
-%
-%% 4th histone modification tree H3K4me3 enhancer
-%dag(23,24) = 1;
-%dag(24,25) = 1;
-%
-%%%%prepare TAN%%%
-%disp([datestr(datetime) ': Initializing TAN...']);
-%
-%discreteNodes = 1; % head node
-%nodeSizes = ones(1,numNodes);
-%nodeSizes(1,1) = numClusters;
-%nodeSizes(1,2:numNodes) = 1;
-%tan = mk_bnet(dag, nodeSizes, 'discrete', discreteNodes, 'observed', ... 
-%[2:numNodes]);
-%tan.CPD{1} = tabular_CPD(tan, 1, 'CPT', 'unif', 'dirichlet_weight', 1, ...
-%'dirichlet_type', 'unif');
-%for (t = 2:numNodes)
-%    tan.CPD{t} = gaussian_CPD(tan, t);
-%
-%end
-%
-%%disp(struct(tan.CPD{1}).CPT);
-%
-%% head node c is discrete node
-%% each node is a Gaussian node (except head node), has parameters my and
-%% sigma
-%% for each cluster: for each node my and sigma, alpha and beta for each  
-%% edge (linear regression)
-%
-%
-%%%initialize with cluster assignments and not k-means
-%
-%date = mydata;
-%date(1,:) = num2cell(classes);
-%
-%%date is fully observed with values for hidden nodes initialized with k-means
-%%data is not fully observed, values for hidden nodes are []
-%
-%tan = learn_params(tan, date);
-%%tanFull = tan;
-%
-%%outFileFull = [curDir '/model-' num2str(numClusters) '_fullbeforeEM.mat'];
-%%%save(outFileFull, 'tan');
-%disp(['learn_params done']);
-%
-
-
-
 %%%EM%%%%
-% keep refining parameters: my and sigma for each node, probabilities of c, 
+%now use EM to improve parameters
+%keep refining parameters: my and sigma for each node, probabilities of c, 
 %edges are linear regression (alpha, beta)
 %data has now cluster assignments
 %mydata has no assignments
