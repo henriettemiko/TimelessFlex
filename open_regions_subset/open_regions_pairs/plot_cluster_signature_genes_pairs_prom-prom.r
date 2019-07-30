@@ -110,7 +110,7 @@ cbbPalette <- c("gray", "#009E73", "#D50F25", "black")
 pdf(paste0(numcluster.dir,"/clusters_", numClusters, "_signature_genes.pdf"), 
     height=6, width=10) 
 
-par(mar=c(7.1, 4.1, 4.1, 7.1), xpd=TRUE)
+par(mar=c(7.1, 4.1, 4.1, 7.1), oma=c(0,0,2,0), xpd=TRUE)
 
 par(mfrow = c(1,2))
 
@@ -162,7 +162,7 @@ for (i in 1:numClusters) {
                ylim = c(0,65), 
                ylab = "normalized average histone mark signal", 
                xlab="time", col = cbbPalette[4], 
-               main = paste0("Cluster ", i, " ", left))
+               main = paste0(left))
     lines(colMeans((cbind(k4me1[cur.items,1], k4me1[cur.items,2], 
                           k4me1[cur.items,3], k4me1[cur.items,4]))), 
           col = cbbPalette[4], ylim = c(0,65), lwd = 8, type="o", 
@@ -208,9 +208,11 @@ for (i in 1:numClusters) {
         PE1.num = 0
     }
 
-    legend("topright", inset=c(-0.5,0), 
+    legend("topright", inset=c(-0.45,0), 
            legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
-           col=c("#009E73", "#D50F25", "black", "gray"), pch=15) 
+           col=c("#009E73", "#D50F25", "black", "gray"), pch=15, bty="n") 
+
+
     mtext(side=1, text=paste0("signature genes:\nD2: ", DE1.num, 
                               " / ", nrow(DE.all), ", D5: ", GT1.num, 
                               " / ", nrow(GT.all), 
@@ -226,7 +228,7 @@ for (i in 1:numClusters) {
                ylim = c(0,65), 
                ylab = "normalized average histone mark signal", 
                xlab="time", col = cbbPalette[4], 
-               main = paste0(right, " (", length(cur.items), " pairs)"))
+               main = paste0(right))
     lines(colMeans((cbind(k4me1[cur.items,5], k4me1[cur.items,6], 
                           k4me1[cur.items,7], k4me1[cur.items,8]))), 
           col = cbbPalette[4], ylim = c(0,65), lwd = 8, type="o", 
@@ -271,6 +273,15 @@ for (i in 1:numClusters) {
     if (length(PE2.num)==0) {
         PE2.num = 0
     }
+
+
+    mtext(paste0("Cluster ", i, " (", length(cur.items), " pairs)"), 
+          outer=TRUE, cex=1.5,font=2)
+
+    legend("topright", inset=c(-0.45,0), 
+           legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
+           col=c("#009E73", "#D50F25", "black", "gray"), pch=15, bty="n") 
+
 
     mtext(side=1, text=paste0("signature genes:\nD2: ", DE2.num, 
                               " / ", nrow(DE.all), ", D5: ", GT2.num, 

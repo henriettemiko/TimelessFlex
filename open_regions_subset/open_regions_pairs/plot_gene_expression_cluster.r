@@ -56,15 +56,19 @@ geomav.fpkm.reordered = geomav.fpkm[,c(1,2,4,5,3)]
 pdf(paste0(numcluster.dir,"/FPKM_geomav_", numClusters, ".pdf"), height=6, 
     width=4) 
 
+par(oma=c(0,0,2,0), xpd=TRUE)
+
 for (i in 1:numClusters) {
 
     cur.items = which(geomav.fpkm.reordered[[1]] == i)
     cur.scores <- geomav.fpkm.reordered[cur.items,2:5]
 
-    boxplot(log(cur.scores+1), main=paste0("Cluster ", i, " PROMOTER (", 
-                                           length(cur.items), " genes)"), 
-            names = c("D0", "D2", "D5", "D10"), outline = F, 
+    boxplot(log(cur.scores+1), main=paste0(length(cur.items), " genes"), 
+            names = c("D0", "D2", "D5", "D10"), outline = F, xlab="time", 
             ylab="log(geomav gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
+
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
 
 }
 
@@ -75,15 +79,20 @@ warnings()
 pdf(paste0(numcluster.dir,"/FPKM_mean_", numClusters, ".pdf"), 
     height=6, width=4)
 
+par(oma=c(0,0,2,0), xpd=TRUE)
+
 for (i in 1:numClusters) {
 
     cur.items = which(mean.fpkm.reordered[[1]] == i)
     cur.scores <- mean.fpkm.reordered[cur.items,2:5]
 
-    boxplot(log(cur.scores+1), main=paste0("Cluster ", i, " PROMOTER (", 
-                                           length(cur.items), " genes)"), 
-            names = c("D0", "D2", "D5", "D10"), outline = F, 
+    boxplot(log(cur.scores+1), main=paste0(length(cur.items), " genes"), 
+            names = c("D0", "D2", "D5", "D10"), outline = F, xlab="time", 
             ylab="log(mean gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
+
+
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
 
 
 }

@@ -74,6 +74,8 @@ geomav.fpkm.reordered2 = geomav.fpkm2[,c(1,2,4,5,3)]
 pdf(paste0(numcluster.dir,"/FPKM_geomav_", numClusters, ".pdf"), height=6, 
     width=8) 
 
+par(oma=c(0,0,2,0), xpd=TRUE)
+
 par(mfrow=c(1,2))
 
 for (i in 1:numClusters) {
@@ -81,19 +83,19 @@ for (i in 1:numClusters) {
     cur.items1 = which(geomav.fpkm.reordered1[[1]] == i)
     cur.scores1 <- geomav.fpkm.reordered1[cur.items1,2:5]
 
-    boxplot(log(cur.scores1+1), main=paste0("Cluster ", i, " PROMOTER (", 
-                                           length(cur.items1), " genes)"), 
+    boxplot(log(cur.scores1+1), main=paste0(length(cur.items1), " genes"), 
             names = c("D0", "D2", "D5", "D10"), outline = F, 
             ylab="log(geomav gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
 
     cur.items2 = which(geomav.fpkm.reordered2[[1]] == i)
     cur.scores2 <- geomav.fpkm.reordered2[cur.items2,2:5]
 
-    boxplot(log(cur.scores2+1), main=paste0("PROMOTER (", length(cur.items2), 
-                                            " genes)"), 
+    boxplot(log(cur.scores2+1), main=paste0(length(cur.items2), " genes"), 
             names = c("D0", "D2", "D5", "D10"), outline = F, 
             ylab="log(geomav gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
 
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
 
 }
 
@@ -104,6 +106,8 @@ warnings()
 pdf(paste0(numcluster.dir,"/FPKM_mean_", numClusters, ".pdf"), 
     height=6, width=8)
 
+par(oma=c(0,0,2,0), xpd=TRUE)
+
 par(mfrow=c(1,2))
 
 for (i in 1:numClusters) {
@@ -111,8 +115,7 @@ for (i in 1:numClusters) {
     cur.items1 = which(mean.fpkm.reordered1[[1]] == i)
     cur.scores1 <- mean.fpkm.reordered1[cur.items1,2:5]
 
-    boxplot(log(cur.scores1+1), main=paste0("Cluster ", i, " PROMOTER (", 
-                                           length(cur.items1), " genes)"), 
+    boxplot(log(cur.scores1+1), main=paste0(length(cur.items1), " genes"), 
             names = c("D0", "D2", "D5", "D10"), outline = F, 
             ylab="log(mean gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
 
@@ -120,10 +123,12 @@ for (i in 1:numClusters) {
     cur.items2 = which(mean.fpkm.reordered2[[1]] == i)
     cur.scores2 <- mean.fpkm.reordered2[cur.items2,2:5]
 
-    boxplot(log(cur.scores2+1), main=paste0("PROMOTER (" , length(cur.items2),
-                                            " genes)"), 
+    boxplot(log(cur.scores2+1), main=paste0(length(cur.items2), " genes"), 
             names = c("D0", "D2", "D5", "D10"), outline = F, 
             ylab="log(mean gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
+
+    mtext(paste0("Cluster ", i), 
+          outer=TRUE, cex=1.5, font=2)
 
 }
 
