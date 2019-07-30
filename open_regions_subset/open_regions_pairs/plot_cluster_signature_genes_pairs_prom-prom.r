@@ -1,9 +1,9 @@
 
 ##########
-#name:          plot_clusters_signature_genes_pairs.r
-#description:   plots clusters and signature genes for pairs
+#name:          plot_clusters_signature_genes_pairs_prom-prom.r
+#description:   plots clusters and signature genes for pairs prom-prom
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          July 29, 2019
+#date:          July 30, 2019
 ##########
 
 
@@ -82,10 +82,13 @@ print(colMeans(k4me1))
 print(colMeans(k4me3))
 
 #read in information about signature genes in clusters
-DE = read.table(paste0(numcluster.dir,"/DE_genes_clusters.txt"))
-GT = read.table(paste0(numcluster.dir,"/GT_genes_clusters.txt"))
-PE = read.table(paste0(numcluster.dir,"/PE_genes_clusters.txt"))
+DE1 = read.table(paste0(numcluster.dir,"/DE_genes_clusters1.txt"))
+GT1 = read.table(paste0(numcluster.dir,"/GT_genes_clusters1.txt"))
+PE1 = read.table(paste0(numcluster.dir,"/PE_genes_clusters1.txt"))
 
+DE2 = read.table(paste0(numcluster.dir,"/DE_genes_clusters2.txt"))
+GT2 = read.table(paste0(numcluster.dir,"/GT_genes_clusters2.txt"))
+PE2 = read.table(paste0(numcluster.dir,"/PE_genes_clusters2.txt"))
 
 ##all signature genes in supplement list
 #DE.all = read.table(paste0(in.dir,"/DE_signature_genes.txt"))
@@ -162,7 +165,6 @@ for (i in 1:numClusters) {
 
 
 
-
     #plot promoter
 
     error.bars(stuff.k4me1.prom, eyes = FALSE, sd = FALSE, bars = FALSE, 
@@ -201,28 +203,28 @@ for (i in 1:numClusters) {
           pch=16)
 
 
-    DE.num=DE[DE$V2==i,]$V2
-    if (length(DE.num)==0) {
-        DE.num = 0
+    DE1.num=DE1[DE1$V2==i,]$V2
+    if (length(DE1.num)==0) {
+        DE1.num = 0
     }
 
-    GT.num=GT[GT$V2==i,]$V2
-    if (length(GT.num)==0) {
-        GT.num = 0
+    GT1.num=GT1[GT1$V2==i,]$V2
+    if (length(GT1.num)==0) {
+        GT1.num = 0
     }
 
-    PE.num=PE[PE$V2==i,]$V2
-    if (length(PE.num)==0) {
-        PE.num = 0
+    PE1.num=PE1[PE1$V2==i,]$V2
+    if (length(PE1.num)==0) {
+        PE1.num = 0
     }
 
     legend("topright", inset=c(-0.5,0), 
            legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
            col=c("#009E73", "#D50F25", "black", "gray"), pch=15) 
-    mtext(side=1, text=paste0("signature genes:\nD2: ", DE.num, 
-                              " / ", nrow(DE.all), ", D5: ", GT.num, 
+    mtext(side=1, text=paste0("signature genes:\nD2: ", DE1.num, 
+                              " / ", nrow(DE.all), ", D5: ", GT1.num, 
                               " / ", nrow(GT.all), 
-                              ", D10: ", PE.num, 
+                              ", D10: ", PE1.num, 
                               " / ", nrow(PE.all)), line=6)
 
 
@@ -263,6 +265,31 @@ for (i in 1:numClusters) {
                           k27me3[cur.items,7], k27me3[cur.items,8]))), 
           col = cbbPalette[3], ylim = c(0,65), lwd = 8, type="o", 
           pch=16)
+
+
+    DE2.num=DE2[DE2$V2==i,]$V2
+    if (length(DE2.num)==0) {
+        DE2.num = 0
+    }
+
+    GT2.num=GT2[GT2$V2==i,]$V2
+    if (length(GT2.num)==0) {
+        GT2.num = 0
+    }
+
+    PE2.num=PE2[PE2$V2==i,]$V2
+    if (length(PE2.num)==0) {
+        PE2.num = 0
+    }
+
+    #legend("topright", inset=c(-0.5,0), 
+    #       legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
+    #       col=c("#009E73", "#D50F25", "black", "gray"), pch=15) 
+    mtext(side=1, text=paste0("signature genes:\nD2: ", DE2.num, 
+                              " / ", nrow(DE.all), ", D5: ", GT2.num, 
+                              " / ", nrow(GT.all), 
+                              ", D10: ", PE2.num, 
+                              " / ", nrow(PE.all)), line=6)
 
 
 }
