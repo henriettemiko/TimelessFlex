@@ -1,8 +1,8 @@
 ##########
 #name:          plot_AIC_BIC.r
-#description:   plots AIC, BIC and likelihood ratio (LR) test for subset
+#description:   plots AIC, BIC and likelihood ratio (LR) test for pairs
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          July 12, 2019
+#date:          July 30, 2019
 ##########
 
 

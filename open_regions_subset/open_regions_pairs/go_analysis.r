@@ -1,9 +1,9 @@
 
 ##########
 #name:          go_analysis.r
-#description:   GO analysis with gprofiler for promoter clusters subset
+#description:   GO analysis with gprofiler for promoter clusters pairs
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          July 12, 2019
+#date:          July 30, 2019
 ##########
 
 
