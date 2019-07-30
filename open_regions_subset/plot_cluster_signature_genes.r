@@ -97,17 +97,17 @@ for (i in 1:numClusters) {
           col = cbbPalette[4], ylim = c(0,65), lwd = 8, type="o", pch=16)
 
 
-    DE.num=DE[DE$V2==i,]$V2
+    DE.num=DE[DE$V2==i,]$V1
     if (length(DE.num)==0) {
         DE.num = 0
     }
 
-    GT.num=GT[GT$V2==i,]$V2
+    GT.num=GT[GT$V2==i,]$V1
     if (length(GT.num)==0) {
         GT.num = 0
     }
 
-    PE.num=PE[PE$V2==i,]$V2
+    PE.num=PE[PE$V2==i,]$V1
     if (length(PE.num)==0) {
         PE.num = 0
     }

@@ -12,7 +12,7 @@ source ../set_variables_hg19.sh
 
 
 #choose cluster number for promoters here
-NUM_CLUSTER=15
+NUM_CLUSTER=7
 
 NUM_MARKS=4
 NUM_TIME_POINTS=4
