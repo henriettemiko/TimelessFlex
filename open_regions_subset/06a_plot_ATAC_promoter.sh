@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ##########
-#name:          06a_do_ATAC_plot.sh
-#description:   plots ATAC signal for clusters subset
+#name:          06a_plot_ATAC_promoter.sh
+#description:   plots ATAC signal for promoters clusters subset
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 12, 2019
 ##########

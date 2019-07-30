@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##########
-#name:          06a_do_ATAC_plot.sh
+#name:          06a_plot_ATAC_enhancer.sh
 #description:   plots ATAC signal for clusters subset enhancer
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 12, 2019
