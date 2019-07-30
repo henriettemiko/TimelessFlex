@@ -224,7 +224,8 @@ for ((i=1; i<=$NUM_CLUSTER; i++)); do
     #one from D5 and none from D10 etc
 done
 
-Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/plot_ATAC_clusters_pairs.r \
+Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+plot_ATAC_clusters_pairs.r \
     prom_regions_${NUM_CLUSTER}_cutsites_all.bed \
     enh_regions_${NUM_CLUSTER}_cutsites_all.bed ${NUM_TIME_POINTS} \
     ${NUM_REPLICATES} $NUM_CLUSTER $TYPE

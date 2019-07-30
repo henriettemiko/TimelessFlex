@@ -34,7 +34,9 @@ modelDirEnhEnh='$MODEL_DIR_ENH_ENH';\
 numClustersPromEnh=$CLUSTER_NUM_PROM_ENH;\
 numClustersPromProm=$CLUSTER_NUM_PROM_PROM;\
 numClustersEnhEnh=$CLUSTER_NUM_ENH_ENH;curDir='$CUR_DIR';" < \
-    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/cluster_pairs_multi_combined.m
+    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+cluster_pairs_multi_combined.m
+
 
 exit
 

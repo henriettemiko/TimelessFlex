@@ -2,7 +2,7 @@
 
 ##########
 #name:          call_matlab_cluster_pairs_combined_initmulti.sh
-#description:   calls MATLAB for combining models and clustering all pairs
+#description:   calls MATLAB for combining models and clustering initmulti pairs
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          July 25, 2019
 ##########
@@ -41,7 +41,9 @@ modelDirEnhEnh='$MODEL_DIR_ENH_ENH';\
 numClustersPromEnh=$CLUSTER_NUM_PROM_ENH;\
 numClustersPromProm=$CLUSTER_NUM_PROM_PROM;\
 numClustersEnhEnh=$CLUSTER_NUM_ENH_ENH;curDir='$CUR_DIR';" < \
-    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/cluster_pairs_initmulti_combined.m
+    $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
+cluster_pairs_initmulti_combined.m
+
 
 exit
 
