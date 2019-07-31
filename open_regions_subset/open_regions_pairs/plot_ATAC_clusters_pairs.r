@@ -121,6 +121,9 @@ for (i in 1:numClusters) {
     prom.normvalues <- read.table(paste0("prom_normalization_values_", 
                                          numClusters, ".txt"))
 
+    #note: if cluster number gets large these values can become zero
+    #and plot will not be plotted
+    
     prom.normD0 <- prom.normvalues[1,1]
     prom.normD10 <- prom.normvalues[2,1]
     prom.normD2 <- prom.normvalues[3,1]
@@ -181,7 +184,7 @@ warnings()
 pdf(paste0(numcluster.dir,"/ATAC_merged_peaks_", numClusters, 
            "_fromwhichtimepoint.pdf"), height=6, width=8)
 
-par(oma=c(0,0,2,0), xpd=TRUE)
+#par(oma=c(0,0,2,0), xpd=TRUE)
 
 par(mfrow=c(1,2))
 
@@ -214,7 +217,7 @@ for (i in 1:numClusters) {
     boxplot(merged.peaks.prom, names = c("D0", "D2", "D5", "D10"),  
             outline = T, col="orange", ylim=c(0,3), 
             ylab="number of merged peaks per region", yaxt='n', 
-            main=paste0(left), xlab="time")
+            main=paste0("Cluster ", i, ": ", left), xlab="time")
     axis(side=2, labels=c(0,1,2,3,4), at=c(0,1,2,3,4))
 
 
@@ -222,10 +225,11 @@ for (i in 1:numClusters) {
             outline = T, col="orange", ylim=c(0,3), 
             ylab="number of merged peaks per region", yaxt='n', 
             main=paste0(right), xlab="time")
+
     axis(side=2, labels=c(0,1,2,3,4), at=c(0,1,2,3,4))
 
-    mtext(paste0("Cluster ", i), 
-          outer=TRUE, cex=1.5, font=2)
+#    mtext(paste0("Cluster ", i), 
+#          outer=TRUE, cex=1.5, font=2)
 
 }
 
