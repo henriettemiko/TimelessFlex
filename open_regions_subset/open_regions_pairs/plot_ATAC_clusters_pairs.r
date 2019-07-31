@@ -29,16 +29,20 @@ type=args[6]
 print(head(overlaps.prom))
 print(head(overlaps.enh))
 
-    if (type=="init_prom-enh" || type=="multi_prom-enh"){
-        left="PROMOTER"
-        right="ENHANCER"
-    } else if (type=="init_prom-prom" || type=="multi_prom-prom"){
-        left="PROMOTER"
-        right="PROMOTER"
-    } else if (type=="init_enh-enh" || type=="multi_enh-enh"){
-        left="ENHANCER"
-        right="ENHANCER"
-    }
+
+left="PROMOTER/ENHANCER"
+right="PROMOTER/ENHANCER"
+    
+if (type=="init_prom-enh" || type=="multi_prom-enh"){
+    left="PROMOTER"
+    right="ENHANCER"
+} else if (type=="init_prom-prom" || type=="multi_prom-prom"){
+    left="PROMOTER"
+    right="PROMOTER"
+} else if (type=="init_enh-enh" || type=="multi_enh-enh"){
+    left="ENHANCER"
+    right="ENHANCER"
+}
 
 
 
