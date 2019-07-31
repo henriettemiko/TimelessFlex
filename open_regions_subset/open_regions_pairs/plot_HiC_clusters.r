@@ -67,7 +67,7 @@ warnings()
 pdf(paste0(numcluster.dir,"/HiC_interactions_", numClusters, 
            "_forwhichtimepoint.pdf"), height=6, width=4)
 
-par(oma=c(0,0,2,0), xpd=TRUE)
+#par(oma=c(0,0,2,0), xpd=TRUE)
 
 for (i in 1:numClusters) {
   
@@ -87,11 +87,11 @@ for (i in 1:numClusters) {
     boxplot(interactions2, names = c("D0","D2","D5","D10"),  outline = T, 
             col="lightskyblue", ylim=c(0,1), 
             ylab="number of Hi-C interactions per region", yaxt='n', 
-            main="", xlab="time")
+            main=paste0("Cluster ", i), xlab="time")
     axis(side=2, labels=c(0,1,2,3), at=c(0,1,2,3))
   
-    mtext(paste0("Cluster ", i), 
-          outer=TRUE, cex=1.5, font=2)
+#    mtext(paste0("Cluster ", i), 
+#          outer=TRUE, cex=1.5, font=2)
 
     print(which(is.na(as.matrix(interactions2))))
   
