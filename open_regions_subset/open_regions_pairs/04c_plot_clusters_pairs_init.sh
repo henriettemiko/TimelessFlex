@@ -12,13 +12,13 @@ source ../../set_variables_hg19.sh
 
 
 #choose cluster number for init prom-enh pairs here
-NUM_CLUSTER_INIT_PROM_ENH=17
+NUM_CLUSTER_INIT_PROM_ENH=10
 
 #choose cluster number for init prom-prom pairs here
-NUM_CLUSTER_INIT_PROM_PROM=7
+NUM_CLUSTER_INIT_PROM_PROM=4
 
 #choose cluster number for init enh-enh pairs here
-NUM_CLUSTER_INIT_ENH_ENH=23
+NUM_CLUSTER_INIT_ENH_ENH=15
 
 
 NUM_MARKS=4
@@ -52,6 +52,7 @@ plot_clusters_pairs.r \
     $NUM_CLUSTER_INIT_PROM_ENH $NUM_MARKS $NUM_TIME_POINTS \
     $MODEL_DIR_INIT_PROM_ENH $TIMELESS_DIR_INIT_PROM_ENH \
     $SIGNAL_GENERATOR_DIR_INIT_PROM_ENH "init_prom-enh"
+
 
 
 #init prom-prom

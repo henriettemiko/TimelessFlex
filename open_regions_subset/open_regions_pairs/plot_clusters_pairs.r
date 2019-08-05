@@ -224,188 +224,121 @@ warnings()
 
 
 
-q()
+#plot one line per region and each histone mark in separate plot
 
-###TODO
+cbbPalette <- c("gray", "#009E73", "#D50F25", "black")
 
+pdf(paste0(type, "_clusters_", numClusters, "_eachregion_matplot.pdf"), 
+    height=16, width=8)
 
-pdf(paste0(type, "_clusters_", numClusters, "_eachregion.pdf"), 
-    height=6, width=10)
-
-par(mar=c(7.1, 4.1, 4.1, 4.1), oma=c(0,0,2,0), xpd=TRUE)
-par(mfrow = c(1,2))
+par(mar=c(5.1, 4.1, 4.1, 4.1), oma=c(0,0,2,0), xpd=TRUE)
+par(mfrow = c(4,2))
 
 for (i in 1:numClusters) {
 
-
     cur.items = which(l[[1]] == i)
-
-
-    stuff.k27ac.prom <- cbind(k27ac[cur.items,1], k27ac[cur.items,2], 
-                              k27ac[cur.items,3], k27ac[cur.items,4])
-    stuff.k27me3.prom <- cbind(k27me3[cur.items,1], k27me3[cur.items,2], 
-                               k27me3[cur.items,3], k27me3[cur.items,4])
-    stuff.k4me1.prom <- cbind(k4me1[cur.items,1], k4me1[cur.items,2], 
-                              k4me1[cur.items,3], k4me1[cur.items,4])
-    stuff.k4me3.prom <- cbind(k4me3[cur.items,1], k4me3[cur.items,2], 
-                              k4me3[cur.items,3], k4me3[cur.items,4])
-
-    colnames(stuff.k4me1.prom) <- c("D0", "D2", "D5", "D10")
-
-
-
-    stuff.k27ac.enh <- cbind(k27ac[cur.items,5], k27ac[cur.items,6], 
-                             k27ac[cur.items,7], k27ac[cur.items,8])
-    stuff.k27me3.enh <- cbind(k27me3[cur.items,5], k27me3[cur.items,6], 
-                              k27me3[cur.items,7], k27me3[cur.items,8])
-    stuff.k4me1.enh <- cbind(k4me1[cur.items,5], k4me1[cur.items,6], 
-                             k4me1[cur.items,7], k4me1[cur.items,8])
-    stuff.k4me3.enh <- cbind(k4me3[cur.items,5], k4me3[cur.items,6], 
-                             k4me3[cur.items,7], k4me3[cur.items,8])
-
-    colnames(stuff.k4me1.enh) <- c("D0", "D2", "D5", "D10")
-
-    left="PROMOTER/ENHANCER"
-    right="PROMOTER/ENHANCER"
-
-    if (type=="init_prom-enh" || type=="multi_prom-enh"){
-        left="PROMOTER"
-        right="ENHANCER"
-    } else if (type=="init_prom-prom" || type=="multi_prom-prom"){
-        left="PROMOTER"
-        right="PROMOTER"
-    } else if (type=="init_enh-enh" || type=="multi_enh-enh"){
-        left="ENHANCER"
-        right="ENHANCER"
-    }
-
 
     #plot promoter
 
-    error.bars(stuff.k4me1.prom, eyes = FALSE, sd = FALSE, bars = FALSE, 
-               arrow.col = cbbPalette[4], labels = colnames(stuff.k4me1.prom), 
-               ylim = c(0,65), 
-               ylab = "normalized average histone mark signal", 
-               xlab="time", col = cbbPalette[4], 
-               main = left)
+    k27acsubset = cbind(k27ac[cur.items,1], k27ac[cur.items,2], 
+                        k27ac[cur.items,3], k27ac[cur.items,4])
+    dim(k27acsubset)
 
-    lines(colMeans((cbind(k4me1[cur.items,1], k4me1[cur.items,2], 
-                          k4me1[cur.items,3], k4me1[cur.items,4]))), 
-          col = cbbPalette[4], ylim = c(0,65), lwd = 8, type="o", 
-          pch=16)
+    matplot(t(k27acsubset), type="l", col=cbbPalette[2], main="K27ac", 
+            axes=F, xlab="time", ylab="signal", lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
 
 
+    #plot enhancer
+
+    k27acsubset = cbind(k27ac[cur.items,5], k27ac[cur.items,6], 
+                        k27ac[cur.items,7], k27ac[cur.items,8])
+    dim(k27acsubset)
+
+    matplot(t(k27acsubset), type="l", col=cbbPalette[2], main="K27ac", 
+            axes=F,xlab="time",ylab="signal",lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
 
 
-    k4me1subset = (cbind(k4me1[cur.items,1], k4me1[cur.items,2], 
-                         k4me1[cur.items,3], k4me1[cur.items,4])
+
+    k27me3subset = cbind(k27me3[cur.items,1], k27me3[cur.items,2], 
+                         k27me3[cur.items,3], k27me3[cur.items,4])
+    dim(k27me3subset)
+
+    matplot(t(k27me3subset), type="l", col=cbbPalette[3], main="K27me3", 
+            axes=F,xlab="time",ylab="signal",lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
+
+
+
+    k27me3subset = cbind(k27me3[cur.items,5], k27me3[cur.items,6], 
+                         k27me3[cur.items,7], k27me3[cur.items,8])
+
+    dim(k27me3subset)
+
+    matplot(t(k27me3subset), type="l", col=cbbPalette[3], main="K27me3", 
+            axes=F,xlab="time",ylab="signal",lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
+
+
+    k4me1subset = cbind(k4me1[cur.items,1], k4me1[cur.items,2], 
+                        k4me1[cur.items,3], k4me1[cur.items,4])
 
     dim(k4me1subset)
 
-
-    for (i in 1:length(cur.items)){
-
-
-        print(cbind(k4me1subset[i,1], k4me1subset[i,2], 
-                    k4me1subset[i,3], k4me1subset[i,4]))
-
-        lines(cbind(k4me1subset[i,1], k4me1subset[i,2], 
-                    k4me1subset[i,3], k4me1subset[i,4]), 
-              col = cbbPalette[4], ylim = c(0,65), lwd = 4, type="o", 
-              pch=16)
-    }
+    matplot(t(k4me1subset), type="l", col= cbbPalette[4], main="K4me1", 
+            axes=F,xlab="time",ylab="signal",lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
 
 
 
+    k4me1subset = cbind(k4me1[cur.items,5], k4me1[cur.items,6], 
+                        k4me1[cur.items,7], k4me1[cur.items,8])
+
+    dim(k4me1subset)
+
+    matplot(t(k4me1subset), type="l", col= cbbPalette[4], main="K4me1", 
+            axes=F,xlab="time",ylab="signal",lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
+
+
+
+    k4me3subset = cbind(k4me3[cur.items,1], k4me3[cur.items,2], 
+                        k4me3[cur.items,3], k4me3[cur.items,4])
+
+    dim(k4me3subset)
+
+    matplot(t(k4me3subset), type="l", col= cbbPalette[1], main="K4me3", 
+            axes=F,xlab="time",ylab="signal",lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
+
+
+    k4me3subset = cbind(k4me3[cur.items,1], k4me3[cur.items,2], 
+                        k4me3[cur.items,3], k4me3[cur.items,4])
+
+    dim(k4me3subset)
+
+    matplot(t(k4me3subset), type="l", col= cbbPalette[1], main="K4me3", 
+            axes=F,xlab="time",ylab="signal",lty=1)
+    axis(2)
+    axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
+
+
+    mtext(paste0("Cluster ", i, " (", length(cur.items), " pairs)"), 
+          outer=TRUE, cex=1.5,font=2)
 
 }
-dev.off()
-
-q()
-error.bars(stuff.k4me1.prom, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[4], labels = colnames(stuff.k4me1.prom), 
-           ylim = c(0,65), 
-           ylab = "normalized average histone mark signal", 
-           xlab="time", col = cbbPalette[4], 
-           main = left)
-
-lines(colMeans((cbind(k4me1[cur.items,1], k4me1[cur.items,2], 
-                      k4me1[cur.items,3], k4me1[cur.items,4]))), 
-      col = cbbPalette[4], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-error.bars(stuff.k4me3.prom, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[1], ylim = c(0,65), 
-           col = cbbPalette[1], add = TRUE)
-lines(colMeans((cbind(k4me3[cur.items,1], k4me3[cur.items,2], 
-                      k4me3[cur.items,3], k4me3[cur.items,4]))), 
-      col = cbbPalette[1], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-error.bars(stuff.k27ac.prom, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[2], ylim = c(0,65), 
-           col = cbbPalette[2], add = TRUE)
-lines(colMeans((cbind(k27ac[cur.items,1], k27ac[cur.items,2], 
-                      k27ac[cur.items,3], k27ac[cur.items,4]))), 
-      col = cbbPalette[2], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-error.bars(stuff.k27me3.prom, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[3], ylim = c(0,65), 
-           col = cbbPalette[3], add = TRUE)
-lines(colMeans((cbind(k27me3[cur.items,1], k27me3[cur.items,2], 
-                      k27me3[cur.items,3], k27me3[cur.items,4]))), 
-      col = cbbPalette[3], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-
-#plot enhancer
-
-error.bars(stuff.k4me1.enh, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[4], labels = colnames(stuff.k4me1.enh), 
-           ylim = c(0,65), 
-           ylab = "normalized average histone mark signal", 
-           xlab="time", col = cbbPalette[4], 
-           main = right)
-lines(colMeans((cbind(k4me1[cur.items,5], k4me1[cur.items,6], 
-                      k4me1[cur.items,7], k4me1[cur.items,8]))), 
-      col = cbbPalette[4], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-error.bars(stuff.k4me3.enh, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[1], ylim = c(0,65), 
-           col = cbbPalette[1], add = TRUE)
-lines(colMeans((cbind(k4me3[cur.items,5], k4me3[cur.items,6], 
-                      k4me3[cur.items,7], k4me3[cur.items,8]))), 
-      col = cbbPalette[1], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-error.bars(stuff.k27ac.enh, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[2], ylim = c(0,65), 
-           col = cbbPalette[2], add = TRUE)
-lines(colMeans((cbind(k27ac[cur.items,5], k27ac[cur.items,6], 
-                      k27ac[cur.items,7], k27ac[cur.items,8]))), 
-      col = cbbPalette[2], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-error.bars(stuff.k27me3.enh, eyes = FALSE, sd = FALSE, bars = FALSE, 
-           arrow.col = cbbPalette[3], ylim = c(0,65), 
-           col = cbbPalette[3], add = TRUE)
-lines(colMeans((cbind(k27me3[cur.items,5], k27me3[cur.items,6], 
-                      k27me3[cur.items,7], k27me3[cur.items,8]))), 
-      col = cbbPalette[3], ylim = c(0,65), lwd = 8, type="o", 
-      pch=16)
-
-
-
-mtext(paste0("Cluster ", i, " (", length(cur.items), " pairs)"),
-      outer=TRUE, cex=1.5,font=2)
-
-legend("bottom", inset=c(-5,0), 
-       legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
-       col=c("#009E73", "#D50F25", "black", "gray"), pch=15) 
-}
-
 
 dev.off()
 warnings()
+
+
+q()
+
