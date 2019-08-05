@@ -320,8 +320,8 @@ for (i in 1:numClusters) {
     axis(side=1,at=1:4,labels=c("D0","D2","D5","D10"))
 
 
-    k4me3subset = cbind(k4me3[cur.items,1], k4me3[cur.items,2], 
-                        k4me3[cur.items,3], k4me3[cur.items,4])
+    k4me3subset = cbind(k4me3[cur.items,5], k4me3[cur.items,6], 
+                        k4me3[cur.items,7], k4me3[cur.items,8])
 
     dim(k4me3subset)
 
