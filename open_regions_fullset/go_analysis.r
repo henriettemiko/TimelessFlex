@@ -1,7 +1,7 @@
 
 ##########
 #name:          go_analysis.r
-#description:   GO analysis with gprofiler for promoter clusters subset
+#description:   GO analysis with gprofiler for promoter clusters
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
 #date:          August 7, 2019
 ##########
@@ -56,7 +56,7 @@ for (i in 1:numClusters) {
               correction_method = "fdr",include_graph = T, 
               custom_bg=genes.background,
               png_fn=paste0(numcluster.dir,"/gprofiler_0001_", 
-                            numClusters, ".png"))
+                            numClusters, "_", i, ".png"))
 
 
     enrichments = gprofiler(genes, organism = "hsapiens", src_filter = "GO", 
@@ -108,7 +108,7 @@ for (i in 1:numClusters) {
               correction_method = "fdr", include_graph = T, 
               custom_bg=genes.background,
               png_fn=paste0(numcluster.dir,"/gprofiler_001_", 
-                            numClusters, ".png"))
+                            numClusters, "_", i, ".png"))
 
     enrichments = gprofiler(genes, organism = "hsapiens", src_filter = "GO", 
                             max_p_value = 1e-2, hier_filtering = "moderate", 
@@ -162,7 +162,7 @@ for (i in 1:numClusters) {
                             correction_method = "fdr", include_graph = T, 
                             custom_bg=genes.background,
                             png_fn=paste0(numcluster.dir,"/gprofiler_0001_", 
-                                          numClusters, "_none.png"))
+                                          numClusters,  "_", i, "_none.png"))
 
 
     enrichments = gprofiler(genes, organism = "hsapiens", src_filter = "GO", 
@@ -216,7 +216,7 @@ for (i in 1:numClusters) {
                             custom_bg=genes.background,
                             min_set_size=100, max_set_size=2000,
                             png_fn=paste0(numcluster.dir,"/gprofiler_0001_", 
-                                          numClusters, "_filtered.png"))
+                                          numClusters,  "_", i, "_filtered.png"))
 
 
     enrichments = gprofiler(genes, organism = "hsapiens", src_filter = "GO", 
