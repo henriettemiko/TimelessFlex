@@ -2,9 +2,9 @@
 
 ##########
 #name:          05b_GO_analysis_promoter.sh
-#description:   calls GO analysis on promoter clusters
+#description:   calls GO analysis on promoter clusters subset
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          July 10, 2019
+#date:          July 12, 2019
 ##########
 
 
@@ -12,11 +12,11 @@ source ../set_variables_hg19.sh
 
 
 #choose cluster number for promoter clusters here
-NUM_CLUSTER=18
+NUM_CLUSTER=15
 
 NUM_MARKS=4
-NUM_TIME_POINTS=5
-TIMELESS_DIR_PROM=$OPEN_REGIONS_DIR_FULL/timeless_promoters
+NUM_TIME_POINTS=4
+TIMELESS_DIR_PROM=$OPEN_REGIONS_DIR_SUB/timeless_promoters
 
 MODEL_DIR_PROM=$TIMELESS_DIR_PROM/2_30
 NUM_CLUSTER_DIR_PROM=$TIMELESS_DIR_PROM/2_30/$NUM_CLUSTER
@@ -49,7 +49,7 @@ for ((i=1; i<=$NUM_CLUSTER; i++)); do echo $i; awk -v i="$i" \
 #all genes from all clusters (as background for GO analysis)
 cut -f 2 genes_names_assignment.txt > names_all.txt
 
-Rscript $SCRIPT_DIR/open_regions_fullset/go_analysis.r $NUM_CLUSTER \
+Rscript $SCRIPT_DIR/open_regions_subset/go_analysis.r $NUM_CLUSTER \
     $NUM_CLUSTER_DIR_PROM
 
 
