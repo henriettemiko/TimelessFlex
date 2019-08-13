@@ -1,9 +1,9 @@
 
 ##########
-#name:          plot_clusters_fullset.r
-#description:   plots clusters for fullset
+#name:          plot_cluster_signature_genes.r
+#description:   plots clusters and signature genes for fullset
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          July 10, 2019
+#date:          July 11, 2019
 ##########
 
 
@@ -16,10 +16,10 @@ args = commandArgs(trailingOnly=TRUE)
 numClusters = as.numeric(args[1])
 numMarks = as.numeric(args[2])
 numTimePoints = as.numeric(args[3])
-numcluster.dir = args[4]
-timeless.dir = args[5]
-signalgenerator.dir = args[6]
-type = args[7]
+model.dir=args[4]
+timeless.dir=args[5]
+signalgenerator.dir=args[6]
+numcluster.dir=args[7]
 
 score <- function(x){
     x = scale(x, scale = FALSE)
@@ -27,8 +27,8 @@ score <- function(x){
     return(x)
 }
 
-l = read.table(paste0(numcluster.dir, "/classes-", numClusters, ".txt"))
-k = read.table(paste0(signalgenerator.dir, "/allCountsNorm.txt"))
+l = read.table(paste0(model.dir,"/classes-", numClusters, ".txt"))
+k = read.table(paste0(signalgenerator.dir,"/allCountsNorm.txt")) 
 
 # 6 time points
 k27ac = cbind(k[[12]], k[[13]], k[[14]], k[[15]], k[[16]], k[[17]])
@@ -46,11 +46,35 @@ print(colMeans(k27me3))
 print(colMeans(k4me1))
 print(colMeans(k4me3))
 
+#read in information about signature genes in clusters
+DE = read.table(paste0(numcluster.dir,"/DE_genes_clusters.txt"))
+GT = read.table(paste0(numcluster.dir,"/GT_genes_clusters.txt"))
+FG = read.table(paste0(numcluster.dir,"/FG_genes_clusters.txt"))
+PE = read.table(paste0(numcluster.dir,"/PE_genes_clusters.txt"))
+
+
+##all signature genes from list that were unambiguously assigned in this clustering
+DE.all = read.table(paste0(numcluster.dir,"/DE_genes.txt"))
+print(nrow(DE.all))
+
+GT.all = read.table(paste0(numcluster.dir,"/GT_genes.txt"))
+print(nrow(GT.all))
+
+FG.all = read.table(paste0(numcluster.dir,"/FG_genes.txt"))
+print(nrow(FG.all))
+
+PE.all = read.table(paste0(numcluster.dir,"/PE_genes.txt"))
+print(nrow(PE.all))
+
+
 cbbPalette <- c("gray", "#009E73", "#D50F25", "black")
 #me3 gray, me1 black, 27ac green 009E73, 27me3 red
 #plot from dark to light colors: me1, k27me3, k27ac, me3
 
-pdf(paste0(type, "_clusters_", numClusters, ".pdf"), height=6, width=4)
+pdf(paste0(numcluster.dir,"/clusters_", numClusters, "_signature_genes.pdf"), 
+    height=6, width=5) 
+
+par(mar=c(7.1, 4.1, 4.1, 7.1), xpd=TRUE)
 
 for (i in 1:numClusters) {
 
@@ -168,7 +192,38 @@ for (i in 1:numClusters) {
 
     axis(side=1, labels=c("D0", "D2", "D5", "D8"), at = c(1,2,3,4), line=2)
     mtext(side=1, "time", line=4)
-  
+
+
+    DE.num=DE[DE$V2==i,]$V1
+    if (length(DE.num)==0) {
+        DE.num = 0
+    }
+
+    GT.num=GT[GT$V2==i,]$V1
+    if (length(GT.num)==0) {
+        GT.num = 0
+    }
+
+    FG.num=FG[FG$V2==i,]$V1
+    if (length(FG.num)==0) {
+        FG.num = 0
+    }
+
+    PE.num=PE[PE$V2==i,]$V1
+        if (length(PE.num)==0) {
+        PE.num = 0
+    }
+
+    legend("topright", inset=c(-0.49,0), 
+           legend=c("H3K27ac","H3K27me3","H3K4me1","H3K4me3"), 
+           col=c("#009E73", "#D50F25", "black", "gray"), pch=15) 
+    mtext(side=1, text=paste0("signature genes:\nD2: ", DE.num, 
+                              " / ", nrow(DE.all), ", D5: ", GT.num, 
+                              " / ", nrow(GT.all), 
+                              ", D7: ", FG.num, " / ", nrow(FG.all), 
+                              ", D10: ", PE.num, 
+                              " / ", nrow(PE.all)), line=6)
+
 
 
 }
