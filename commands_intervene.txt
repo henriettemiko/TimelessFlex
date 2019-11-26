@@ -1,0 +1,84 @@
+Plots with intervene outside of guix profile and computed on workstation
+Henriette Miko
+November 26, 2019
+
+
+1) Intersection plot ATAC-seq peaks:
+
+export PATH=/data/ohler/henriette/miniconda2/bin:$PATH
+
+mv D0_pooled_p005_peaks_IDR_summitpos_final.narrowPeak D0.narrowPeak
+mv D2_pooled_p005_peaks_IDR_summitpos_final.narrowPeak D2.narrowPeak
+mv D5_pooled_p005_peaks_IDR_summitpos_final.narrowPeak D5.narrowPeak
+mv D7_pooled_p005_peaks_IDR_summitpos_final.narrowPeak D7.narrowPeak
+mv D10_pooled_p005_peaks_IDR_summitpos_final.narrowPeak D10.narrowPeak
+mv D8_pooled_p005_peaks_IDR_summitpos_final.narrowPeak D8.narrowPeak
+
+intervene upset -i D*.narrowPeak --output upset10 --figsize 10 6 --save-overlaps
+
+
+
+2) Pairwise intersection - Fraction of overlap
+between clusters and published FOXA1/FOXA2/PDX1 peaks:
+
+export PATH=/data/ohler/henriette/miniconda2/bin:$PATH
+
+#process excel files into bed files with csvkit
+in2csv -K 3 --sheet foxa1.gt mmc6.xlsx | tr "," "\\t" > foxa1_gt.bed
+in2csv -K 3 --sheet foxa1.fg mmc6.xlsx | tr "," "\\t" > foxa1_fg.bed
+in2csv -K 3 -- sheet foxa2.pe mmc7.xlsx | tr "," "\\t" > foxa2_pe.bed
+in2csv -K 3 --sheet foxa2.fg mmc7.xlsx | tr "," "\\t" > foxa2_fg.bed
+in2csv -K 3 --sheet foxa2.gt mmc7.xlsx | tr "," "\\t" > foxa2_gt.bed
+in2csv -K 3 --sheet foxa2.de mmc7.xlsx | tr "," "\\t" > foxa2_de.bed
+in2csv -K 3 --sheet "Pdx1 peaks" mmc5.xlsx | tr "," "\\t" > pdx1_pe.bed
+
+#liftover from hg18 to hg19:
+liftOver foxa2_de.bed ../hg18ToHg19.over.chain FOXA2_DE_hg19.bed unmapped_foxa2_de.bed
+liftOver foxa2_fg.bed ../hg18ToHg19.over.chain FOXA2_FG_hg19.bed unmapped_foxa2_fg.bed
+liftOver foxa2_gt.bed ../hg18ToHg19.over.chain FOXA2_GT_hg19.bed unmapped_foxa2_gt.bed
+liftOver foxa2_pe.bed ../hg18ToHg19.over.chain FOXA2_PE_hg19.bed unmapped_foxa2_pe.bed
+liftOver foxa1_gt.bed ../hg18ToHg19.over.chain FOXA1_GT_hg19.bed unmapped_foxa1_gt.bed
+liftOver foxa1_fg.bed ../hg18ToHg19.over.chain FOXA1_FG_hg19.bed unmapped_foxa1_fg.bed
+liftOver foxa2_pe.bed ../hg18ToHg19.over.chain FOXA2_PE_hg19.bed unmapped_foxa2_pe.bed
+liftOver pdx1_pe.bed ../hg18ToHg19.over.chain PDX1_PE_hg19.bed unmapped_pdx1_pe.bed
+
+
+a) fullset:
+
+#get regions
+for i in {1..15}; do echo $i; awk -v i="$i" 'OFS="\t" {if ($9==i) print $1,($2+500),($3-500),$4,
+$5,"+" > "regions_"i".txt"}' ../regions_15classes.bed; done
+
+#rename regions for 1 to 15
+mv regions_1.txt regions_1.bed
+
+intervene pairwise -i .
+./regions_*.bed ../../../../../../../Wang_suppl/*/*_*hg19.bed --names cluster10,cluster11,cluster12,cluster13,cluster14,cluster15,cluster1,cluster2,cluster3,cluster4,cluster5,cluster6,cluster7,cluster8,cluster9,FOXA1_D7,FOXA1_D5,FOXA1_D10,FOXA2_D2,FOXA2_D7,FOXA2_D5,FOXA2_D10,PDX1_D10 --output pairwise_circle_regions_all_all_good --compute frac --htype circle
+
+
+b) splitset:
+
+for i in {1..23}; do echo $i; awk -v i="$i" 'OFS="\t" {if ($9==i) print $1,($2+500),($3-500),$4,
+$5,"+" > "regions_"i".txt"}' ../regions_23classes.bed; done
+
+intervene pairwise -i regions_*.txt ../../../../../../../Wang_suppl/*/*_*hg19.bed --names cluster10,cluster11,cluster12,cluster13,cluster14,cluster15,cluster16,cluster17,cluster18,cluster19,cluster1,clusters20,cluster21,cluster22,cluster23,cluster2,cluster3,cluster4,cluster5,cluster6,cluster7,cluster8,cluster9,FOXA1_D7,FOXA1_D5,FOXA1_D10,FOXA2_D2,FOXA2_D7,FOXA2_D5,FOXA2_D10,PDX1_D10 --output pairwise_circle_regions_all_all_good_splitset --compute frac --htype circle
+
+
+c)subset:
+
+for i in {1..8}; do echo $i; awk -v i="$i" 'OFS="\t" {if ($9==i) print $1,($2+
+500),($3-500),$4,
+$5,"+" > "regions_"i".txt"}' ../../regions_8classes.bed; done
+
+#rename from *.txt to *.bed
+
+intervene pairwise -i .
+./regions_*.bed ../../../../../../../Wang_suppl/*/*_*hg19.bed --names cluster1,cluster2,cluster3,cluster4,cluster5,cluster6,cluster7,cluster8,FOXA1_D7,FOXA1_D5,FOXA1_D10,FOXA2_D2,FOXA2_D7,FOXA2_D5,FOXA2_D10,PDX1_D10 --output pairwise_circle_regions_all_all_good_subset --compute frac --htype circle
+
+
+d) inititialization pairs prom-enh:
+
+for i in {1..10}; do echo $i; awk -v i="$i" 'OFS="\t" {if ($10==i) print $1,($2+500),($3-500),$4,
+$5,"+" > "regions_"i".txt"}' ../enh_regions_10classes.bed; done
+
+intervene pairwise -i regions_*.txt ../../../../../../../Wang_suppl/*/*_*hg19.bed --names cluster10,cluster1,cluster2,cluster3,cluster4,cluster5,cluster6,cluster7,cluster8,cluster9,FOXA1_D7,FOXA1_D5,FOXA1_D10,FOXA2_D2,FOXA2_D7,FOXA2_D5,FOXA2_D10,PDX1_D10 --output pairwise_circle_regions_all_all_good --compute frac --htype circle
