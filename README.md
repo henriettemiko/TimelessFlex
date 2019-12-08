@@ -1,7 +1,7 @@
 # TimelessFlex - A flexible framework for investigating chromatin state trajectories
 
 by Henriette Miko (henriette.miko@mdc-berlin.de) at [Ohler lab](
-https://github.com/ohlerlab) at BIMSB/MDC, 2019
+https://github.com/ohlerlab) at BIMSB/MDC, December 8, 2019
 
 
 
