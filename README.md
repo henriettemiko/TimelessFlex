@@ -4,6 +4,7 @@ by Henriette Miko (henriette.miko@mdc-berlin.de) at [Ohler lab at BIMSB/MDC](
 https://github.com/ohlerlab), December 2019
 
 
+[ATAC-seq data processing](./ATAC)
 
 
 
