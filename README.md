@@ -37,7 +37,7 @@ This framework is written in R and bash and it makes use of multiple publicly av
 
 ### Repository structure
 
-[ATAC](./ATAC): script for processing of ATAC-seq data and peak calling with MACS2 and IDR
+[ATAC](./ATAC): scripts for processing of ATAC-seq data and peak calling with MACS2 and IDR
 
 [ChIP](./ChIP): scripts for processing of ChIP-seq data for histone modifications H3K27ac/me3 and H3K4me1/3 and peak calling with JAMM
 
