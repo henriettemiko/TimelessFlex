@@ -21,8 +21,8 @@ The framework consists of three parts:
    - if Hi-C data is available, assign promoters and enhancers to Hi-C interaction pairs
    - define feature regions around promoters and enhancer   
 2. Clustering:
-   -compute histone mark signals over feature regions
-   -cluster histone mark signals with Bayesian network
+   - compute histone mark signals over feature regions
+   - cluster histone mark signals with Bayesian network
 3. Validation and interpretation of clusters
    - validate clusters with genomic data not used in clustering
    - functional analyses of clusters
