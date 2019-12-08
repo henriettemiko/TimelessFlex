@@ -1,18 +1,17 @@
-TimelessFlex - A flexible framework for investigating chromatin state trajectories
+# TimelessFlex
+## A flexible framework for investigating chromatin state trajectories
 
-Henriette Miko
-
-PhD student in Ohler lab at BIMSB/MDC
-
-
-November 13, 2019
+by Henriette Miko (henriette.miko@mdc-berlin.de)
+Ohler lab at BIMSB/MDC (https://ohlerlab.mdc-berlin.de/)
+December 2019
 
 
 
-Bayes Net Toolbox for Matlab is required: 
-https://github.com/bayesnet/bnt
 
 
-This framework adapts and extends Timeless: 
-https://github.com/mahmoudibrahim/timeless
+
+
+This framework adapts and extends [Timeless](https://github.com/mahmoudibrahim/timeless). 
+The [Bayes Net Toolbox for Matlab](https://github.com/bayesnet/bnt) is required.
+
 
