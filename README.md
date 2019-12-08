@@ -37,13 +37,13 @@ This framework is written in R and bash and it makes use of multiple publicly av
 
 ### Repository structure
 
-[ATAC](./ATAC): processing of ATAC-seq data and peak calling with MACS2 and IDR
+[ATAC](./ATAC): script for processing of ATAC-seq data and peak calling with MACS2 and IDR
 
-[ChIP](./ChIP): processing of ChIP-seq data for histone modifications H3K27ac/me3 and H3K4me1/3 and peak calling with JAMM
+[ChIP](./ChIP): scripts for processing of ChIP-seq data for histone modifications H3K27ac/me3 and H3K4me1/3 and peak calling with JAMM
 
-[RNA](./RNA): processing of RNA-seq data with RSEM
+[RNA](./RNA): scripts for processing of RNA-seq data with RSEM
 
-[HiC](./ChIP): combining of processed Hi-C data
+[HiC](./ChIP): script for combining of processed Hi-C data
 
 [open_regions_fullset](./open_regions_fullset): scripts for a linear time-course of 5 time points (D0 -> D2 -> D5 -> D7 -> D10)
 
