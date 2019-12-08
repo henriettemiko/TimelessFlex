@@ -1,6 +1,6 @@
 # TimelessFlex - A flexible framework for investigating chromatin state trajectories
 
-by Henriette Miko (henriette.miko@mdc-berlin.de) at [Ohler lab](
+by Henriette Miko (henriette.miko@mdc-berlin.de), [Ohler lab](
 https://github.com/ohlerlab) at BIMSB/MDC, December 8, 2019
 
 
@@ -23,7 +23,7 @@ The framework consists of three parts:
 2. Clustering:
    - compute histone mark signals over feature regions
    - cluster histone mark signals with Bayesian network
-3. Validation and interpretation of clusters
+3. Validation and interpretation:
    - validate clusters with genomic data not used in clustering
    - functional analyses of clusters
 
