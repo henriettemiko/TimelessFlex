@@ -10,7 +10,7 @@ https://github.com/ohlerlab) at BIMSB/MDC, June 15, 2020
 All code for processing and analyzing data from human pancreatic differentiation at 6 time points D0, D2, D5, D7, D10 and D8 can be found here.
 The structure of this directory is as follows:
 
-[ATAC](./human_pancreatic_differentiation/ATAC): scripts for processing of ATAC-seq data and peak calling with MACS2 and IDR
+[ATAC](./ATAC): scripts for processing of ATAC-seq data and peak calling with MACS2 and IDR
 
 [ChIP](./ChIP): scripts for processing of ChIP-seq data for histone modifications H3K27ac/me3 and H3K4me1/3 and peak calling with JAMM
 
