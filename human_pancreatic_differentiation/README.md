@@ -1,6 +1,6 @@
 # Human pancreatic differentiation
 
-All code for processing and analyzing data from human pancreatic differentiation at 5 time points D0, D2, D5, D7 and D10 can be found here.
+All code for processing and analyzing data from human pancreatic differentiation at 6 time points D0, D2, D5, D7, D10 and D8 can be found here.
 The structure of this directory is as follows:
 
 [ATAC](./human_pancreatic_differentiation/ATAC): scripts for processing of ATAC-seq data and peak calling with MACS2 and IDR
