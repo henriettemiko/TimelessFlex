@@ -1,7 +1,11 @@
-# Human pancreatic differentiation
-Henriette Miko (henriette.miko@mdc-berlin.de), [Ohler lab](
+
+
+# TimelessFlex - A flexible framework for investigating chromatin state trajectories
+
+by Henriette Miko (henriette.miko@mdc-berlin.de), [Ohler lab](
 https://github.com/ohlerlab) at BIMSB/MDC, June 15, 2020
 
+## Human pancreatic differentiation data
 
 All code for processing and analyzing data from human pancreatic differentiation at 6 time points D0, D2, D5, D7, D10 and D8 can be found here.
 The structure of this directory is as follows:
