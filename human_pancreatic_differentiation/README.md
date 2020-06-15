@@ -15,4 +15,6 @@ The structure of this directory is as follows:
 
 [open_regions_split](./open_regions_split): scripts for a branched set with 5 time points of linear differentiation and a split from second time point (D0 -> D2 -> D5 -> D7 -> D10 and D8 split from D5)
 
-[open_regions_subset](./open_regions_subset): scripts for a linear time course with 4 time points, for which Hi-C data is available (D0 -> D2 -> D5 -> D10) , in [open_regions_pairs](./open_regions_subset/open_regions_pairs): scripts for Hi-C interaction pairs
+[open_regions_subset](./open_regions_subset): scripts for a linear time course with 4 time points, for which Hi-C data is available (D0 -> D2 -> D5 -> D10)
+
+[open_regions_subset/open_regions_pairs](./open_regions_subset/open_regions_pairs): scripts for Hi-C interaction pairs (promoter-enhancer, promoter-promoter and enhancer-enhancer pairs)
