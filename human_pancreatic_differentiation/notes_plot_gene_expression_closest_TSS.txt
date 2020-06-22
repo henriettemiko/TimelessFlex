@@ -2,6 +2,10 @@ Notes for plot_gene_expression_closest_TSS.txt:
 25.01.2020, Henriette Miko
 
 
+sort -k1,1 -k2,2n regions_7.txt > regions_7_sorted.txt
+sort -k1,1 -k2,2n regions_3.txt > regions_3_sorted.txt
+
+
 #find closest transcript TSSs for enhancer clusters 3 and 7
 bedtools closest -a ../intervene/regions_3_sorted.txt -b ../../../../../annotation/all_transcript_TSSs_chr_uniq.bed > regions3_closestTSS.txt
 
