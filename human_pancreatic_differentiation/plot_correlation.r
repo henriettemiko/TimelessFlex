@@ -14,11 +14,15 @@ library(psych)
 
 
 #files needed:
-#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/allCountsNorm_10classes.txt #K27ac
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/\
+#timeless_init_prom-enh/10/allCountsNorm_10classes.txt #K27ac
 #all_join_leftgene_regions_fpkms.txt #FPKMs for feature regions
-#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/Signal_Generator_init_prom-enh/allCountsNorm.txt
-#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/2_30/classes-10.txt
-#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/enh_regions_10_cutsites_all.bed #ATAC
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/\
+#Signal_Generator_init_prom-enh/allCountsNorm.txt
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/\
+#timeless_init_prom-enh/2_30/classes-10.txt
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/\
+#timeless_init_prom-enh/10/enh_regions_10_cutsites_all.bed #ATAC
 
 
 #K27ac signal for prom and enh (from plot_clusters_pairs.r)
