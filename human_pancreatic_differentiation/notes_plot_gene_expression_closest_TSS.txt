@@ -2,6 +2,12 @@ Notes for plot_gene_expression_closest_TSS.txt:
 25.01.2020, Henriette Miko
 
 
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/Homer/intervene$
+
+
+export PATH=/data/ohler/henriette/miniconda2/bin:$PATH
+
+
 sort -k1,1 -k2,2n regions_7.txt > regions_7_sorted.txt
 sort -k1,1 -k2,2n regions_3.txt > regions_3_sorted.txt
 
