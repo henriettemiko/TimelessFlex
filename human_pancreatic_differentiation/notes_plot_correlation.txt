@@ -9,12 +9,13 @@ Notes for plot correlation:
 #bidir regions has two fpkms, so only take left gene (col7)
 #join fpkms with left gene of feature regions
 
-[hmiko@max212.mdc-berlin.net:/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/correlation] $ join -t $'\t' -1 1 -2 7 ../all_join.txt <( sort -k 7,7 ../regions_10classes.bed) > all_join_leftgene_regions.txt
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/correlation
+join -t $'\t' -1 1 -2 7 ../all_join.txt <( sort -k 7,7 ../regions_10classes.bed) > all_join_leftgene_regions.txt
 
 #take fpkms and assignments only
 
-[hmiko@max212.mdc-berlin.net:/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/correlation] $ cut -f 2-13 all_join_leftgene_regions.txt > all_join_leftgene_regions_fpkms.txt
-[hmiko@max212.mdc-berlin.net:/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/correlation] $ wc -l all_join_leftgene_regions*
+cut -f 2-13 all_join_leftgene_regions.txt > all_join_leftgene_regions_fpkms.txt
+wc -l all_join_leftgene_regions*
   3617 all_join_leftgene_regions_fpkms.txt
   3617 all_join_leftgene_regions.txt
   7234 total
