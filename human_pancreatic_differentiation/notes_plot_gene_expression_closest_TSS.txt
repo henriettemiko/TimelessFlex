@@ -1,0 +1,26 @@
+Notes for plot_gene_expression_closest_TSS.txt:
+25.01.2020, Henriette Miko
+
+
+#find closest transcript TSSs for enhancer clusters 3 and 7
+bedtools closest -a ../intervene/regions_3_sorted.txt -b ../../../../../annotation/all_transcript_TSSs_chr_uniq.bed > regions3_closestTSS.txt
+
+
+#cut to ENSG
+cat regions3_closestTSS.txt | cut -f 10 | sort | uniq > regions3_closestTSS_gene.txt
+
+
+#join with file ENSG and all FPKMs
+join -t $'\t' ../../all_join.txt regions3_closestTSS_gene.txt > join_regions3_closestTSS_gene.txt
+
+
+bedtools closest -a ../intervene/regions_7_sorted.txt -b ../../../../../annotation/all_transcript_TSSs_chr_uniq.bed > regions7_closestTSS.txt
+
+
+cat regions7_closestTSS.txt | cut -f 10 | sort | uniq > regions7_closestTSS_gene.txt
+
+
+join -t $'\t' ../../all_join.txt regions7_closestTSS_gene.txt > join_regions7_closestTSS_gene.txt
+
+
+#then plot with plot_gene_expression_closest_TSS.r (adapted from plot_gene_expression_cluster.r in open_regions_subset)
