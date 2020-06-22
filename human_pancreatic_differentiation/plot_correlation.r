@@ -14,13 +14,11 @@ library(psych)
 
 
 #files needed:
-#[hmiko@max213.mdc-berlin.net:/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/:
-#allCountsNorm_10classes.txt #K27ac
-#join_10assignments.txt #FPKM for unambigously assigned genes (not needed here)
-#all_join_leftgene_regions_fpkms.txt #FPKMs for feature regions (needed here)
-#/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/Signal_Generator_init_prom-enh/allCountsNorm.txt
-#/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/2_30/classes-10.txt
-#/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/enh_regions_10_cutsites_all.bed #ATAC
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/allCountsNorm_10classes.txt #K27ac
+#all_join_leftgene_regions_fpkms.txt #FPKMs for feature regions
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/Signal_Generator_init_prom-enh/allCountsNorm.txt
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/2_30/classes-10.txt
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/enh_regions_10_cutsites_all.bed #ATAC
 
 
 #K27ac signal for prom and enh (from plot_clusters_pairs.r)
@@ -44,7 +42,6 @@ k27acenh = cbind(k[[40]], k[[41]], k[[42]], k[[43]])
 k27acenh = matrix(score(as.vector(k27acenh)), ncol = 4, byrow = FALSE)
 
 k27ac = cbind(k27acprom, k27acenh)
-
 
 
 #RNA-seq signal for prom (from plot_expression_cluster.r for feature regions here)
@@ -139,8 +136,6 @@ for (i in c(3, 7, 10)){
                 quote = F, row.names = F, col.names = F)
 
 
-
-
     ####Spearman correlation prom K27ac and RNA (4-dim vectors)
     #correlation for each feature region
     #in case all FPKMs are zero for feature region, correlation coefficient is NA (e.g. l236 for cluster 3)
@@ -153,7 +148,6 @@ for (i in c(3, 7, 10)){
     }
 
 
-
     mean(corrvalsprom, na.rm=T)
     plot(corrvalsprom)
     hist(corrvalsprom)
@@ -163,10 +157,6 @@ for (i in c(3, 7, 10)){
     write.table(corrvalsprom, sep = "\t",
                 file = paste0("Spearman_correlation_K27ac_RNA_cluster",i,".txt"), 
                 quote = F, row.names = F, col.names = F)
-
-
-
-
 
 }
 
@@ -208,10 +198,6 @@ dev.off()
 
 
 
-
-
-
-
 #K27ac and RNA correlation
 
 corrvalsprom_c3=data.frame(read.table("Spearman_correlation_K27ac_RNA_cluster3.txt", header=F))
@@ -244,87 +230,3 @@ text(y = boxplot.stats(corrvalsprom_c10$V1)$stats[c(3)],
 
 dev.off()
 
-
-
-
-
-
-
-
-#####################################################################
-########################################################################################
-
-
-# #checked that it looks like ATAC plot for cluster 1
-# 
-# boxplot(1000*(cur.overlaps.enh/2), 
-#         main="", 
-#         ylab="normalized mean ATAC-seq cut sites",xlab="time", 
-#         ylim=c(0,25), col=rep("orange",5), 
-#         names = c("D0","D2","D5","D10"),  outline = F)
-# 
-# dev.off()
-# 
-# boxplot(ATACsig, 
-#         main="", 
-#         ylab="normalized mean ATAC-seq cut sites",xlab="time", 
-#         ylim=c(0,25), col=rep("orange",5), 
-#         names = c("D0","D2","D5","D10"),  outline = F)
-
-
-#########################
-
-#checked that it looks like k27ac for cluster 1
-# error.bars(stuff.k27ac.enh, eyes = FALSE, sd = FALSE, bars = FALSE, 
-#            arrow.col = cbbPalette[2], ylim = c(0,65), 
-#            col = cbbPalette[2], add = F)
-# lines(colMeans((cbind(k27ac[cur.items,5], k27ac[cur.items,6], 
-#                       k27ac[cur.items,7], k27ac[cur.items,8]))), 
-#       col = cbbPalette[2], ylim = c(0,65), lwd = 8, type="o", 
-#       pch=16)
-# 
-# 
-# 
-# error.bars(k27acenhsig, eyes = FALSE, sd = FALSE, bars = FALSE, 
-#            arrow.col = cbbPalette[2], ylim = c(0,65), 
-#            col = cbbPalette[2], add = F)
-# lines(colMeans(k27acenhsig), 
-#       col = cbbPalette[2], ylim = c(0,65), lwd = 8, type="o", 
-#       pch=16)
-
-
-##################
-
-# #checked that it looks like k27ac for cluster 1
-# cbbPalette <- c("gray", "#009E73", "#D50F25", "black")
-# 
-# error.bars(stuff.k27ac.prom, eyes = FALSE, sd = FALSE, bars = FALSE, 
-#            arrow.col = cbbPalette[2], ylim = c(0,65), 
-#            col = cbbPalette[2], add = F)
-# lines(colMeans((cbind(k27ac[cur.items,1], k27ac[cur.items,2], 
-#                       k27ac[cur.items,3], k27ac[cur.items,4]))), 
-#       col = cbbPalette[2], ylim = c(0,65), lwd = 8, type="o", 
-#       pch=16)
-# 
-# error.bars(k27acpromsig, eyes = FALSE, sd = FALSE, bars = FALSE, 
-#            arrow.col = cbbPalette[2], ylim = c(0,65), 
-#            col = cbbPalette[2], add = F)
-# lines(colMeans(k27acpromsig), 
-#       col = cbbPalette[2], ylim = c(0,65), lwd = 8, type="o", 
-#       pch=16)
-
-#################
-
-# #checked that it looks like RNA seq plot for cluster 1
-#    
-#   boxplot(log(cur.scores+1), main=paste0(length(cur.items), " genes"), 
-#           names = c("D0", "D2", "D5", "D10"), outline = F, xlab="time", 
-#           ylab="log(geomav gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
-#   
-#   
-#   boxplot(RNAsig, main=paste0(length(cur.items), " genes"), 
-#           names = c("D0", "D2", "D5", "D10"), outline = F, xlab="time", 
-#           ylab="log(geomav gene FPKM+1)", ylim=c(0,8), col="lightskyblue1")
-
-
-#  }
