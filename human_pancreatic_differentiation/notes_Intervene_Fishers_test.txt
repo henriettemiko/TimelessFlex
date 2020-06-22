@@ -1,0 +1,19 @@
+Notes for Intervene Fisher's test:
+24.01.2020, Henriette Miko
+
+
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/Homer/intervene$
+#see commands_intervene.txt for information how to compute ../../../../../../../Wang_suppl/FOXA1/FOXA1_GT_hg19_sorted.bed and other files
+
+
+export PATH=/data/ohler/henriette/miniconda2/bin:$PATH
+
+
+sort -k1,1 -k2,2n regions_7.txt > regions_7_sorted.txt
+sort -k1,1 -k2,2n regions_3.txt > regions_3_sorted.txt
+
+
+intervene pairwise -i regions_7_sorted.txt regions_3_sorted.txt ../../../../../../../Wang_suppl/FOXA1/FOXA1_GT_hg19_sorted.bed ../../../../../../../Wang_suppl/FOXA1/FOXA1_PE_hg19_sorted.bed  ../../../../../../../Wang_suppl/FOXA2/FOXA2_DE_hg19_sorted.bed ../../../../../../../Wang_suppl/FOXA2/FOXA2_GT_hg19_sorted.bed ../../../../../../../Wang_suppl/FOXA2/FOXA2_PE_hg19_sorted.bed ../../../../../../../Wang_suppl/PDX1/PDX1_PE_hg19_sorted.bed --names cluster7,cluster3,FOXA1_D5,FOXA1_D10,FOXA2_D2,FOXA2_D5,FOXA2_D10,PDX1_D10 --output pairwise_fisher_new --compute fisher --htype circle --genome hg19
+
+
+#Fisher's test results in pairwise_fisher_new/Intervene_pairwise_fisher_matrix.txt
