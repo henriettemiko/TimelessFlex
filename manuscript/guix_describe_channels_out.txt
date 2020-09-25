@@ -1,0 +1,15 @@
+(list (channel
+        (name 'guix-bimsb)
+        (url "https://github.com/BIMSBbioinfo/guix-bimsb.git")
+        (commit
+          "97de008ef26516d03743c3271e2f3421281687b4"))
+      (channel
+        (name 'guix-bimsb-nonfree)
+        (url "https://github.com/BIMSBbioinfo/guix-bimsb-nonfree.git")
+        (commit
+          "fbb52b4e3b6747fc6768e126db27c6bcba51b555"))
+      (channel
+        (name 'guix)
+        (url "https://git.savannah.gnu.org/git/guix.git")
+        (commit
+          "5a6e04c53cee8d35feaa40755fa362dc1bb672de")))
