@@ -22,4 +22,4 @@ The structure of this directory is as follows:
 
 [open_regions_subset/open_regions_pairs](./open_regions_subset/open_regions_pairs): scripts for Hi-C interaction pairs (promoter-enhancer pairs)
 
-[additional_scripts_notes](./additonal_scripts_notes): additional scripts and notes, outside of framework
+[additional_scripts_notes](./additional_scripts_notes): additional scripts and notes, outside of framework
