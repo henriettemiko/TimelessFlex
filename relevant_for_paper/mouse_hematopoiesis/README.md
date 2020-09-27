@@ -6,7 +6,7 @@ https://github.com/ohlerlab) at BIMSB/MDC, September 27, 2020
 
 ## Mouse hematopoiesis data
 
-All code for processing and analyzing data from mouse hematopoiesis at 6 time points (CMP, MEP, EryA, GMP, Granu, Mono) can be found here.
+Code for processing and analyzing data from mouse hematopoiesis at 6 time points (CMP, MEP, EryA, GMP, Granu, Mono) can be found here.
 The structure of this directory is as follows:
 
 [ATAC](./ATAC): scripts for processing of ATAC-seq data and peak calling with MACS2
