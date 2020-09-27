@@ -41,3 +41,8 @@ All code for processing and analyzing data from mouse hematopoiesis at 6 time po
 ### Code for data from human pancreatic differentiation
 
 All code for processing and analyzing data from human pancreatic differentiation at 5 time points D0, D2, D5, D7 and D10 can be found in [human_pancreatic_differentiation](./human_pancreatic_differentiation).
+
+
+### Relevant Code for paper
+
+All relevant code for Miko et al., "Inferring time-course chromatin states for promoter-enhancer pairs based on Hi-C data" can be found in [paper](./paper).
