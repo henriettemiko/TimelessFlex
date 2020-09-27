@@ -3,7 +3,7 @@
 # TimelessFlex - A flexible framework for investigating chromatin state trajectories
 
 by Henriette Miko (henriette.miko@mdc-berlin.de), [Ohler lab](
-https://github.com/ohlerlab) at BIMSB/MDC, 2020
+https://github.com/ohlerlab) at BIMSB/MDC, September 27, 2020
 
 ## Human pancreatic differentiation data
 
@@ -20,4 +20,4 @@ The structure of this directory is as follows:
 
 [open_regions_subset](./open_regions_subset): scripts for a linear time course with 4 time points, for which Hi-C data is available (D0 -> D2 -> D5 -> D10)
 
-[open_regions_subset/open_regions_pairs](./open_regions_subset/open_regions_pairs): scripts for Hi-C interaction pairs (promoter-enhancer, promoter-promoter and enhancer-enhancer pairs)
+[open_regions_subset/open_regions_pairs](./open_regions_subset/open_regions_pairs): scripts for Hi-C interaction pairs (promoter-enhancer pairs)
