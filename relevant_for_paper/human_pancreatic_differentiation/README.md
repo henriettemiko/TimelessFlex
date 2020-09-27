@@ -7,7 +7,7 @@ https://github.com/ohlerlab) at BIMSB/MDC, September 27, 2020
 
 ## Human pancreatic differentiation data
 
-All code for processing and analyzing data from human pancreatic differentiation at 5 time points D0, D2, D5, D10 and D8 can be found here.
+Code for processing and analyzing data from human pancreatic differentiation at 5 time points D0, D2, D5, D10 and D8 can be found here.
 The structure of this directory is as follows:
 
 [ATAC](./ATAC): scripts for processing of ATAC-seq data and peak calling with MACS2 and IDR
