@@ -1,5 +1,5 @@
-Notes for plot correlation:
-15.06.2020, Henriette Miko
+Notes for plot correlations H3K7ac/ATAC-seq:
+September 28, 2020, Henriette Miko
 
 
 #get fpkm values for correlation plot promoter K27ac and gene expression
@@ -20,4 +20,4 @@ wc -l all_join_leftgene_regions*
   3617 all_join_leftgene_regions.txt
   7234 total
 
-#plot with correlation.r
+#plot with plot_correlations_H3K27ac_ATAC.r
