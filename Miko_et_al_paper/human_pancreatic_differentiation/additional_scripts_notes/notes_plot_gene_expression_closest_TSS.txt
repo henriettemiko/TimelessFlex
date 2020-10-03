@@ -1,39 +1,45 @@
 Notes for plot_gene_expression_closest_TSS.txt:
-25.01.2020, Henriette Miko
-
-
-#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/Homer/intervene$
+Henriette Miko, October 03, 2020
 
 
 export PATH=/data/ohler/henriette/miniconda2/bin:$PATH
 
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/Homer/intervene$
 
-sort -k1,1 -k2,2n regions_7.txt > regions_7_sorted.txt
-sort -k1,1 -k2,2n regions_3.txt > regions_3_sorted.txt
+for i in {1..10}
+do
+    sort -k1,1 -k2,2n ../regions_${i}.txt > regions_${i}_sorted.txt
 
-
-#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/Homer/closest$
-
-
-#find closest transcript TSSs for enhancer clusters 3 and 7
-bedtools closest -a ../intervene/regions_3_sorted.txt -b ../../../../../annotation/all_transcript_TSSs_chr_uniq.bed > regions3_closestTSS.txt
+done
 
 
-#cut to ENSG
-cat regions3_closestTSS.txt | cut -f 10 | sort | uniq > regions3_closestTSS_gene.txt
+#/fast/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/Homer/closest/all$
 
 
-#join with file ENSG and all FPKMs
-join -t $'\t' ../../all_join.txt regions3_closestTSS_gene.txt > join_regions3_closestTSS_gene.txt
+
+for i in {1..10}
+do
+
+    #find closest transcript TSSs for all enhancer clusters, especially 3 and 7
+
+    bedtools closest -a ../../intervene/regions_${i}_sorted.txt -b ../../../../../../annotation/all_transcript_TSSs_chr_uniq.bed > regions${i}_closestTSS.txt
 
 
-bedtools closest -a ../intervene/regions_7_sorted.txt -b ../../../../../annotation/all_transcript_TSSs_chr_uniq.bed > regions7_closestTSS.txt
+    #cut to ENSG
+
+    cat regions${i}_closestTSS.txt | cut -f 10 | sort | uniq > regions${i}_closestTSS_gene.txt
 
 
-cat regions7_closestTSS.txt | cut -f 10 | sort | uniq > regions7_closestTSS_gene.txt
+    #join with file ENSG and all FPKMs
+	
+    join -t $'\t' ../../all_join.txt regions${i}_closestTSS_gene.txt > join_regions${i}_closestTSS_gene.txt
 
 
-join -t $'\t' ../../all_join.txt regions7_closestTSS_gene.txt > join_regions7_closestTSS_gene.txt
+    bedtools closest -a ../intervene/regions_${i}_sorted.txt -b ../../../../../annotation/all_transcript_TSSs_chr_uniq.bed > regions${i}_closestTSS.txt
+
+
+done
 
 
 #then plot with plot_gene_expression_closest_TSS.r (adapted from plot_gene_expression_cluster.r in open_regions_subset)
+
