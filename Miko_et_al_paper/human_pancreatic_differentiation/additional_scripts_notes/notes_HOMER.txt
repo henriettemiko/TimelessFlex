@@ -1,0 +1,35 @@
+Notes for HOMER analysis:
+Henriette Miko, October 03, 2020
+
+#/scratch/AG_Ohler/henriette/PANCREAS_final/output_hg19/open_regions_subset/open_regions_pairs/timeless_init_prom-enh/10/Homer
+
+export PATH=$PATH:/data/ohler/henriette/programs/Homer/.//bin/
+
+awk -v i="$i" 'OFS="\t" {print $1,($2+500),($3-500),$4,$5,"+" > "regions_all.txt"}' ../enh_regions_10classes.bed
+
+for i in {1..10}; do echo $i; awk -v i="$i" 'OFS="\t" {if ($10==i) print $1,($2+500),($3-500),$4,
+$5,"+" > "regions_"i".txt"}' ../enh_regions_10classes.bed; done
+
+
+#with background:
+
+findMotifsGenome.pl regions_1.txt hg19 regions1_bg -size given -mask -bg regions_all.txt > regions1_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_2.txt hg19 regions2_bg -size given -mask -bg regions_all.txt > regions2_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_3.txt hg19 regions3_bg -size given -mask -bg regions_all.txt > regions3_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_4.txt hg19 regions4_bg -size given -mask -bg regions_all.txt > regions4_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_5.txt hg19 regions5_bg -size given -mask -bg regions_all.txt > regions5_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_6.txt hg19 regions6_bg -size given -mask -bg regions_all.txt > regions6_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_7.txt hg19 regions7_bg -size given -mask -bg regions_all.txt > regions7_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_8.txt hg19 regions8_bg -size given -mask -bg regions_all.txt > regions8_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_9.txt hg19 regions9_bg -size given -mask -bg regions_all.txt > regions9_bg_output.txt 2>&1
+
+findMotifsGenome.pl regions_10.txt hg19 regions10_bg -size given -mask -bg regions_all.txt > regions10_bg_output.txt 2>&1
+
