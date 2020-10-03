@@ -12,4 +12,4 @@ All relevant code for Miko et al., "Inferring time-course chromatin states for p
 
 [human_pancreatic_differentiation](./human_pancreatic_differentiation): Code for human pancreatic data
 
-[guix_information](./guix_information: Information about Guix profile
+[guix_information](./guix_information): Information about Guix profile
