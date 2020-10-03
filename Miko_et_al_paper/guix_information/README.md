@@ -6,7 +6,7 @@ https://github.com/ohlerlab) at BIMSB/MDC, October 03, 2020
 
 ## Guix information
 
-TimelessFlex_manifest.scm is the manifest for the GNU Guix profile that was used for TimelessFlex.
+`<TimelessFlex_manifest.scm>` is the manifest for the GNU Guix profile that was used for TimelessFlex.
 
 A docker container image was created with the following command
 
