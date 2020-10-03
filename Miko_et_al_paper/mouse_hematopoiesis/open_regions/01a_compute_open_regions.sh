@@ -4,7 +4,7 @@
 #name:          01a_compute_open_regions.sh
 #description:   compute open regions
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          September 26, 2020
+#date:          April 3, 2020
 ##########
 
 
@@ -264,6 +264,27 @@ cat peaks_unidirectional.bed peaks_bidirectional.bed | \
 cat peaks_enhancers_intragenic.bed peaks_enhancers_intergenic.bed | \
     sort -k1,1 -k2,2n > peaks_allclassified_enhancers.bed
 #FINAL SET OF OPEN CHROMATIN REGIONS
+
+Rscript $SCRIPT_DIR/open_regions/plot_classified_open_regions_widths.r 
+
+
+##for decision about distance from open region and closest TSS
+##I chose distance 0 (overlapping TSS)
+##write distances from peaks to TSSs to file and plot
+#cut -f13 peaks_closestTSS.bed > peaks_closestTSS_plus_dist.txt
+#cut -f26 peaks_closestTSS.bed > peaks_closestTSS_minus_dist.txt
+#
+#Rscript $SCRIPT_DIR/open_regions_fullset/plot_closestTSS_dist.r 
+#
+#
+##check distances to neighbor regions
+##to decide how long feature regions are
+##I remove overlapping feature regions later
+#paste <(head -n -1 peaks_allclassified.bed) \
+#    <(tail -n +2 peaks_allclassified.bed) > peaks_allclassified_neighbors.bed
+#
+#Rscript $SCRIPT_DIR/open_regions_fullset/plot_neighbor_dist.r 
+#
 
 exit
 

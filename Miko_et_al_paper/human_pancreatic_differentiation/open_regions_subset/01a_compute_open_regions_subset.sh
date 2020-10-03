@@ -4,7 +4,7 @@
 #name:          01a_compute_open_regions_subset.sh
 #description:   compute open regions for subset (D0, D2, D5, D10)
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          September 26, 2020
+#date:          July 12, 2019
 ##########
 
 
@@ -108,6 +108,9 @@ bedtools intersect -v -a $HIC_DIR/all_bins_unique.bed -b peaks.bed > \
 all_bins_unique_nonoverlapping_peaks.bed
 
 #########
+
+
+exit
 
 
 cd $ANNOTATION_DIR
@@ -320,6 +323,25 @@ cat peaks_enhancers_intragenic.bed peaks_enhancers_intergenic.bed | \
     sort -k1,1 -k2,2n > peaks_allclassified_enhancers.bed
 #FINAL SET OF OPEN CHROMATIN REGIONS
 
+Rscript $SCRIPT_DIR/open_regions_subset/plot_classified_open_regions_widths.r 
+
+
+#for decision about distance from open region and closest TSS
+#I chose distance 0 (overlapping TSS)
+#write distances from peaks to TSSs to file and plot
+cut -f13 peaks_closestTSS.bed > peaks_closestTSS_plus_dist.txt
+cut -f26 peaks_closestTSS.bed > peaks_closestTSS_minus_dist.txt
+
+Rscript $SCRIPT_DIR/open_regions_subset/plot_closestTSS_dist.r 
+
+
+#check distances to neighbor regions
+#to decide how long feature regions are
+#I remove overlapping feature regions later
+paste <(head -n -1 peaks_allclassified.bed) \
+    <(tail -n +2 peaks_allclassified.bed) > peaks_allclassified_neighbors.bed
+
+Rscript $SCRIPT_DIR/open_regions_subset/plot_neighbor_dist.r 
 
 
 exit

@@ -4,7 +4,7 @@
 #name:          02a_compute_feature_regions.sh
 #description:   compute feature region windows around open regions
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          September 26, 2020
+#date:          April 3, 2020
 ##########
 
 
@@ -80,6 +80,10 @@ do
 
     awk 'OFS="\t" {if ($8=="." && $9==".") print $0}' all_ext_${l}_final.bed \
         > all_ext_${l}_final_enhancers.bed
+
+    Rscript $SCRIPT_DIR/open_regions/plot_feature_region_widths.r \
+        all_ext_${l}_final.bed all_ext_${l}_final_promoters.bed \
+        all_ext_${l}_final_enhancers.bed ${l} 
 
 done
 
