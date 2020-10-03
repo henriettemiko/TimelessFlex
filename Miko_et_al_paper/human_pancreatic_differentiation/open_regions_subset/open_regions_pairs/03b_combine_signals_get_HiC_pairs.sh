@@ -4,7 +4,7 @@
 #name:          03b_combine_signals_get_HiC_pairs.sh
 #description:   get Hi-C pairs
 #author:        Henriette Miko (henriette.miko@mdc-berlin.de)
-#date:          July 23, 2019
+#date:          October 03, 2020
 ##########
 
 
@@ -370,66 +370,6 @@ Rscript $SCRIPT_DIR/open_regions_subset/open_regions_pairs/\
 get_normalized_FC_nofilter_pairs.r \
 $OPEN_REGIONS_DIR_PAIRS/max_counts_multi_pairs_unique_enh-enh.txt \
 "multi_enh-enh"
-
-
-exit
-
-
-
-
-
-
-###########NOT NEEDED ANYMORE############
-
-
-###information of Hi-C bins belonging to Hi-C pairs###
-
-grep -f mypairs_all_notunique.txt \
-    $OPEN_REGIONS_DIR_SUB/combine_peaks/all_bins_unique_overlapping_peaks.bed \
-    > all_bins_merged_overlapping_peaks_mypairs_all.bed
-#not unique
-
-grep -f mypairs_all_unique.txt \
-    $OPEN_REGIONS_DIR_SUB/combine_peaks/all_bins_unique_overlapping_peaks.bed \
-    > all_bins_merged_overlapping_peaks_mypairs_all_unique.bed
-
-grep -f mypairs_init.txt \
-    $OPEN_REGIONS_DIR_SUB/combine_peaks/all_bins_unique_overlapping_peaks.bed \
-    > all_bins_merged_overlapping_peaks_mypairs_init.bed
-#unique
-
-grep -f mypairs_multi.txt \
-    $OPEN_REGIONS_DIR_SUB/combine_peaks/all_bins_unique_overlapping_peaks.bed \
-    > all_bins_merged_overlapping_peaks_mypairs_multi.bed
-
-
-##get unique bins belonging to pairs
-
-cut -f 1-4 all_bins_merged_overlapping_peaks_mypairs_all.bed | sort | uniq > \
-    all_bins_merged_peaks_mypairs_all_unique.bed
-
-cut -f 1-4 all_bins_merged_overlapping_peaks_mypairs_init.bed | sort | uniq > \
-    all_bins_merged_peaks_mypairs_init_unique.bed
-
-cut -f 1-4 all_bins_merged_overlapping_peaks_mypairs_multi.bed | sort | uniq \
-    > all_bins_merged_peaks_mypairs_multi_unique.bed
-
-
-###information about open chromatin regions that are overlapped by Hi-C bins###
-
-
-#col 6: HiC time information
-cut -f 10 all_bins_merged_overlapping_peaks_mypairs_init.bed | sort | uniq > \
-    mypairs_init_peaks.txt
-
-cut -f 10 all_bins_merged_overlapping_peaks_mypairs_all.bed | sort | uniq > \
-    mypairs_all_peaks.txt
-
-cut -f 10 all_bins_merged_overlapping_peaks_mypairs_multi.bed | sort | uniq > \
-    mypairs_multi_peaks.txt
-#all open chromatin regions that are overlapped by bins from pairs with 
-#multiple overlaps
-#these are unique peaks belonging to the pairs
 
 
 exit
