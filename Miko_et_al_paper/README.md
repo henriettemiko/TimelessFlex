@@ -6,7 +6,7 @@ https://github.com/ohlerlab) at BIMSB/MDC, October 03, 2020
 
 ## Miko et al. paper
 
-All relevant code for Miko et al., "Inferring time-course chromatin states for promoter-enhancer pairs based on Hi-C data" can be found here. The structure of this directory is as follows:
+All relevant code for Miko et al., "Inferring time series chromatin states for promoter-enhancer pairs based on Hi-C data" can be found here. The structure of this directory is as follows:
 
 [mouse_hematopoiesis](./mouse_hematopoiesis): scripts for mouse hematopoiesis data
 
