@@ -45,4 +45,4 @@ All code for processing and analyzing data from human pancreatic differentiation
 
 ### Code for Miko et al. paper
 
-All relevant code for Miko et al., "Inferring time series chromatin states for promoter-enhancer pairs based on Hi-C data" can be found in [Miko_et_al_paper](./Miko_et_al_paper). This code is basically a subset of [mouse_hematopoiesis](./mouse_hematopoiesis) and [human_pancreatic_differentiation](./human_pancreatic_differentiation).
+All relevant code for Miko et al., "Inferring time series chromatin states for promoter-enhancer pairs based on Hi-C data", BMC Genomics (2021) can be found in [Miko_et_al_paper](./Miko_et_al_paper). This code is basically a subset of [mouse_hematopoiesis](./mouse_hematopoiesis) and [human_pancreatic_differentiation](./human_pancreatic_differentiation).
